@@ -1,0 +1,30 @@
+/* Common CSS */
+:root {
+  --main-bg-color: #037438;
+  --main-text-color: #ffffff;
+  --secondary-bg-color: #3d3d3d;
+}
+body {
+  background-color: var(--main-bg-color);
+}
+.buttons-navs {
+  background-color: white;
+  color: black;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-style: none;
+  margin-right: 15px;
+}
+.p-landing {
+  border-radius: 10px;
+  background-color: #3d3d3d;
+  color: white;
+  font-weight: bold;
+  padding: 20px;
+  max-width: 200px;
+}

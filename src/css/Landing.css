@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+.container-landing {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.navbar-landing {
+  border-bottom: 3px solid white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.principal {
+  text-align: -webkit-center;
+  padding-top: 50px;
+  position: relative;
+  animation: slideInFromTop 1s ease-in-out;
+}
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(
+      -100%
+    ); /* Ajusta según la dirección desde la que quieras que aparezca */
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.Tittle-Landing {
+  font-family: "Erica One", sans-serif;
+
+  color: white;
+  font-size: 80px;
+}
+p {
+  border-radius: 10px;
+  background-color: var(--secondary-bg-color);
+  color: white;
+  font-weight: bold;
+  padding: 20px;
+  max-width: 200px;
+}
+#img-mate {
+  max-width: 400px;
+  max-height: 400px;
+}
+.carousel-item.active {
+  display: flex;
+  justify-content: center;
+}
+.tittle-carrousel {
+  text-align: center;
+  font-family: "Erica One", sans-serif;
+  font-size: 50px;
+  color: white;
+}
