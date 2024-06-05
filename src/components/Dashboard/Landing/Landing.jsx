@@ -1,5 +1,9 @@
 import NavBarLanding from "../../Navs/NavBarLanding";
+
 import Footer from "../../footer/Footer";
+
+import AboutWe from "../AboutWe/AboutWe";
+
 import HandsL from "../Hands/HandsL";
 import HandsR from "../Hands/HandsR";
 
@@ -9,24 +13,38 @@ const Landing = () => {
   return (
     <>
       <NavBarLanding />
-      <div className="container-landing">
+
+      <div className="d-flex justify-content-between">
         <HandsL />
+
         <div className="principal">
-          <h1 className="Tittle-Landing">
-            MUNDO <br /> MATERO
-          </h1>
-          <div>
-            <p className="p-landing">
-              Conseguí los mejores mates, termos, bombillas y materas.
-            </p>
+          <button
+            className="buttons-about"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasBottom"
+            aria-controls="offcanvasBottom"
+          >
+            <h1 className="Tittle-Landing">
+              MUNDO <br /> MATERO
+            </h1>
+          </button>
+
+          <div className="p-landing">
+            <p>Conseguí los mejores mates, termos, bombillas y materas.</p>
           </div>
         </div>
         <HandsR />
       </div>
+
       <br />
       <br />
       <Carrousel />
+
       <Footer />
+
+      <AboutWe />
+
     </>
   );
 };
