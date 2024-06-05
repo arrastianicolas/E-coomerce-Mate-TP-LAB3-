@@ -8,7 +8,7 @@ const Footer = () => {
             <i className="bi bi-telephone-fill"></i> +54 2474181222
           </div>
           <div>
-            <i className="bi bi-envelope"></i> mundomatero@gmail.com
+            <i className="bi bi-envelope"></i> materos@gmail.com
           </div>
           <div>
             <i className="bi bi-geo-alt-fill"></i> Zeballos 1341, Rosario
