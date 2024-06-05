@@ -1,5 +1,9 @@
 import NavBarLanding from "../../Navs/NavBarLanding";
+
+import Footer from "../../footer/Footer";
+
 import AboutWe from "../AboutWe/AboutWe";
+
 import HandsL from "../Hands/HandsL";
 import HandsR from "../Hands/HandsR";
 
@@ -36,7 +40,11 @@ const Landing = () => {
       <br />
       <br />
       <Carrousel />
+
+      <Footer />
+
       <AboutWe />
+
     </>
   );
 };
