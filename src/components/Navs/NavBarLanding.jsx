@@ -5,12 +5,20 @@ const NavBarLanding = () => {
   const clickHandlerLogin = () => {
     navigate("/login");
   };
+  const clickHandlerMain = () => {
+    navigate("/");
+  };
   return (
     <div className="navbar-landing">
-      <button className="buttons-navs">INICIO</button>
+      <button className="btn btn-light buttons-navs" onClick={clickHandlerMain}>
+        INICIO
+      </button>
       <div className="nav2">
-        <button className="buttons-navs">Registrarme</button>
-        <button className="buttons-navs" onClick={clickHandlerLogin}>
+        <button className="btn btn-light buttons-navs">Registrarme</button>
+        <button
+          className="btn btn-light buttons-navs"
+          onClick={clickHandlerLogin}
+        >
           Iniciar Sesion
         </button>
       </div>
