@@ -1,0 +1,57 @@
+body {
+    background-color: var(--main-bg-color);
+  }
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+}
+.h5,h5{
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+
+}
+
+.content-login {
+    background-color: #3d3d3d;
+    color: #fff;
+    padding: 30px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 35%;
+    height: 70%;
+    margin-top: 60px;
+}
+.content-login Form {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.btnLogIn {
+    background-color: #fff;
+    color: #3d3d3d;
+    font-size: 1.25rem; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+}
+.btnLogIn:hover {
+    background-color: #fff;
+    color: #3d3d3d;
+}
+
