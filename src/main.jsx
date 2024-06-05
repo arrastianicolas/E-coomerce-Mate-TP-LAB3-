@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import "./index.css";
 import "./css/Landing.css";
 import "./css/Hands.css";
+import "./css/Footer.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
