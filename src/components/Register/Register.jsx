@@ -86,7 +86,7 @@ const Login = () => {
             <Form onSubmit={submitHandler}>
 
                 <FormGroup className="mb-4">
-                    <label>Usuario</label>
+                    <Form.label>Usuario</Form.label>
                     <Form.Control
                     ref={userRef}
                     type="user"
@@ -97,7 +97,7 @@ const Login = () => {
                 </FormGroup>
 
                 <FormGroup className="mb-4">
-                    <label>Email:</label>
+                    <Form.label>Email:</Form.label>
                     <Form.Control
                     ref={emailRef}
                     type="email"
@@ -108,7 +108,7 @@ const Login = () => {
                 </FormGroup>
 
                 <FormGroup className="mb-4">
-                    <label>Password:</label>
+                    <Form.label>Password:</Form.label>
                     <Form.Control
                     ref={passwordRef}
                     type="password"

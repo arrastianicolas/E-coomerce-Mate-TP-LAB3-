@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 const NavBarLanding = () => {
   const navigate = useNavigate();
+  
   const clickHandlerRegister = () => {
     navigate("/register");
   };
