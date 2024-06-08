@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Landing from "./components/Dashboard/Landing/Landing";
-
+import Register from "./components/Register/Register"
 import Login from "./components/Login/Login";
 
 function App() {
@@ -12,6 +12,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/Register",
+      element: <Register />,
     },
     {
       path: "*",

@@ -3,12 +3,19 @@ import { useNavigate, useLocation } from "react-router-dom";
 const NavBarLanding = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  
+  const clickHandlerRegister = () => {
+    navigate("/register");
+  };
+  
   const clickHandlerLogin = () => {
     navigate("/login");
   };
-  const clickHandlerMain = () => {
+   const clickHandlerMain = () => {
     navigate("/");
   };
+
+
   return (
     <>
       {location.pathname === "/" && (
@@ -20,7 +27,7 @@ const NavBarLanding = () => {
             INICIO
           </button>
           <div className="nav2">
-            <button className="btn btn-light buttons-navs">Registrarme</button>
+            <button className="btn btn-light buttons-navs" onClick={clickHandlerRegister}>Registrarme</button>
             <button
               className="btn btn-light buttons-navs"
               onClick={clickHandlerLogin}
@@ -41,7 +48,7 @@ const NavBarLanding = () => {
           <div className="nav2">
             <button
               className="btn btn-light buttons-navs"
-              onClick={clickHandlerMain}
+              onClick={clickHandlerRegister}
             >
               Registrarme
             </button>
@@ -49,6 +56,7 @@ const NavBarLanding = () => {
         </div>
       )}
     </>
+
   );
 };
 
