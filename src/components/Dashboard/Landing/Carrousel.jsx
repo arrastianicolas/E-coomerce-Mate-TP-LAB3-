@@ -1,5 +1,6 @@
 import mate2 from "../../../assets/mate2.png";
 import termo from "../../../assets/termo.png";
+
 const Carrousel = () => {
   return (
     <>

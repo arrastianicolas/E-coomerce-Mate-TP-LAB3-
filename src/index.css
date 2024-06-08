@@ -41,3 +41,9 @@ body {
   padding: 20px;
   max-width: 200px;
 } */
+.navbar-landing {
+  border-bottom: 3px solid white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
