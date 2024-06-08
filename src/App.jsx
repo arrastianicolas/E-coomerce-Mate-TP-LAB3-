@@ -6,11 +6,11 @@ import Login from "./components/Login/Login";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/home",
       element: <Landing />,
     },
     {
-      path: "/Login",
+      path: "/login",
       element: <Login />,
     },
     {
