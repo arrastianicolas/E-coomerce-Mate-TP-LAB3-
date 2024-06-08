@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
-.container-landing {
+/* .container-landing {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-}
-.navbar-landing {
+} */
+/* .navbar-landing {
   border-bottom: 3px solid white;
   padding: 10px;
   display: flex;
   justify-content: space-between;
-}
+} */
 .principal {
   text-align: -webkit-center;
   padding-top: 50px;
@@ -33,25 +33,33 @@
   color: white;
   font-size: 80px;
 }
-p {
+.p-landing {
   border-radius: 10px;
-  background-color: var(--secondary-bg-color);
+  background-color: #3d3d3d;
   color: white;
   font-weight: bold;
   padding: 20px;
   max-width: 200px;
+  font-size: 20px;
 }
-#img-mate {
+.carousel-item img {
+  max-height: 400px; /* Ajusta esta altura según tus necesidades */
+  object-fit: contain; /* Ajusta el tamaño de la imagen manteniendo su proporción */
+}
+/* #img-mate {
   max-width: 400px;
   max-height: 400px;
-}
-.carousel-item.active {
+} */
+/* .carousel-item.active {
   display: flex;
   justify-content: center;
-}
+} */
 .tittle-carrousel {
   text-align: center;
   font-family: "Erica One", sans-serif;
   font-size: 50px;
   color: white;
 }
+/* #carouselExampleIndicators img {
+  object-fit: cover;
+  height: 500px; /* Puedes ajustar esta altura según sea necesario */

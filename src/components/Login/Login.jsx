@@ -55,7 +55,7 @@ const Login = () => {
 
     console.log(`Usuario ${email} ha iniciado sesión.`);
 
-    navigate("/");
+    navigate("/home");
   };
 
   return (
@@ -81,7 +81,7 @@ const Login = () => {
               </FormGroup>
 
               <FormGroup className="mb-4">
-              <label>Password:</label>
+                <label>Password:</label>
                 <Form.Control
                   ref={passwordRef}
                   type="password"
@@ -97,7 +97,9 @@ const Login = () => {
                 <Col />
                 <div>
                   <Col style={{ display: "flex", justifyContent: "center" }}>
-                    <Button className="btnLogIn">Iniciar sesión</Button>
+                    <Button className="btnLogIn" type="sumbit">
+                      Iniciar sesión
+                    </Button>
                   </Col>
                 </div>
               </Row>

@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NavBarLanding = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   
   const clickHandlerRegister = () => {
     navigate("/register");
@@ -10,18 +11,52 @@ const NavBarLanding = () => {
   const clickHandlerLogin = () => {
     navigate("/login");
   };
-
-  const clickHandlerLanding = () => {
-    navigate("/landing");
+   const clickHandlerMain = () => {
+    navigate("/");
   };
+
+
   return (
-    <div className="navbar-landing">
-      <button className="buttons-navs" onClick={clickHandlerLanding}>INICIO</button>
-      <div className="nav2">
-        <button className="buttons-navs" onClick={clickHandlerRegister}>Registrarme</button>
-        <button className="buttons-navs" onClick={clickHandlerLogin}>Iniciar Sesion</button>
-      </div>
-    </div>
+    <>
+      {location.pathname === "/" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <div className="nav2">
+            <button className="btn btn-light buttons-navs" onClick={clickHandlerRegister}>Registrarme</button>
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerLogin}
+            >
+              Iniciar Sesion
+            </button>
+          </div>
+        </div>
+      )}
+      {location.pathname === "/login" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <div className="nav2">
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerRegister}
+            >
+              Registrarme
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+
   );
 };
 

@@ -7,11 +7,11 @@ import Client from "./components/client/Client";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/home",
       element: <Landing />,
     },
     {
-      path: "/Login",
+      path: "/login",
       element: <Login />,
     },
     {

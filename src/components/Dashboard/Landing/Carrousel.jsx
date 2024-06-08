@@ -1,10 +1,15 @@
 import mate2 from "../../../assets/mate2.png";
 import termo from "../../../assets/termo.png";
+
 const Carrousel = () => {
   return (
     <>
-      <h2 className="tittle-carrousel">NUESTROS PRODUCTOS MAS VENDIDOS</h2>
-      <div id="carouselExampleIndicators" className="carousel slide">
+      <h2 className="tittle-carrousel">¡NUESTROS PRODUCTOS MAS VENDIDOS!</h2>
+      <div
+        id="carouselExampleIndicators"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
         <div className="carousel-indicators">
           <button
             type="button"
@@ -32,7 +37,7 @@ const Carrousel = () => {
             <img
               src={mate2}
               className="d-block w-100"
-              alt="..."
+              alt="Mate 1"
               id="img-mate"
             />
           </div>
@@ -40,7 +45,7 @@ const Carrousel = () => {
             <img
               src={termo}
               className="d-block w-100"
-              alt="..."
+              alt="Termo"
               id="img-mate"
             />
           </div>
@@ -48,7 +53,7 @@ const Carrousel = () => {
             <img
               src={mate2}
               className="d-block w-100"
-              alt="..."
+              alt="Mate 2"
               id="img-mate"
             />
           </div>
