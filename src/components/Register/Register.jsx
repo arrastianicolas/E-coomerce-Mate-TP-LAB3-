@@ -10,7 +10,7 @@ const Login = () => {
   const [errors, setErrors] = useState({
     email: false,
     password: false,
-    user : false,
+    user: false,
   });
   const navigate = useNavigate();
 
@@ -29,7 +29,6 @@ const Login = () => {
     setUser(inputUser);
   };
 
-
   const changePasswordHandler = (event) => {
     const inputPassword = event.target.value;
     setPassword(inputPassword);
@@ -37,6 +36,17 @@ const Login = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    if (userRef.current.value.length === 0) {
+      userRef.current.focus();
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        user: true,
+        email: false,
+        password: false,
+      }));
+      return;
+    }
 
     if (emailRef.current.value.length === 0) {
       emailRef.current.focus();
@@ -49,7 +59,7 @@ const Login = () => {
       return;
     }
 
-    if (password.length === 0) {
+    if (passwordRef.current.value.length === 0) {
       passwordRef.current.focus();
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -59,7 +69,7 @@ const Login = () => {
       }));
       return;
     }
-    
+
     //-----SET-ERRORS-----
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -68,11 +78,12 @@ const Login = () => {
       user: false,
     }));
 
-    console.log(`Usuario ${email} ha iniciado sesión.`);
+    console.log(`Usuario ${user} ha iniciado sesión con el email ${email}.`);
 
-    navigate("/");
+    navigate("/client");
   };
-    //-----FORM-----
+
+  //-----FORM-----
   return (
     <>
       <NavBarLanding />
@@ -82,48 +93,49 @@ const Login = () => {
             <Row>
               <h5>REGISTRATE</h5>
             </Row>
-            <hr/>
+            <hr />
             <Form onSubmit={submitHandler}>
+              <FormGroup className="mb-4">
+                <Form.Label>Usuario</Form.Label>
+                <Form.Control
+                  ref={userRef}
+                  type="text"
+                  className={errors.user ? "border border-danger" : ""}
+                  onChange={changeUserHandler}
+                  placeholder="Ingresar usuario"
+                />
+              </FormGroup>
 
-                <FormGroup className="mb-4">
-                    <Form.label>Usuario</Form.label>
-                    <Form.Control
-                    ref={userRef}
-                    type="user"
-                    className={errors.user ? "border border-danger" : ""}
-                    onChange={changeUserHandler}
-                    placeholder="Ingresar usuario"
-                    />
-                </FormGroup>
+              <FormGroup className="mb-4">
+                <Form.Label>Email:</Form.Label>
+                <Form.Control
+                  ref={emailRef}
+                  type="email"
+                  className={errors.email ? "border border-danger" : ""}
+                  onChange={changeEmailHandler}
+                  placeholder="Ingresar email"
+                />
+              </FormGroup>
 
-                <FormGroup className="mb-4">
-                    <Form.label>Email:</Form.label>
-                    <Form.Control
-                    ref={emailRef}
-                    type="email"
-                    className={errors.email ? "border border-danger" : ""}
-                    onChange={changeEmailHandler}
-                    placeholder="Ingresar email"
-                    />
-                </FormGroup>
-
-                <FormGroup className="mb-4">
-                    <Form.label>Password:</Form.label>
-                    <Form.Control
-                    ref={passwordRef}
-                    type="password"
-                    value={password}
-                    className={errors.password ? "border border-danger" : ""}
-                    onChange={changePasswordHandler}
-                    placeholder="Ingresar contraseña"
-                    />
-                </FormGroup>
+              <FormGroup className="mb-4">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
+                  ref={passwordRef}
+                  type="password"
+                  value={password}
+                  className={errors.password ? "border border-danger" : ""}
+                  onChange={changePasswordHandler}
+                  placeholder="Ingresar contraseña"
+                />
+              </FormGroup>
               <hr />
               <Row>
                 <Col />
                 <div>
                   <Col style={{ display: "flex", justifyContent: "center" }}>
-                    <Button className="btnLogIn">Iniciar sesión</Button>
+                    <Button className="btnLogIn" type="submit">
+                      Iniciar sesión
+                    </Button>
                   </Col>
                 </div>
               </Row>
