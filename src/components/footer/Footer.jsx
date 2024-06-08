@@ -39,6 +39,9 @@ const Footer = () => {
           </div>
         </div>
       </footer>
+      <div className="container-end-main">
+        <p>© 2024. Términos y Condiciones.</p>
+      </div>
     </>
   );
 };

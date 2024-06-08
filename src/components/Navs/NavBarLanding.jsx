@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NavBarLanding = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const clickHandlerLogin = () => {
     navigate("/login");
   };
@@ -9,20 +10,45 @@ const NavBarLanding = () => {
     navigate("/");
   };
   return (
-    <div className="navbar-landing">
-      <button className="btn btn-light buttons-navs" onClick={clickHandlerMain}>
-        INICIO
-      </button>
-      <div className="nav2">
-        <button className="btn btn-light buttons-navs">Registrarme</button>
-        <button
-          className="btn btn-light buttons-navs"
-          onClick={clickHandlerLogin}
-        >
-          Iniciar Sesion
-        </button>
-      </div>
-    </div>
+    <>
+      {location.pathname === "/" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <div className="nav2">
+            <button className="btn btn-light buttons-navs">Registrarme</button>
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerLogin}
+            >
+              Iniciar Sesion
+            </button>
+          </div>
+        </div>
+      )}
+      {location.pathname === "/login" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <div className="nav2">
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerMain}
+            >
+              Registrarme
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
