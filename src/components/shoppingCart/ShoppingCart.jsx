@@ -1,4 +1,4 @@
-import NavBarLanding from "../Navs/NavBarLanding";
+import NavBarLanding from "../navs/NavBarLanding";
 
 const ShoppingCart = () => {
   return (

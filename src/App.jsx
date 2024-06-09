@@ -1,10 +1,10 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Landing from "./components/Dashboard/Landing/Landing";
-import Register from "./components/Register/Register";
-import Login from "./components/Login/Login";
+import Landing from "./components/dashboard/landing/Landing";
+import Register from "./components/register/Register";
+import Login from "./components/login/Login";
 import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
-import Seller from "./components/Seller/Seller";
+import Seller from "./components/seller/Seller";
 //import MyPurchases from "./components/client/MyPurchases";
 import MyPurchases from "./components/client/MyPurchases";
 import ProductForSale from "./components/Seller/productForSale/ProductForSale";
