@@ -7,16 +7,19 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
+  const [userType, setUserType] = useState("");
   const [errors, setErrors] = useState({
     email: false,
     password: false,
     user: false,
+    userType: false,
   });
   const navigate = useNavigate();
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const userRef = useRef(null);
+  const userTypeRef = useRef(null);
 
   //-----HANDLER-----
   const changeEmailHandler = (event) => {
@@ -33,7 +36,10 @@ const Login = () => {
     const inputPassword = event.target.value;
     setPassword(inputPassword);
   };
-
+  const changeUserTypeHandler = (event) => {
+    const selectUsertype = event.target.value;
+    setUserType(selectUsertype);
+  };
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -78,9 +84,9 @@ const Login = () => {
       user: false,
     }));
 
-    console.log(`Usuario ${user} ha iniciado sesión con el email ${email}.`);
+    console.log(`Usuario ${user} se ha registrado con email ${email}.`);
 
-    navigate("/client");
+    navigate("/login");
   };
 
   //-----FORM-----
@@ -96,9 +102,10 @@ const Login = () => {
             <hr />
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
-                <Form.Label>Usuario</Form.Label>
+                <Form.Label>Usuario:</Form.Label>
                 <Form.Control
                   ref={userRef}
+                  value={user}
                   type="text"
                   className={errors.user ? "border border-danger" : ""}
                   onChange={changeUserHandler}
@@ -110,6 +117,7 @@ const Login = () => {
                 <Form.Label>Email:</Form.Label>
                 <Form.Control
                   ref={emailRef}
+                  value={email}
                   type="email"
                   className={errors.email ? "border border-danger" : ""}
                   onChange={changeEmailHandler}
@@ -118,7 +126,7 @@ const Login = () => {
               </FormGroup>
 
               <FormGroup className="mb-4">
-                <Form.Label>Password:</Form.Label>
+                <Form.Label>Contraseña:</Form.Label>
                 <Form.Control
                   ref={passwordRef}
                   type="password"
@@ -128,13 +136,28 @@ const Login = () => {
                   placeholder="Ingresar contraseña"
                 />
               </FormGroup>
+              <FormGroup className="mb-4">
+                <Form.Label>Quieres Ser...</Form.Label>
+                <Form.Select
+                  ref={userTypeRef}
+                  value={userType}
+                  className={errors.userType ? "border border-danger" : ""}
+                  onChange={changeUserTypeHandler}
+                >
+                  <option value="" disabled>
+                    Selecciona una opción...
+                  </option>
+                  <option value="client">Cliente</option>
+                  <option value="seller">Vendedor</option>
+                </Form.Select>
+              </FormGroup>
               <hr />
               <Row>
                 <Col />
                 <div>
                   <Col style={{ display: "flex", justifyContent: "center" }}>
                     <Button className="btnLogIn" type="submit">
-                      Iniciar sesión
+                      Registrarme
                     </Button>
                   </Col>
                 </div>

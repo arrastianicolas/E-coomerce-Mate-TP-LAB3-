@@ -55,7 +55,9 @@ const Login = () => {
 
     console.log(`Usuario ${email} ha iniciado sesión.`);
 
+
     navigate("/Client");
+
   };
 
   return (

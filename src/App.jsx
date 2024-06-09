@@ -2,13 +2,17 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Landing from "./components/Dashboard/Landing/Landing";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
+
 import Client from "./components/client/Client";
 //import MyPurchases from "./components/client/MyPurchases";
+
+// import Client from "./components/client/Client";
+
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/home",
+      path: "/",
       element: <Landing />,
     },
     {
@@ -19,6 +23,7 @@ function App() {
       path: "/register",
       element: <Register />,
     },
+
     {
       path: "/client",
       element: <Client />,
@@ -26,6 +31,11 @@ function App() {
     // {
     //   path: "/mypurchases",
     //   element: <MyPurchases />,
+
+    // {
+    //   path: "/client",
+    //   element: <Client />,
+
     // },
     {
       path: "*",
