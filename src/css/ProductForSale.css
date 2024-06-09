@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+.productForSale-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+}
+
+.productForSale-container h1 {
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+}
+
+.productForSale-table {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+.productForSale-table th,
+.productForSale-table td {
+  border: 2px solid #fff;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.productForSale-table th {
+  background-color: #444;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.productForSale-table td {
+  color: #fff;
+}
+
+.productForSale-table .btn {
+  margin: 5px 0;
+}
+
+.actions-column {
+  width: 120px;
+}
+
+.d-flex.flex-column.align-items-center {
+  height: 100%;
+  justify-content: center;
+}

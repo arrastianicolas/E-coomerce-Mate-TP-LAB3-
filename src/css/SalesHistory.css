@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+.salesHistory-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  color: #fff;
+}
+
+.salesHistory-container h1 {
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+}
+
+.salesHistory-table {
+  width: 80%;
+  border-collapse: collapse;
+}
+
+.salesHistory-table th,
+.salesHistory-table td {
+  border: 2px solid #fff;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.salesHistory-table th {
+  background-color: #444;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.salesHistory-table td {
+  color: #fff;
+}

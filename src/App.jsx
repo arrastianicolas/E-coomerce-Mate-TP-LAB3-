@@ -6,7 +6,8 @@ import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
 import Seller from "./components/seller/Seller";
 import MyPurchases from "./components/client/MyPurchases";
-
+import ProductForSale from "./components/seller/productForSale/ProductForSale";
+import SalesHistory from "./components/seller/salesHistory/SalesHistory";
 
 
 function App() {
@@ -53,6 +54,14 @@ function App() {
     {
       path: "/seller",
       element: <Seller />,
+    },
+    {
+      path: "/productForSale",
+      element: <ProductForSale />,
+    },
+    {
+      path: "/salesHistory",
+      element: <SalesHistory />,
     },
   ]);
   return <RouterProvider router={router} />;
