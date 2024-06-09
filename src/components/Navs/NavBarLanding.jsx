@@ -77,6 +77,40 @@ const NavBarLanding = () => {
           </div>
         </div>
       )}
+      {location.pathname === "/Client" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <div className="nav2">
+            <button
+              className="btn btn-light buttons-navs"
+              // onClick={() => navigate("/mypurchases")}
+            >
+              Mis Compras
+            </button>
+            <button
+              className="btn btn-light buttons-navs"
+              style={{ marginLeft: "auto" }}
+            >
+              Cerrar Sesión
+            </button>
+            <button
+              className="bi bi-cart"
+              style={{
+                fontSize: "1.5rem",
+                background: "none",
+                border: "none",
+                marginLeft: "20px",
+              }}
+              onClick={() => navigate("/carrito")}
+            ></button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
