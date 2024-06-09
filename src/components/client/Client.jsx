@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-import NavBarLanding from "../Navs/NavBarLanding";
+import NavBarLanding from "../navs/NavBarLanding";
 import Footer from "../footer/Footer";
 import mate2 from "../../assets/mate2.png";
 import termoboca from "../../assets/termo.png";
