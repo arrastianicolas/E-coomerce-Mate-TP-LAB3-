@@ -1,0 +1,48 @@
+.my-purchases-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #fff;
+  }
+  
+  .NavBar-Client {
+    width: 100%;
+    border-bottom: 3px solid white;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+  }
+  
+  .my-purchases-container h1 {
+    margin: 80px 0 20px 0; 
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .purchases-table {
+    width: 80%;
+    border-collapse: collapse;
+  }
+  
+  .purchases-table th,
+  .purchases-table td {
+    border: 2px solid #fff;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .purchases-table th {
+    background-color: #444;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  
+  .purchases-table td {
+    color: #fff;
+  }
+  

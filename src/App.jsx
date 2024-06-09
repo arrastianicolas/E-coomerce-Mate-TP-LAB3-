@@ -41,7 +41,7 @@ function App() {
 
     // },
     {
-      path: "/carrito",
+      path: "/cart",
       //poner element
     },
     {
