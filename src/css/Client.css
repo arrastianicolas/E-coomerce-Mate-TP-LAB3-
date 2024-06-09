@@ -6,6 +6,7 @@
   display: flex;
   padding: 20px;
   font-family: "Raleway", sans-serif;
+  font-weight: bold;
 }
 
 .filter-container {
@@ -66,11 +67,12 @@
 
 .product-card h4 {
   margin: 10px 0;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  border-top: 2px solid black;
 }
 
 .product-card p {
-  color: #555;
+  color: #198754;
   font-size: 1rem;
   margin: 10px 0;
 }
