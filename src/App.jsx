@@ -8,7 +8,6 @@ import Client from "./components/client/Client";
 
 // import Client from "./components/client/Client";
 
-
 function App() {
   const router = createBrowserRouter([
     {
@@ -37,6 +36,10 @@ function App() {
     //   element: <Client />,
 
     // },
+    {
+      path: "/carrito",
+      //poner element
+    },
     {
       path: "*",
       element: <Landing />,

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 import NavBarLanding from "../Navs/NavBarLanding";
 import Footer from "../footer/Footer";
 import mate2 from "../../assets/mate2.png";
@@ -35,12 +35,33 @@ const products = [
     price: 40000,
     image: "img",
   },
+  {
+    id: 5,
+    category: "Bombillas",
+    name: "Bombilla",
+    price: 40000,
+    image: "img",
+  },
+  {
+    id: 6,
+    category: "Bombillas",
+    name: "Bombilla",
+    price: 40000,
+    image: "img",
+  },
+  {
+    id: 7,
+    category: "Bombillas",
+    name: "Bombilla",
+    price: 40000,
+    image: "img",
+  },
 ];
 
 const Client = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -59,33 +80,6 @@ const Client = () => {
   return (
     <div>
       <NavBarLanding />
-      <div className="NavBar-Client">
-        <nav>
-          <button className="btn btn-light buttons-navs">Inicio</button>
-          <button
-            className="btn btn-light buttons-navs"
-            onClick={() => navigate("/mypurchases")}
-          >
-            Mis Compras
-          </button>
-          <button
-            className="btn btn-light buttons-navs"
-            style={{ marginLeft: "auto" }}
-          >
-            Cerrar Sesión
-          </button>
-          <button
-            className="bi bi-cart"
-            style={{
-              fontSize: "1.5rem",
-              background: "none",
-              border: "none",
-              marginLeft: "20px",
-            }}
-          ></button>
-        </nav>
-      </div>
-
       <div className="container">
         <div className="filter-container">
           <h3>Filtrar:</h3>
