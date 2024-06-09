@@ -11,6 +11,7 @@ import "./css/Seller.css";
 import "./css/Register.css";
 import "./css/Client.css";
 import "./css/ProductForSale.css";
+import "./css/SalesHistory.css";
 import { AuthenticationContextProvider } from "./services/auth/Auth.context.jsx";
 //import "./css/MyPurchases.css";
 
