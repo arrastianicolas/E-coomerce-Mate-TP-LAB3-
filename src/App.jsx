@@ -4,6 +4,7 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
+import Seller from "./components/Seller/Seller";
 
 //import MyPurchases from "./components/client/MyPurchases";
 
@@ -48,6 +49,10 @@ function App() {
     {
       path: "/shoppingCart",
       element: <ShoppingCart />,
+    },
+    {
+      path: "/seller",
+      element: <Seller />,
     },
   ]);
   return <RouterProvider router={router} />;

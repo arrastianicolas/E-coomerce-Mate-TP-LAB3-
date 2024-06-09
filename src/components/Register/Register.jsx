@@ -86,7 +86,7 @@ const Login = () => {
 
     console.log(`Usuario ${user} se ha registrado con email ${email}.`);
 
-    navigate("/login");
+    navigate("/seller");
   };
 
   //-----FORM-----
