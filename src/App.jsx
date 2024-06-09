@@ -2,9 +2,12 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Landing from "./components/Dashboard/Landing/Landing";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
-
+import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
+import Seller from "./components/Seller/Seller";
+//import MyPurchases from "./components/client/MyPurchases";
 import MyPurchases from "./components/client/MyPurchases";
+
 
 // import Client from "./components/client/Client";
 
@@ -44,6 +47,14 @@ function App() {
     {
       path: "*",
       element: <Landing />,
+    },
+    {
+      path: "/shoppingCart",
+      element: <ShoppingCart />,
+    },
+    {
+      path: "/seller",
+      element: <Seller />,
     },
   ]);
   return <RouterProvider router={router} />;

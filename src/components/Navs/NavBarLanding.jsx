@@ -22,6 +22,10 @@ const NavBarLanding = () => {
     navigate("/");
   };
 
+  const clickHandlerShop = () => {
+    navigate("/client");
+  };
+
   return (
     <>
       {location.pathname === "/" && (
@@ -116,6 +120,32 @@ const NavBarLanding = () => {
               }}
               onClick={() => navigate("/carrito")}
             ></button>
+          </div>
+        </div>
+      )}
+      {location.pathname === "/seller" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+          <div className="nav2">
+            <button className="btn btn-light buttons-navs">
+              Productos en venta
+            </button>
+            <button className="btn btn-light buttons-navs">
+              Historial de ventas
+            </button>
+
+            <button
+              className="btn btn-light buttons-navs"
+              style={{ marginLeft: "auto" }}
+              onClick={clickHandlerMain}
+            >
+              Cerrar Sesión
+            </button>
           </div>
         </div>
       )}

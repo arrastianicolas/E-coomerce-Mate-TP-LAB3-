@@ -7,6 +7,7 @@ import "./css/Hands.css";
 import "./css/Footer.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./css/LogIn.css";
+import "./css/Seller.css";
 
 import "./css/Client.css";
 import { AuthenticationContextProvider } from "./services/auth/Auth.context.jsx";
