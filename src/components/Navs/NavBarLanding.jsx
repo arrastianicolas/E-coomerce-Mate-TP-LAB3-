@@ -26,6 +26,14 @@ const NavBarLanding = () => {
     navigate("/client");
   };
 
+  const clickHandlerProductForSale = () => {
+    navigate("/productForSale");
+  };
+
+  const clickHandlerSalesHistory = () => {
+    navigate("/salesHistory");
+  };
+
   return (
     <>
       {location.pathname === "/" && (
@@ -132,10 +140,16 @@ const NavBarLanding = () => {
             Tienda
           </button>
           <div className="nav2">
-            <button className="btn btn-light buttons-navs">
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerProductForSale}
+            >
               Productos en venta
             </button>
-            <button className="btn btn-light buttons-navs">
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerSalesHistory}
+            >
               Historial de ventas
             </button>
 

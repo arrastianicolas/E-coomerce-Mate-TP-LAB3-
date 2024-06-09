@@ -7,7 +7,8 @@ import Client from "./components/client/Client";
 import Seller from "./components/Seller/Seller";
 //import MyPurchases from "./components/client/MyPurchases";
 import MyPurchases from "./components/client/MyPurchases";
-
+import ProductForSale from "./components/Seller/productForSale/ProductForSale";
+import SalesHistory from "./components/Seller/salesHistory/SalesHistory";
 
 // import Client from "./components/client/Client";
 
@@ -55,6 +56,14 @@ function App() {
     {
       path: "/seller",
       element: <Seller />,
+    },
+    {
+      path: "/productForSale",
+      element: <ProductForSale />,
+    },
+    {
+      path: "/salesHistory",
+      element: <SalesHistory />,
     },
   ]);
   return <RouterProvider router={router} />;
