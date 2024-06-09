@@ -38,6 +38,10 @@ function App() {
 
     // },
     {
+      path: "/carrito",
+      //poner element
+    },
+    {
       path: "*",
       element: <Landing />,
     },
