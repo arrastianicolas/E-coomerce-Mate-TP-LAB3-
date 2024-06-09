@@ -6,7 +6,7 @@ const NavBarLanding = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { handleLogout } = useContext(AuthenticationContext);
+  const { handleLogout, user } = useContext(AuthenticationContext);
   const clickHandlerRegister = () => {
     navigate("/register");
   };
@@ -28,7 +28,7 @@ const NavBarLanding = () => {
 
   return (
     <>
-      {location.pathname === "/" && (
+      {location.pathname === "/" && !user && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
@@ -48,6 +48,24 @@ const NavBarLanding = () => {
               onClick={clickHandlerLogin}
             >
               Iniciar Sesion
+            </button>
+          </div>
+        </div>
+      )}
+      {location.pathname === "/" && user && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <div className="nav2">
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerShop}
+            >
+              Tienda
             </button>
           </div>
         </div>
