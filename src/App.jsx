@@ -5,11 +5,9 @@ import Login from "./components/login/Login";
 import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
 import Seller from "./components/seller/Seller";
-//import MyPurchases from "./components/client/MyPurchases";
 import MyPurchases from "./components/client/MyPurchases";
 
 
-// import Client from "./components/client/Client";
 
 function App() {
   const router = createBrowserRouter([
@@ -41,7 +39,7 @@ function App() {
 
     // },
     {
-      path: "/carrito",
+      path: "/cart",
       //poner element
     },
     {
