@@ -9,13 +9,15 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./css/LogIn.css";
 
 import "./css/Client.css";
+import { AuthenticationContextProvider } from "./services/auth/Auth.context.jsx";
 //import "./css/MyPurchases.css";
 
 // import "./css/Client.css";
 
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <AuthenticationContextProvider>
+      <App />
+    </AuthenticationContextProvider>
   </React.StrictMode>
 );

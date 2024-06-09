@@ -1,5 +1,6 @@
 import mate2 from "../../../assets/mate2.png";
 import termo from "../../../assets/termo.png";
+import termocarc from "../../../assets/termocentrall.png";
 
 const Carrousel = () => {
   return (
@@ -51,7 +52,7 @@ const Carrousel = () => {
           </div>
           <div className="carousel-item">
             <img
-              src={mate2}
+              src={termocarc}
               className="d-block w-100"
               alt="Mate 2"
               id="img-mate"
