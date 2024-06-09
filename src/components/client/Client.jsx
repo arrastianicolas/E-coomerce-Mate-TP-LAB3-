@@ -1,10 +1,10 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
-
 import NavBarLanding from "../Navs/NavBarLanding";
 import Footer from "../footer/Footer";
 import mate2 from "../../assets/mate2.png";
+import termoboca from "../../assets/termo.png";
 import termocac from "../../assets/termocac.jpg";
 import { Card } from "react-bootstrap";
 
@@ -28,7 +28,7 @@ const products = [
     category: "Mochilas",
     name: "Mochila Matera",
     price: 40000,
-    image: "img",
+    image: termoboca,
   },
   {
     id: 4,
