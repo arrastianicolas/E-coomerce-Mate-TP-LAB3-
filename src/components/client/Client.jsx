@@ -1,11 +1,11 @@
 import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
-
 import NavBarLanding from "../Navs/NavBarLanding";
 import Footer from "../footer/Footer";
 import mate2 from "../../assets/mate2.png";
 import termoboca from "../../assets/termo.png";
 import termocac from "../../assets/termocac.jpg";
+import termocentrall from "../../assets/termocentrall.png";
 import { Card } from "react-bootstrap";
 
 const products = [
@@ -35,7 +35,7 @@ const products = [
     category: "Bombillas",
     name: "Bombilla",
     price: 40000,
-    image: "img",
+    image: termocentrall,
   },
   {
     id: 5,
@@ -101,18 +101,24 @@ const Client = () => {
               onChange={handleSearch}
             />
           </div>
-          <div className="card-container">
-            {filteredProducts.map((product) => (
-              <Card key={product.id} className="product-card">
-                <div>
-                  <img src={product.image} alt={product.name} />
-                  <h4>{product.name}</h4>
-                  <p>${product.price}</p>
-                  <button>Agregar al carrito</button>
-                </div>
-              </Card>
-            ))}
-          </div>
+          {filteredProducts.length > 0 ? (
+            <div className="card-container">
+              {filteredProducts.map((product) => (
+                <Card key={product.id} className="product-card">
+                  <div>
+                    <img src={product.image} alt={product.name} />
+                    <h4>{product.name}</h4>
+                    <p>${product.price}</p>
+                    <button>Agregar al carrito</button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <h3 className="message-not-product">
+              ¡No se encontraron Productos!
+            </h3>
+          )}
         </div>
       </div>
 

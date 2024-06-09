@@ -1,7 +1,8 @@
 import NavBarLanding from "../Navs/NavBarLanding";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
+import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
+  const { handleLogin } = useContext(AuthenticationContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -54,7 +56,7 @@ const Login = () => {
     }));
 
     console.log(`Usuario ${email} ha iniciado sesión.`);
-
+    handleLogin(email);
     navigate("/client");
   };
 

@@ -127,3 +127,8 @@
 .search-bar input[type="text"]:focus {
   border-color: #ef9d63; /* Cambiamos el color del borde al enfocar */
 }
+.message-not-product {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 100px;
+}
