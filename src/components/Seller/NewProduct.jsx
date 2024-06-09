@@ -14,8 +14,8 @@ const NewProduct = () => {
 
   return (
     <>
-      <div className="login-container">
-        <Card className="content-seller">
+      <div className="register-container">
+        <Card className="content-register">
           <Card.Body>
             <Row>
               <h5>Publicar un nuevo producto</h5>

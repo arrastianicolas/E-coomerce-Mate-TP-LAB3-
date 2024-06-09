@@ -1,4 +1,4 @@
-import NavBarLanding from "../Navs/NavBarLanding";
+import NavBarLanding from "../navs/NavBarLanding";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
@@ -83,7 +83,7 @@ const Login = () => {
               </FormGroup>
 
               <FormGroup className="mb-4">
-                <label>Password:</label>
+                <label>Contraseña:</label>
                 <Form.Control
                   ref={passwordRef}
                   type="password"

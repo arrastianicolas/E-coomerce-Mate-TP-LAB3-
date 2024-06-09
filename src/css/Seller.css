@@ -5,7 +5,7 @@
   border: none;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  width: 35%;
-  height: 80%;
-  margin-top: 170px;
+  width: 100%; /* Adjust width to fit inside the container */
+  max-width: 500px; /* Set a max width */
+  
 }

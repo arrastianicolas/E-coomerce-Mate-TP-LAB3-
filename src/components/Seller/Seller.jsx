@@ -1,5 +1,5 @@
 import NewProduct from "./NewProduct";
-import NavBarLanding from "../Navs/NavBarLanding";
+import NavBarLanding from "../navs/NavBarLanding";
 
 const Seller = () => {
   return (
