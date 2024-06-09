@@ -6,27 +6,53 @@ import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState("");
+  const [userType, setUserType] = useState("");
   const [errors, setErrors] = useState({
     email: false,
     password: false,
+    user: false,
+    userType: false,
   });
   const navigate = useNavigate();
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const userRef = useRef(null);
+  const userTypeRef = useRef(null);
 
+  //-----HANDLER-----
   const changeEmailHandler = (event) => {
     const inputEmail = event.target.value;
     setEmail(inputEmail);
+  };
+
+  const changeUserHandler = (event) => {
+    const inputUser = event.target.value;
+    setUser(inputUser);
   };
 
   const changePasswordHandler = (event) => {
     const inputPassword = event.target.value;
     setPassword(inputPassword);
   };
-
+  const changeUserTypeHandler = (event) => {
+    const selectUsertype = event.target.value;
+    setUserType(selectUsertype);
+  };
   const submitHandler = (event) => {
     event.preventDefault();
+
+    if (userRef.current.value.length === 0) {
+      userRef.current.focus();
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        user: true,
+        email: false,
+        password: false,
+      }));
+      return;
+    }
 
     if (emailRef.current.value.length === 0) {
       emailRef.current.focus();
@@ -34,32 +60,36 @@ const Login = () => {
         ...prevErrors,
         email: true,
         password: false,
+        user: false,
       }));
       return;
     }
 
-    if (password.length === 0) {
+    if (passwordRef.current.value.length === 0) {
       passwordRef.current.focus();
       setErrors((prevErrors) => ({
         ...prevErrors,
         password: true,
         email: false,
+        user: false,
       }));
       return;
     }
+
+    //-----SET-ERRORS-----
     setErrors((prevErrors) => ({
       ...prevErrors,
       email: false,
       password: false,
+      user: false,
     }));
 
-    console.log(`Usuario ${email} ha iniciado sesión.`);
+    console.log(`Usuario ${user} se ha registrado con email ${email}.`);
 
-
-    navigate("/Client");
-
+    navigate("/login");
   };
 
+  //-----FORM-----
   return (
     <>
       <NavBarLanding />
@@ -67,14 +97,27 @@ const Login = () => {
         <Card className="content-login">
           <Card.Body>
             <Row>
-              <h5>INICIE SESION</h5>
+              <h5>REGISTRATE</h5>
             </Row>
             <hr />
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
-                <label>Email:</label>
+                <Form.Label>Usuario:</Form.Label>
+                <Form.Control
+                  ref={userRef}
+                  value={user}
+                  type="text"
+                  className={errors.user ? "border border-danger" : ""}
+                  onChange={changeUserHandler}
+                  placeholder="Ingresar usuario"
+                />
+              </FormGroup>
+
+              <FormGroup className="mb-4">
+                <Form.Label>Email:</Form.Label>
                 <Form.Control
                   ref={emailRef}
+                  value={email}
                   type="email"
                   className={errors.email ? "border border-danger" : ""}
                   onChange={changeEmailHandler}
@@ -83,7 +126,7 @@ const Login = () => {
               </FormGroup>
 
               <FormGroup className="mb-4">
-                <label>Password:</label>
+                <Form.Label>Contraseña:</Form.Label>
                 <Form.Control
                   ref={passwordRef}
                   type="password"
@@ -93,14 +136,28 @@ const Login = () => {
                   placeholder="Ingresar contraseña"
                 />
               </FormGroup>
-              <label>¿No tenes una cuenta? Registrate</label>
+              <FormGroup className="mb-4">
+                <Form.Label>Quieres Ser...</Form.Label>
+                <Form.Select
+                  ref={userTypeRef}
+                  value={userType}
+                  className={errors.userType ? "border border-danger" : ""}
+                  onChange={changeUserTypeHandler}
+                >
+                  <option value="" disabled>
+                    Selecciona una opción...
+                  </option>
+                  <option value="client">Cliente</option>
+                  <option value="seller">Vendedor</option>
+                </Form.Select>
+              </FormGroup>
               <hr />
               <Row>
                 <Col />
                 <div>
                   <Col style={{ display: "flex", justifyContent: "center" }}>
-                    <Button className="btnLogIn" type="sumbit">
-                      Iniciar sesión
+                    <Button className="btnLogIn" type="submit">
+                      Registrarme
                     </Button>
                   </Col>
                 </div>
