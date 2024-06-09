@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBarLanding from "../Navs/NavBarLanding";
 import Footer from "../footer/Footer";
@@ -91,7 +91,7 @@ const Client = () => {
           <h3>Filtrar:</h3>
           <button onClick={() => handleFilter("Mates")}>Mates</button>
           <button onClick={() => handleFilter("Termos")}>Termos</button>
-          <button onClick={() => handleFilter("Mochilas")}>Mochilas</button>
+          <button onClick={() => handleFilter("Mochilas")}>Materas</button>
           <button onClick={() => handleFilter("Bombillas")}>Bombillas</button>
           <button onClick={() => handleFilter("")}>Todos</button>
         </div>

@@ -1,7 +1,11 @@
 /* Client.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
 .container {
   display: flex;
   padding: 20px;
+  font-family: "Raleway", sans-serif;
 }
 
 .filter-container {
@@ -17,7 +21,7 @@
 
 .filter-container h3 {
   margin-bottom: 20px;
-  color: #EF9D63;
+  color: #ef9d63;
 }
 
 .filter-container button {
@@ -36,7 +40,6 @@
 .filter-container button:hover {
   color: #031221; /* Cambio de color de texto al pasar el cursor */
 }
-
 
 .card-container {
   display: flex;
@@ -99,24 +102,24 @@
 
 /* Estilo para la barra de búsqueda */
 .search-bar {
-  background-color: transparent; 
-  border: 2px solid #EF9D63; 
-  padding: 7px; 
-  width: 60%; 
-  margin: auto; 
-  color: #EF9D63;
+  background-color: transparent;
+  border: 2px solid #ef9d63;
+  padding: 7px;
+  width: 60%;
+  margin: auto;
+  color: #ef9d63;
   border-radius: 20px;
 }
 
 .search-bar input[type="text"] {
   border: none;
-  background-color: transparent; 
-  color: #fff; 
-  width: 100%; 
-  outline: none; 
+  background-color: transparent;
+  color: #fff;
+  width: 100%;
+  outline: none;
 }
 
 /* Estilo para el borde al enfocar */
 .search-bar input[type="text"]:focus {
-  border-color: #EF9D63; /* Cambiamos el color del borde al enfocar */
+  border-color: #ef9d63; /* Cambiamos el color del borde al enfocar */
 }

@@ -1,11 +1,13 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const MyPurchases = () => {
   const navigate = useNavigate();
   return (
     <div className="my-purchases-container">
-      <button className="btn btn-light buttons-navs" onClick={() => navigate("/client")}>
+      <button
+        className="btn btn-light buttons-navs"
+        onClick={() => navigate("/client")}
+      >
         Tienda
       </button>
 
