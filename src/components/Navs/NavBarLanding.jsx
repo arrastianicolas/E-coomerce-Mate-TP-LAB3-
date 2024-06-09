@@ -163,6 +163,16 @@ const NavBarLanding = () => {
           </div>
         </div>
       )}
+      {location.pathname === "/productForSale" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+        </div>
+      )}
     </>
   );
 };

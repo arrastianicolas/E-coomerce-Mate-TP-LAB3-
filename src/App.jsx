@@ -7,8 +7,8 @@ import Client from "./components/client/Client";
 import Seller from "./components/seller/Seller";
 //import MyPurchases from "./components/client/MyPurchases";
 import MyPurchases from "./components/client/MyPurchases";
-import ProductForSale from "./components/Seller/productForSale/ProductForSale";
-import SalesHistory from "./components/Seller/salesHistory/SalesHistory";
+import ProductForSale from "./components/seller/productForSale/ProductForSale";
+import SalesHistory from "./components/seller/salesHistory/SalesHistory";
 
 // import Client from "./components/client/Client";
 
