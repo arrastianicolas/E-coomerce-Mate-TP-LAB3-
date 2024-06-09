@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
@@ -170,4 +170,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
