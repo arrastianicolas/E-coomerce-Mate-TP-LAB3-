@@ -174,7 +174,7 @@ const NavBarLanding = () => {
             <button
               className="btn btn-light buttons-navs"
               style={{ marginLeft: "auto" }}
-              onClick={clickHandlerMain}
+              onClick={handleLogOut}
             >
               Cerrar Sesión
             </button>
