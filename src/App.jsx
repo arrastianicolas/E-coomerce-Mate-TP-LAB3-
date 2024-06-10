@@ -58,6 +58,10 @@ function App() {
       path: "/saleHistory",
       element: <SaleHistory />,
     },
+    {
+      path: "/cart",
+      element: <Cart />,
+    },
   ]);
   return <RouterProvider router={router} />;
 }
