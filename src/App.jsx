@@ -1,16 +1,16 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-
 import Cart from "./components/Cart/Cart";
 import Landing from "./components/dashboard/landing/Landing";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
-import ShoppingCart from "./components/shoppingCart/ShoppingCart";
+// import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
 import Seller from "./components/seller/Seller";
 import MyPurchases from "./components/client/MyPurchases";
 import ProductForSale from "./components/seller/productsForSale/ProducstForSale";
 import SaleHistory from "./components/seller/saleHistory/SaleHistory";
+import Protected from "./routes/Protected";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,26 +27,31 @@ function App() {
       element: <Register />,
     },
     {
-      path: "/cart",
-      element: <Cart />,
+      path: "/",
+      element: <Protected />,
+      children: [
+        {
+          path: "/client",
+          element: <Client />,
+        },
+        {
+          path: "/cart",
+          element: <Cart />,
+        },
+        {
+          path: "/mypurchases",
+          element: <MyPurchases />,
+        },
+      ],
     },
+    // {
+    //   path: "/mypurchases",
+    //   element: <MyPurchases />,
+    // },
 
-    {
-      path: "/client",
-      element: <Client />,
-    },
-    {
-      path: "/mypurchases",
-      element: <MyPurchases />,
-    },
-  
     {
       path: "*",
       element: <Landing />,
-    },
-    {
-      path: "/shoppingCart",
-      element: <ShoppingCart />,
     },
     {
       path: "/seller",

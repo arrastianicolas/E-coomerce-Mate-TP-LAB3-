@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 // import { useNavigate } from "react-router-dom";
 import NavBarLanding from "../navs/NavBarLanding";
 import Footer from "../footer/Footer";
@@ -7,67 +7,14 @@ import Footer from "../footer/Footer";
 // import termocac from "../../assets/termocac.jpg";
 // import termocentrall from "../../assets/termocentrall.png";
 import { Card } from "react-bootstrap";
+import { ApiContext } from "../../services/apiContext/Api.context";
 
-// const products = [
-//   {
-//     id: 1,
-//     category: "Mates",
-//     name: "Mate Imperial",
-//     price: 40000,
-//     image: mate2,
-//   },
-//   {
-//     id: 2,
-//     category: "Termos",
-//     name: "Termo Stanley",
-//     price: 40000,
-//     image: termocac,
-//   },
-//   {
-//     id: 3,
-//     category: "Mochilas",
-//     name: "Mochila Matera",
-//     price: 40000,
-//     image: termoboca,
-//   },
-//   {
-//     id: 4,
-//     category: "Bombillas",
-//     name: "Bombilla",
-//     price: 40000,
-//     image: termocentrall,
-//   },
-//   {
-//     id: 5,
-//     category: "Bombillas",
-//     name: "Bombilla",
-//     price: 40000,
-//     image: "img",
-//   },
-//   {
-//     id: 6,
-//     category: "Bombillas",
-//     name: "Bombilla",
-//     price: 40000,
-//     image: "img",
-//   },
-//   {
-//     id: 7,
-//     category: "Bombillas",
-//     name: "Bombilla",
-//     price: 40000,
-//     image: "img",
-//   },
-// ];
-// const filteredProducts = products
-//   .filter((product) =>
-//     product.name.toLowerCase().includes(searchTerm.toLowerCase())
-//   )
-//   .filter((product) => !filter || product.category === filter);
 const Client = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
   const [productsFiltered, setProductsFiltered] = useState([]);
+
+  const { products, setCart } = useContext(ApiContext); // Obtener los productos y addToCart del contexto
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -76,25 +23,29 @@ const Client = () => {
   const handleFilter = (category) => {
     setFilter(category);
   };
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const itemInCart = prevCart.find((item) => item.id === product.id);
+      if (itemInCart) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+  };
 
   useEffect(() => {
-    fetch("http://localhost:8000/products", {
-      headers: {
-        accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((products) => {
-        const filteredProducts = products
-          .filter((product) =>
-            product.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-          .filter((product) => !filter || product.category === filter);
+    const filteredProducts = products
+      .filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .filter((product) => !filter || product.category === filter);
 
-        setProductsFiltered(filteredProducts);
-      })
-      .catch((error) => console.log(error));
-  }, [searchTerm, filter]);
+    setProductsFiltered(filteredProducts);
+  }, [searchTerm, filter, products]);
 
   return (
     <div>
@@ -126,7 +77,9 @@ const Client = () => {
                     <img src={product.image} alt={product.name} />
                     <h4>{product.name}</h4>
                     <p>${product.price}</p>
-                    <button>Agregar al carrito</button>
+                    <button onClick={() => addToCart(product)}>
+                      Agregar al carrito
+                    </button>
                   </div>
                 </Card>
               ))}

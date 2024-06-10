@@ -14,11 +14,14 @@ import "./css/ProductsForSale.css";
 import "./css/SaleHistory.css";
 import { AuthenticationContextProvider } from "./services/auth/Auth.context.jsx";
 import "./css/MyPurchases.css";
-
+import { ApiContextProvider } from "./services/apiContext/Api.context.jsx";
+import "./css/Cart.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthenticationContextProvider>
-      <App />
-    </AuthenticationContextProvider>
+    <ApiContextProvider>
+      <AuthenticationContextProvider>
+        <App />
+      </AuthenticationContextProvider>
+    </ApiContextProvider>
   </React.StrictMode>
 );
