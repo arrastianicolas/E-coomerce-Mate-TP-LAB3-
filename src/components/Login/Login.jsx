@@ -13,7 +13,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  const { handleLogin, isAuthenticated } = useContext(AuthenticationContext);
+  const { handleLogin } = useContext(AuthenticationContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -108,14 +108,14 @@ const Login = () => {
                     <Button className="btnLogIn" type="submit">
                       Iniciar sesión
                     </Button>
-                    {isAuthenticated && (
+                    {/* {isAuthenticated && (
                       <Button
                         className="btnStore"
                         onClick={() => navigate("/client")}
                       >
                         Tienda
                       </Button>
-                    )}
+                    )} */}
                   </Col>
                 </div>
               </Row>
