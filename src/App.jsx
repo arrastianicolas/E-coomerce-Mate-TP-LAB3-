@@ -6,9 +6,8 @@ import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
 import Seller from "./components/seller/Seller";
 import MyPurchases from "./components/client/MyPurchases";
-import ProductForSale from "./components/seller/productForSale/ProductForSale";
-import SalesHistory from "./components/seller/salesHistory/SalesHistory";
-
+import ProductForSale from "./components/seller/productsForSale/ProducstForSale";
+import SaleHistory from "./components/seller/saleHistory/SaleHistory";
 
 function App() {
   const router = createBrowserRouter([
@@ -56,12 +55,12 @@ function App() {
       element: <Seller />,
     },
     {
-      path: "/productForSale",
+      path: "/productsForSale",
       element: <ProductForSale />,
     },
     {
-      path: "/salesHistory",
-      element: <SalesHistory />,
+      path: "/saleHistory",
+      element: <SaleHistory />,
     },
   ]);
   return <RouterProvider router={router} />;

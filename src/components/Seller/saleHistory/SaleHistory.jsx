@@ -1,6 +1,6 @@
 import NavBarLanding from "../../navs/NavBarLanding";
 
-const SalesHistory = () => {
+const SaleHistory = () => {
   return (
     <>
       <NavBarLanding />
@@ -27,4 +27,4 @@ const SalesHistory = () => {
   );
 };
 
-export default SalesHistory;
+export default SaleHistory;

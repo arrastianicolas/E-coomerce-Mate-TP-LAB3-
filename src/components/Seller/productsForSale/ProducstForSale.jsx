@@ -1,6 +1,6 @@
 import NavBarLanding from "../../navs/NavBarLanding";
 
-const ProductForSale = () => {
+const ProductsForSale = () => {
   return (
     <>
       <NavBarLanding />
@@ -37,4 +37,4 @@ const ProductForSale = () => {
   );
 };
 
-export default ProductForSale;
+export default ProductsForSale;
