@@ -35,10 +35,6 @@ const NavBarLanding = () => {
     navigate("/saleHistory");
   };
 
-  const clickHandlerCart = () => {
-    navigate("/cart");
-  };
-
   return (
     <>
       {location.pathname === "/" && !user && (
@@ -61,12 +57,6 @@ const NavBarLanding = () => {
               onClick={clickHandlerLogin}
             >
               Iniciar Sesión
-            </button>
-            <button
-              className="btn btn-light buttons-navs"
-              onClick={clickHandlerCart}
-            >
-              Carrito
             </button>
           </div>
         </div>
