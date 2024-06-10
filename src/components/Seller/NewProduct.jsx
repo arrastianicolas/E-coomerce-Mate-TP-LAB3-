@@ -1,7 +1,9 @@
 import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthenticationContext } from "../../services/auth/Auth.context"; // Asegúrate de importar el contexto de autenticación
 
 const NewProduct = () => {
+  const { user } = useContext(AuthenticationContext); // Obtén el estado de autenticación del contexto
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -27,14 +29,20 @@ const NewProduct = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      setError("Debes iniciar sesión para crear un nuevo producto."); // Mostrar error si el usuario no está autenticado
+      return;
+    }
+
     const newProduct = {
-      productName: name,
-      productPrice: price,
-      productDescription: description,
-      productCategory: category,
-      productImage: image,
+      category: category,
+      name: name,
+      description: description,
+      price: price,
+      image: image,
     };
-  
+
     try {
       const response = await fetch("http://localhost:8000/products", {
         method: "POST",
@@ -43,21 +51,22 @@ const NewProduct = () => {
         },
         body: JSON.stringify(newProduct),
       });
-  
+
       if (!response.ok) {
-        throw new Error('Error al añadir el producto');
+        throw new Error("Error al añadir el producto");
       }
-  
+
       setName("");
       setPrice("");
       setDescription("");
       setCategory("");
       setImage("");
+      setError(null); // Limpiar el estado de error
     } catch (error) {
       setError(error.message);
     }
   };
-  
+
   return (
     <>
       <div className="register-container">
@@ -67,7 +76,8 @@ const NewProduct = () => {
               <h5>Publicar un nuevo producto</h5>
             </Row>
             <hr />
-            {error && <p>{error}</p>} {/* Muestra el mensaje de error si está definido */}
+            {error && <p>{error}</p>}{" "}
+            {/* Muestra el mensaje de error si está definido */}
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
                 <Form.Label>Nombre:</Form.Label>
