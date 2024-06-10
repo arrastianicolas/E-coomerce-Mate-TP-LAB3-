@@ -1,11 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-// import { useNavigate } from "react-router-dom";
 import NavBarLanding from "../navs/NavBarLanding";
 import Footer from "../footer/Footer";
-// import mate2 from "../../assets/mate2.png";
-// import termoboca from "../../assets/termo.png";
-// import termocac from "../../assets/termocac.jpg";
-// import termocentrall from "../../assets/termocentrall.png";
 import { Card } from "react-bootstrap";
 import { ApiContext } from "../../services/apiContext/Api.context";
 
