@@ -31,7 +31,7 @@ const NavBarLanding = () => {
   };
 
   const clickHandlerSalesHistory = () => {
-    navigate("/salesHistory");
+    navigate("/saleHistory");
   };
 
   return (
@@ -191,7 +191,7 @@ const NavBarLanding = () => {
           </button>
         </div>
       )}
-      {location.pathname === "/salesHistory" && (
+      {location.pathname === "/saleHistory" && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
