@@ -41,6 +41,9 @@ const NavBarLanding = () => {
   const clickHandlerCart = () => {
     navigate("/cart");
   };
+  const clickHandlerMenuSeller = () => {
+    navigate("/seller");
+  };
 
   return (
     <>
@@ -76,14 +79,25 @@ const NavBarLanding = () => {
           >
             INICIO
           </button>
-          <div className="nav2">
-            <button
-              className="btn btn-light buttons-navs"
-              onClick={clickHandlerShop}
-            >
-              Tienda
-            </button>
-          </div>
+          {user.userType === "client" ? (
+            <div className="nav2">
+              <button
+                className="btn btn-light buttons-navs"
+                onClick={clickHandlerShop}
+              >
+                Tienda
+              </button>
+            </div>
+          ) : (
+            <div className="nav2">
+              <button
+                className="btn btn-light buttons-navs"
+                onClick={clickHandlerMenuSeller}
+              >
+                Menu
+              </button>
+            </div>
+          )}
         </div>
       )}
       {location.pathname === "/login" && (
@@ -161,9 +175,9 @@ const NavBarLanding = () => {
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
-            onClick={clickHandlerShop}
+            onClick={clickHandlerMenuSeller}
           >
-            Tienda
+            Menu
           </button>
           <div className="nav2">
             <button
@@ -193,9 +207,9 @@ const NavBarLanding = () => {
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
-            onClick={clickHandlerShop}
+            onClick={clickHandlerMenuSeller}
           >
-            Tienda
+            Menu
           </button>
         </div>
       )}
@@ -203,9 +217,9 @@ const NavBarLanding = () => {
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
-            onClick={clickHandlerShop}
+            onClick={clickHandlerMenuSeller}
           >
-            Tienda
+            Menu
           </button>
         </div>
       )}

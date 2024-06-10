@@ -16,7 +16,7 @@ import "./css/Cart.css";
 import { AuthenticationContextProvider } from "./services/auth/Auth.context.jsx";
 import "./css/MyPurchases.css";
 import { ApiContextProvider } from "./services/apiContext/Api.context.jsx";
-import "./css/Cart.css";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ApiContextProvider>
