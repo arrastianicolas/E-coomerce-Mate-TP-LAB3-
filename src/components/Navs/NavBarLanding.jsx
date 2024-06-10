@@ -26,8 +26,8 @@ const NavBarLanding = () => {
     navigate("/client");
   };
 
-  const clickHandlerProductForSale = () => {
-    navigate("/productForSale");
+  const clickHandlerProductsForSale = () => {
+    navigate("/productsForSale");
   };
 
   const clickHandlerSalesHistory = () => {
@@ -160,7 +160,7 @@ const NavBarLanding = () => {
           <div className="nav2">
             <button
               className="btn btn-light buttons-navs"
-              onClick={clickHandlerProductForSale}
+              onClick={clickHandlerProductsForSale}
             >
               Productos en venta
             </button>
@@ -181,7 +181,7 @@ const NavBarLanding = () => {
           </div>
         </div>
       )}
-      {location.pathname === "/productForSale" && (
+      {location.pathname === "/productsForSale" && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
