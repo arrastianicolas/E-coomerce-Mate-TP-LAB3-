@@ -18,6 +18,11 @@
   margin-top: auto;
   text-align: center;
 }
+
+.cart-container {
+  height: calc(100vh - 80px);
+  overflow: auto;
+}
 .container-end-main {
   position: relative;
   left: 0;
