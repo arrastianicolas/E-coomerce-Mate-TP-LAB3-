@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const NavBarLanding = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { handleLogout, user } = useContext(AuthenticationContext);
   const clickHandlerRegister = () => {
     navigate("/register");
   };
@@ -15,6 +18,22 @@ const NavBarLanding = () => {
   const clickHandlerMain = () => {
     navigate("/");
   };
+  const handleLogOut = () => {
+    handleLogout();
+    navigate("/");
+  };
+
+  const clickHandlerShop = () => {
+    navigate("/client");
+  };
+
+  const clickHandlerProductsForSale = () => {
+    navigate("/productsForSale");
+  };
+
+  const clickHandlerSaleHistory = () => {
+    navigate("/saleHistory");
+  };
 
   const clickHandlerCart = () => {
     navigate("/cart");
@@ -22,7 +41,8 @@ const NavBarLanding = () => {
 
   return (
     <>
-      {(location.pathname === "/" || location.pathname === "/cart") && (
+      {location.pathname === "/" && !user && (
+
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
@@ -48,6 +68,24 @@ const NavBarLanding = () => {
               onClick={clickHandlerCart}
             >
               Carrito
+            </button>
+          </div>
+        </div>
+      )}
+      {location.pathname === "/" && user && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <div className="nav2">
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerShop}
+            >
+              Tienda
             </button>
           </div>
         </div>
@@ -86,6 +124,93 @@ const NavBarLanding = () => {
               Iniciar Sesión
             </button>
           </div>
+        </div>
+      )}
+      {location.pathname === "/client" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <div className="nav2">
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={() => navigate("/mypurchases")}
+            >
+              Mis Compras
+            </button>
+            <button
+              className="btn btn-light buttons-navs"
+              style={{ marginLeft: "auto" }}
+              onClick={handleLogOut}
+            >
+              Cerrar Sesión
+            </button>
+            <button
+              className="bi bi-cart"
+              style={{
+                fontSize: "1.5rem",
+                background: "none",
+                border: "none",
+                marginLeft: "20px",
+              }}
+              onClick={() => navigate("/carrito")}
+            ></button>
+          </div>
+        </div>
+      )}
+      {location.pathname === "/seller" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+          <div className="nav2">
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerProductsForSale}
+            >
+              Productos en venta
+            </button>
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerSaleHistory}
+            >
+              Historial de ventas
+            </button>
+
+            <button
+              className="btn btn-light buttons-navs"
+              style={{ marginLeft: "auto" }}
+              onClick={clickHandlerMain}
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
+      )}
+      {location.pathname === "/productsForSale" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+        </div>
+      )}
+      {location.pathname === "/salesHistory" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
         </div>
       )}
     </>

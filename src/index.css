@@ -20,6 +20,8 @@ body {
   border-style: none;
   margin-right: 15px;
   text-decoration: none;
+  align-self: flex-start;
+
 }
 .buttons-about {
   background-color: #037438;

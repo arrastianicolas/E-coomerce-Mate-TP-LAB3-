@@ -1,9 +1,9 @@
-import NavBarLanding from "../Navs/NavBarLanding";
+import NavBarLanding from "../navs/NavBarLanding";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
@@ -86,15 +86,15 @@ const Login = () => {
 
     console.log(`Usuario ${user} se ha registrado con email ${email}.`);
 
-    navigate("/login");
+    navigate("/seller");
   };
 
   //-----FORM-----
   return (
     <>
       <NavBarLanding />
-      <div className="login-container">
-        <Card className="content-login">
+      <div className="register-container">
+        <Card className="content-register">
           <Card.Body>
             <Row>
               <h5>REGISTRATE</h5>
@@ -156,7 +156,7 @@ const Login = () => {
                 <Col />
                 <div>
                   <Col style={{ display: "flex", justifyContent: "center" }}>
-                    <Button className="btnLogIn" type="submit">
+                    <Button className="btnRegister" type="submit">
                       Registrarme
                     </Button>
                   </Col>
@@ -170,4 +170,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
