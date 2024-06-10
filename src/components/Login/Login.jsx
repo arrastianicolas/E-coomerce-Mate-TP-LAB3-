@@ -1,8 +1,8 @@
-import NavBarLanding from "../navs/NavBarLanding";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
+import NavBarLanding from "../navs/NavBarLanding";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  const { handleLogin } = useContext(AuthenticationContext);
+  const { handleLogin, isAuthenticated } = useContext(AuthenticationContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -27,42 +27,49 @@ const Login = () => {
     setPassword(inputPassword);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-
-    if (emailRef.current.value.length === 0) {
-      emailRef.current.focus();
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        email: true,
-        password: false,
-      }));
+  
+    const emailValue = email.trim();
+    const passwordValue = password.trim();
+  
+    if (emailValue === "" || passwordValue === "") {
+      setErrors({
+        email: emailValue === "",
+        password: passwordValue === "",
+      });
       return;
     }
-
-    if (password.length === 0) {
-      passwordRef.current.focus();
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password: true,
-        email: false,
-      }));
-      return;
+  
+    try {
+      const response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: emailValue, password: passwordValue }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Credenciales incorrectas");
+      }
+  
+      const userData = await response.json();
+      handleLogin(userData.email, userData.userType);
+  
+      if (userData.userType === "client") {
+        navigate("/client");
+      } else if (userData.userType === "seller") {
+        navigate("/seller");
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error.message);
     }
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      email: false,
-      password: false,
-    }));
-
-    console.log(`Usuario ${email} ha iniciado sesión.`);
-    handleLogin(email);
-    navigate("/client");
   };
 
   return (
     <>
-      <NavBarLanding />
+      <NavBarLanding></NavBarLanding>
       <div className="login-container">
         <Card className="content-login">
           <Card.Body>
@@ -93,15 +100,19 @@ const Login = () => {
                   placeholder="Ingresar contraseña"
                 />
               </FormGroup>
-              <label>¿No tenes una cuenta? Registrate</label>
               <hr />
               <Row>
                 <Col />
                 <div>
                   <Col style={{ display: "flex", justifyContent: "center" }}>
-                    <Button className="btnLogIn" type="sumbit">
+                    <Button className="btnLogIn" type="submit">
                       Iniciar sesión
                     </Button>
+                    {isAuthenticated && (
+                      <Button className="btnStore" onClick={() => navigate("/client")}>
+                        Tienda
+                      </Button>
+                    )}
                   </Col>
                 </div>
               </Row>

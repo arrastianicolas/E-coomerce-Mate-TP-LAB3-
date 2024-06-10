@@ -1,10 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
-import Cart from "./components/Cart/Cart";
+import Cart from "./components/cart/Cart";
 import Landing from "./components/dashboard/landing/Landing";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
-// import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
 import Seller from "./components/seller/Seller";
 import MyPurchases from "./components/client/MyPurchases";
@@ -44,11 +42,6 @@ function App() {
         },
       ],
     },
-    // {
-    //   path: "/mypurchases",
-    //   element: <MyPurchases />,
-    // },
-
     {
       path: "*",
       element: <Landing />,
