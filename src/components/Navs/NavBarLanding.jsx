@@ -14,6 +14,7 @@ const NavBarLanding = () => {
   const clickHandlerLogin = () => {
     navigate("/login");
   };
+
   const clickHandlerMain = () => {
     navigate("/");
   };
@@ -30,8 +31,12 @@ const NavBarLanding = () => {
     navigate("/productsForSale");
   };
 
-  const clickHandlerSaleHistory = () => {
+  const clickHandlerSalesHistory = () => {
     navigate("/saleHistory");
+  };
+
+  const clickHandlerCart = () => {
+    navigate("/cart");
   };
 
   return (
@@ -55,7 +60,7 @@ const NavBarLanding = () => {
               className="btn btn-light buttons-navs"
               onClick={clickHandlerLogin}
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </button>
           </div>
         </div>
@@ -109,7 +114,7 @@ const NavBarLanding = () => {
               className="btn btn-light buttons-navs"
               onClick={clickHandlerLogin}
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </button>
           </div>
         </div>
@@ -144,7 +149,7 @@ const NavBarLanding = () => {
                 border: "none",
                 marginLeft: "20px",
               }}
-              onClick={() => navigate("/carrito")}
+              onClick={clickHandlerCart}
             ></button>
           </div>
         </div>
@@ -166,7 +171,7 @@ const NavBarLanding = () => {
             </button>
             <button
               className="btn btn-light buttons-navs"
-              onClick={clickHandlerSaleHistory}
+              onClick={clickHandlerSalesHistory}
             >
               Historial de ventas
             </button>
@@ -191,7 +196,27 @@ const NavBarLanding = () => {
           </button>
         </div>
       )}
-      {location.pathname === "/salesHistory" && (
+      {location.pathname === "/saleHistory" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+        </div>
+      )}
+      {location.pathname === "/cart" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+        </div>
+      )}
+      {location.pathname === "/mypurchases" && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
