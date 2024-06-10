@@ -7,10 +7,16 @@ export const ApiContext = createContext();
 export const ApiContextProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   //   const [salesHistory, setSalesHistory] = useState([]);
-  //   const [purchaseHistory, setPurchaseHistory] = useState([]);
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   // Funciones para manejar la API
   const fetchUsers = async () => {
     const response = await fetch("http://localhost:8000/users");
@@ -34,7 +40,6 @@ export const ApiContextProvider = ({ children }) => {
 
   //   const fetchPurchaseHistory = async () => {
   //     const response = await fetch("/api/purchaseHistory");
-  //     const data = await response.json();
   //     setPurchaseHistory(data);
   //   };
 
@@ -58,8 +63,8 @@ export const ApiContextProvider = ({ children }) => {
         addToCart,
         // salesHistory,
         // setSalesHistory,
-        // purchaseHistory,
-        // setPurchaseHistory,
+        purchaseHistory,
+        setPurchaseHistory,
       }}
     >
       {children}

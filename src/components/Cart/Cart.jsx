@@ -7,13 +7,14 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 
 const Cart = () => {
   const [purchaseConfirmed, setPurchaseConfirmed] = useState(false);
-  const { cart, setCart } = useContext(ApiContext);
+  const { cart, setCart, setPurchaseHistory } = useContext(ApiContext);
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
   const handleConfirmPurchase = () => {
     setPurchaseConfirmed(!purchaseConfirmed);
+    setPurchaseHistory((prevHistory) => [...prevHistory, ...cart]);
     setCart([]);
   };
 
@@ -58,9 +59,9 @@ const Cart = () => {
         >
           Confirmar Compra
         </Button>
-        {purchaseConfirmed && cart.lenght > 0 && (
+        {purchaseConfirmed && cart.length > 0 && (
           <div className="confirmation-message">
-            La compra ha sido Confirmada <span className="checkmark">✔️</span>
+            <span className="checkmark">La compra ha sido Confirmada ✔️</span>
           </div>
         )}
       </div>

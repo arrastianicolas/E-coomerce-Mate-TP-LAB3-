@@ -1,6 +1,9 @@
+import { useContext } from "react";
+import { ApiContext } from "../../services/apiContext/Api.context";
 import NavBarLanding from "../navs/NavBarLanding";
 
 const MyPurchases = () => {
+  const { purchaseHistory } = useContext(ApiContext);
   return (
     <>
       <NavBarLanding />
@@ -12,16 +15,20 @@ const MyPurchases = () => {
               <th>Producto</th>
               <th>Descripción</th>
               <th>Precio</th>
+              <th>Cantidad</th>
               <th>Total</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Mate Imperial Personalizable</td>
-              <td>Miguel</td>
-              <td>$40.000</td>
-              <td>$40.000</td>
-            </tr>
+            {purchaseHistory.map((purchase, index) => (
+              <tr key={index}>
+                <td>{purchase.name}</td>
+                <td>{purchase.description}</td>
+                <td>${purchase.price.toFixed(2)}</td>
+                <td>{purchase.quantity}</td>
+                <td>${(purchase.price * purchase.quantity).toFixed(2)}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

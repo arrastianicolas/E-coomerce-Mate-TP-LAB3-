@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
+import { ApiContext } from "../../services/apiContext/Api.context";
 
 const NavBarLanding = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { handleLogout, user } = useContext(AuthenticationContext);
+  const { setCart } = useContext(ApiContext);
   const clickHandlerRegister = () => {
     navigate("/register");
   };
@@ -21,6 +23,7 @@ const NavBarLanding = () => {
   const handleLogOut = () => {
     handleLogout();
     navigate("/");
+    setCart([]);
   };
 
   const clickHandlerShop = () => {

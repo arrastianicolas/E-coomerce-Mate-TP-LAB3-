@@ -29,10 +29,10 @@ const Login = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-  
+
     const emailValue = email.trim();
     const passwordValue = password.trim();
-  
+
     if (emailValue === "" || passwordValue === "") {
       setErrors({
         email: emailValue === "",
@@ -40,7 +40,7 @@ const Login = () => {
       });
       return;
     }
-  
+
     try {
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
@@ -49,14 +49,14 @@ const Login = () => {
         },
         body: JSON.stringify({ email: emailValue, password: passwordValue }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Credenciales incorrectas");
       }
-  
+
       const userData = await response.json();
       handleLogin(userData.email, userData.userType);
-  
+
       if (userData.userType === "client") {
         navigate("/client");
       } else if (userData.userType === "seller") {
@@ -109,7 +109,10 @@ const Login = () => {
                       Iniciar sesión
                     </Button>
                     {isAuthenticated && (
-                      <Button className="btnStore" onClick={() => navigate("/client")}>
+                      <Button
+                        className="btnStore"
+                        onClick={() => navigate("/client")}
+                      >
                         Tienda
                       </Button>
                     )}
