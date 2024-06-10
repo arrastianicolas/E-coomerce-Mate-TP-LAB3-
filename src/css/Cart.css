@@ -9,8 +9,7 @@
 }
 
 .cart-container h1 {
-  font-weight: bold;
-  font-family: "Raleway", sans-serif;
+  font-family: "Erica One", sans-serif;
 }
 
 .cart-table {
@@ -33,4 +32,10 @@
 
 .cart-table td {
   color: #fff;
+}
+.confirm-button {
+  margin-top: 20px;
+  background-color: white;
+  color: black;
+  font-family: "Raleway", sans-serif;
 }

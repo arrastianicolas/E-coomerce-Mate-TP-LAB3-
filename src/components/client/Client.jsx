@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import NavBarLanding from "../navs/NavBarLanding";
 import Footer from "../footer/Footer";
-
 import { Card } from "react-bootstrap";
+import { ApiContext } from "../../services/apiContext/Api.context";
+
 const Client = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
   const [productsFiltered, setProductsFiltered] = useState([]);
+
+  const { products, setCart } = useContext(ApiContext); // Obtener los productos y addToCart del contexto
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -16,25 +18,29 @@ const Client = () => {
   const handleFilter = (category) => {
     setFilter(category);
   };
+  const addToCart = (product) => {
+    setCart((prevCart) => {
+      const itemInCart = prevCart.find((item) => item.id === product.id);
+      if (itemInCart) {
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+      return [...prevCart, { ...product, quantity: 1 }];
+    });
+  };
 
   useEffect(() => {
-    fetch("http://localhost:8000/products", {
-      headers: {
-        accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((products) => {
-        const filteredProducts = products
-          .filter((product) =>
-            product.name.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-          .filter((product) => !filter || product.category === filter);
+    const filteredProducts = products
+      .filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .filter((product) => !filter || product.category === filter);
 
-        setProductsFiltered(filteredProducts);
-      })
-      .catch((error) => console.log(error));
-  }, [searchTerm, filter]);
+    setProductsFiltered(filteredProducts);
+  }, [searchTerm, filter, products]);
 
   return (
     <div>
@@ -66,7 +72,9 @@ const Client = () => {
                     <img src={product.image} alt={product.name} />
                     <h4>{product.name}</h4>
                     <p>${product.price}</p>
-                    <button>Agregar al carrito</button>
+                    <button onClick={() => addToCart(product)}>
+                      Agregar al carrito
+                    </button>
                   </div>
                 </Card>
               ))}
