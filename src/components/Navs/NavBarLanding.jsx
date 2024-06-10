@@ -42,7 +42,6 @@ const NavBarLanding = () => {
   return (
     <>
       {location.pathname === "/" && !user && (
-
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
@@ -62,12 +61,6 @@ const NavBarLanding = () => {
               onClick={clickHandlerLogin}
             >
               Iniciar Sesión
-            </button>
-            <button
-              className="btn btn-light buttons-navs"
-              onClick={clickHandlerCart}
-            >
-              Carrito
             </button>
           </div>
         </div>
@@ -156,7 +149,7 @@ const NavBarLanding = () => {
                 border: "none",
                 marginLeft: "20px",
               }}
-              onClick={() => navigate("/carrito")}
+              onClick={clickHandlerCart}
             ></button>
           </div>
         </div>
@@ -204,6 +197,26 @@ const NavBarLanding = () => {
         </div>
       )}
       {location.pathname === "/saleHistory" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+        </div>
+      )}
+      {location.pathname === "/cart" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+        </div>
+      )}
+      {location.pathname === "/mypurchases" && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"

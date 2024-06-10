@@ -1,25 +1,68 @@
-// import { useState, createContext } from "react";
+import { createContext, useState, useEffect } from "react";
 
-// export const ApiContext = createContext();
+// Crear el contexto
+export const ApiContext = createContext();
 
-// const userValue = JSON.parse(localStorage.getItem("user"));
+// Proveedor del contexto
+export const ApiContextProvider = ({ children }) => {
+  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  //   const [salesHistory, setSalesHistory] = useState([]);
+  //   const [purchaseHistory, setPurchaseHistory] = useState([]);
 
-// export const ApiContextProvider = ({ children }) => {
-//   const [user, setUser] = useState(userValue);
+  // Funciones para manejar la API
+  const fetchUsers = async () => {
+    const response = await fetch("http://localhost:8000/users");
+    const data = await response.json();
+    setUsers(data);
+  };
 
-//   const handleLogout = () => {
-//     localStorage.removeItem("user");
-//     setUser(null);
-//   };
+  const fetchProducts = async () => {
+    const response = await fetch("http://localhost:8000/products");
+    const data = await response.json();
+    setProducts(data);
+  };
+  const addToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
+  //   const fetchSalesHistory = async () => {
+  //     const response = await fetch("/api/salesHistory");
+  //     const data = await response.json();
+  //     setSalesHistory(data);
+  //   };
 
-//   const handleLogin = (email) => {
-//     localStorage.setItem("user", JSON.stringify({ email }));
-//     setUser({ email });
-//   };
+  //   const fetchPurchaseHistory = async () => {
+  //     const response = await fetch("/api/purchaseHistory");
+  //     const data = await response.json();
+  //     setPurchaseHistory(data);
+  //   };
 
-//   return (
-//     <ApiContext.Provider value={{ user, handleLogin, handleLogout }}>
-//       {children}
-//     </ApiContext.Provider>
-//   );
-// };
+  // UseEffect para cargar los datos al inicio
+  useEffect(() => {
+    fetchUsers();
+    fetchProducts();
+    // fetchSalesHistory();
+    // fetchPurchaseHistory();
+  }, []);
+
+  return (
+    <ApiContext.Provider
+      value={{
+        users,
+        setUsers,
+        products,
+        setProducts,
+        cart,
+        setCart,
+        addToCart,
+        // salesHistory,
+        // setSalesHistory,
+        // purchaseHistory,
+        // setPurchaseHistory,
+      }}
+    >
+      {children}
+    </ApiContext.Provider>
+  );
+};
