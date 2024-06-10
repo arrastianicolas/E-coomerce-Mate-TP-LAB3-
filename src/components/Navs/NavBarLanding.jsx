@@ -31,7 +31,7 @@ const NavBarLanding = () => {
     navigate("/productsForSale");
   };
 
-  const clickHandlerSaleHistory = () => {
+  const clickHandlerSalesHistory = () => {
     navigate("/saleHistory");
   };
 
@@ -178,7 +178,7 @@ const NavBarLanding = () => {
             </button>
             <button
               className="btn btn-light buttons-navs"
-              onClick={clickHandlerSaleHistory}
+              onClick={clickHandlerSalesHistory}
             >
               Historial de ventas
             </button>
@@ -203,7 +203,7 @@ const NavBarLanding = () => {
           </button>
         </div>
       )}
-      {location.pathname === "/salesHistory" && (
+      {location.pathname === "/saleHistory" && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
