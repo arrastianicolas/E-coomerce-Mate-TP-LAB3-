@@ -39,7 +39,6 @@ function App() {
       path: "/mypurchases",
       element: <MyPurchases />,
     },
-  
     {
       path: "*",
       element: <Landing />,

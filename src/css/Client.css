@@ -1,5 +1,3 @@
-/* Client.css */
-
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 .container {
@@ -30,16 +28,16 @@
   width: 50px;
   margin-bottom: 10px;
   padding: 10px;
-  background-color: transparent; /* Cambiado a transparente para quitar el color de fondo */
+  background-color: transparent; 
   border: none;
-  color: #fff; /* Color de texto azul */
+  color: #fff; 
   cursor: pointer;
-  transition: color 0.3s; /* Transición para cambiar el color del texto */
-  text-decoration: underline; /* Subrayado del texto */
+  transition: color 0.3s; 
+  text-decoration: underline; 
 }
 
 .filter-container button:hover {
-  color: #031221; /* Cambio de color de texto al pasar el cursor */
+  color: #031221; 
 }
 
 .card-container {
@@ -47,22 +45,27 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   margin: 20px;
-  max-width: 100%; /* Asegúrate de que este valor se ajuste a tus necesidades */
+  max-width: 100%; 
   padding: 35px;
 }
 .product-card {
   width: 220px;
+  height: 400px; /* Fija la altura de las tarjetas */
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-card img {
   width: 100%;
-  height: auto;
+  height: 200px; /* Ajusta la altura de las imágenes para que todas sean iguales */
+  object-fit: cover; /* Asegura que las imágenes se ajusten sin distorsionarse */
 }
 
 .product-card h4 {
@@ -104,7 +107,7 @@
   justify-content: space-between;
 }
 
-/* Estilo para la barra de búsqueda */
+
 .search-bar {
   background-color: transparent;
   border: 2px solid #ef9d63;
@@ -123,9 +126,8 @@
   outline: none;
 }
 
-/* Estilo para el borde al enfocar */
 .search-bar input[type="text"]:focus {
-  border-color: #ef9d63; /* Cambiamos el color del borde al enfocar */
+  border-color: #ef9d63; 
 }
 .message-not-product {
   text-align: center;

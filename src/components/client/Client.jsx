@@ -2,68 +2,8 @@ import { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 import NavBarLanding from "../navs/NavBarLanding";
 import Footer from "../footer/Footer";
-// import mate2 from "../../assets/mate2.png";
-// import termoboca from "../../assets/termo.png";
-// import termocac from "../../assets/termocac.jpg";
-// import termocentrall from "../../assets/termocentrall.png";
-import { Card } from "react-bootstrap";
 
-// const products = [
-//   {
-//     id: 1,
-//     category: "Mates",
-//     name: "Mate Imperial",
-//     price: 40000,
-//     image: mate2,
-//   },
-//   {
-//     id: 2,
-//     category: "Termos",
-//     name: "Termo Stanley",
-//     price: 40000,
-//     image: termocac,
-//   },
-//   {
-//     id: 3,
-//     category: "Mochilas",
-//     name: "Mochila Matera",
-//     price: 40000,
-//     image: termoboca,
-//   },
-//   {
-//     id: 4,
-//     category: "Bombillas",
-//     name: "Bombilla",
-//     price: 40000,
-//     image: termocentrall,
-//   },
-//   {
-//     id: 5,
-//     category: "Bombillas",
-//     name: "Bombilla",
-//     price: 40000,
-//     image: "img",
-//   },
-//   {
-//     id: 6,
-//     category: "Bombillas",
-//     name: "Bombilla",
-//     price: 40000,
-//     image: "img",
-//   },
-//   {
-//     id: 7,
-//     category: "Bombillas",
-//     name: "Bombilla",
-//     price: 40000,
-//     image: "img",
-//   },
-// ];
-// const filteredProducts = products
-//   .filter((product) =>
-//     product.name.toLowerCase().includes(searchTerm.toLowerCase())
-//   )
-//   .filter((product) => !filter || product.category === filter);
+import { Card } from "react-bootstrap";
 const Client = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
