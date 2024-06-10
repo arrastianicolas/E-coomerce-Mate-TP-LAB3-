@@ -30,8 +30,8 @@ const NavBarLanding = () => {
     navigate("/productsForSale");
   };
 
-  const clickHandlerSalesHistory = () => {
-    navigate("/salesHistory");
+  const clickHandlerSaleHistory = () => {
+    navigate("/saleHistory");
   };
 
   return (
@@ -166,7 +166,7 @@ const NavBarLanding = () => {
             </button>
             <button
               className="btn btn-light buttons-navs"
-              onClick={clickHandlerSalesHistory}
+              onClick={clickHandlerSaleHistory}
             >
               Historial de ventas
             </button>
