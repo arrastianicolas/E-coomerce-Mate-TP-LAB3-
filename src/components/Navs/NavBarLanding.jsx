@@ -11,13 +11,18 @@ const NavBarLanding = () => {
   const clickHandlerLogin = () => {
     navigate("/login");
   };
+
   const clickHandlerMain = () => {
     navigate("/");
   };
 
+  const clickHandlerCart = () => {
+    navigate("/cart");
+  };
+
   return (
     <>
-      {location.pathname === "/" && (
+      {(location.pathname === "/" || location.pathname === "/cart") && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
@@ -36,7 +41,13 @@ const NavBarLanding = () => {
               className="btn btn-light buttons-navs"
               onClick={clickHandlerLogin}
             >
-              Iniciar Sesion
+              Iniciar Sesión
+            </button>
+            <button
+              className="btn btn-light buttons-navs"
+              onClick={clickHandlerCart}
+            >
+              Carrito
             </button>
           </div>
         </div>
@@ -72,7 +83,7 @@ const NavBarLanding = () => {
               className="btn btn-light buttons-navs"
               onClick={clickHandlerLogin}
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </button>
           </div>
         </div>
