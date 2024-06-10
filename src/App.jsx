@@ -32,12 +32,6 @@ function App() {
       path: "/mypurchases",
       element: <MyPurchases />,
     },
-
-    // {
-    //   path: "/client",
-    //   element: <Client />,
-
-    // },
     {
       path: "/cart",
       //poner element
