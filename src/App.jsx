@@ -26,7 +26,7 @@ function App() {
     },
     {
       path: "/",
-      element: <Protected />,
+      element: <Protected allowedRoles={["client"]} />,
       children: [
         {
           path: "/client",
@@ -43,20 +43,26 @@ function App() {
       ],
     },
     {
+      path: "/",
+      element: <Protected allowedRoles={["seller"]} />,
+      children: [
+        {
+          path: "/seller",
+          element: <Seller />,
+        },
+        {
+          path: "/productsForSale",
+          element: <ProductForSale />,
+        },
+        {
+          path: "/saleHistory",
+          element: <SaleHistory />,
+        },
+      ],
+    },
+    {
       path: "*",
       element: <Landing />,
-    },
-    {
-      path: "/seller",
-      element: <Seller />,
-    },
-    {
-      path: "/productsForSale",
-      element: <ProductForSale />,
-    },
-    {
-      path: "/saleHistory",
-      element: <SaleHistory />,
     },
     {
       path: "/cart",
