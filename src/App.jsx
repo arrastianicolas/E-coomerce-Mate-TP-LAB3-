@@ -7,7 +7,7 @@ import Client from "./components/client/Client";
 import Seller from "./components/seller/Seller";
 import MyPurchases from "./components/client/MyPurchases";
 import ProductForSale from "./components/seller/productsForSale/ProducstForSale";
-import SaleHistory from "./components/seller/saleHistory/SaleHistory";
+import SalesHistory from "./components/seller/salesHistory/SalesHistory";
 
 function App() {
   const router = createBrowserRouter([
@@ -59,8 +59,8 @@ function App() {
       element: <ProductForSale />,
     },
     {
-      path: "/saleHistory",
-      element: <SaleHistory />,
+      path: "/salesHistory",
+      element: <SalesHistory />,
     },
   ]);
   return <RouterProvider router={router} />;
