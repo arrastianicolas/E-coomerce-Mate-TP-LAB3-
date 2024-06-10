@@ -42,7 +42,6 @@ const NavBarLanding = () => {
   return (
     <>
       {location.pathname === "/" && !user && (
-
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
@@ -204,6 +203,16 @@ const NavBarLanding = () => {
         </div>
       )}
       {location.pathname === "/saleHistory" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerShop}
+          >
+            Tienda
+          </button>
+        </div>
+      )}
+      {location.pathname === "/cart" && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"

@@ -1,11 +1,9 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-
-import Cart from "./components/Cart/Cart";
+import Cart from "./components/client/cart/Cart";
 import Landing from "./components/dashboard/landing/Landing";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
-import ShoppingCart from "./components/shoppingCart/ShoppingCart";
 import Client from "./components/client/Client";
 import Seller from "./components/seller/Seller";
 import MyPurchases from "./components/client/MyPurchases";
@@ -27,11 +25,6 @@ function App() {
       element: <Register />,
     },
     {
-      path: "/cart",
-      element: <Cart />,
-    },
-
-    {
       path: "/client",
       element: <Client />,
     },
@@ -44,10 +37,6 @@ function App() {
       element: <Landing />,
     },
     {
-      path: "/shoppingCart",
-      element: <ShoppingCart />,
-    },
-    {
       path: "/seller",
       element: <Seller />,
     },
@@ -58,6 +47,10 @@ function App() {
     {
       path: "/saleHistory",
       element: <SaleHistory />,
+    },
+    {
+      path: "/cart",
+      element: <Cart />,
     },
   ]);
   return <RouterProvider router={router} />;
