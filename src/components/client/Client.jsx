@@ -9,7 +9,7 @@ const Client = () => {
   const [filter, setFilter] = useState("");
   const [productsFiltered, setProductsFiltered] = useState([]);
 
-  const { products, setCart } = useContext(ApiContext); // Obtener los productos y addToCart del contexto
+  const { products, setCart } = useContext(ApiContext); 
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);

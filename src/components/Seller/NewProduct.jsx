@@ -1,15 +1,70 @@
 import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthenticationContext } from "../../services/auth/Auth.context"; // Asegúrate de importar el contexto de autenticación
 
 const NewProduct = () => {
-  const [selection, setSelection] = useState("");
+  const { user } = useContext(AuthenticationContext); // Obtén el estado de autenticación del contexto
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [image, setImage] = useState("");
+  const [error, setError] = useState(null); // Define el estado de error
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const changeNameHandler = (event) => {
+    setName(event.target.value);
+  };
+  const changePriceHandler = (event) => {
+    setPrice(event.target.value);
+  };
+  const changeDescriptionHandler = (event) => {
+    setDescription(event.target.value);
+  };
+  const changeCategoryHandler = (event) => {
+    setCategory(event.target.value);
+  };
+  const changeImageHandler = (event) => {
+    setImage(event.target.value);
   };
 
-  const handleSelectionChange = (event) => {
-    setSelection(event.target.value);
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      setError("Debes iniciar sesión para crear un nuevo producto."); // Mostrar error si el usuario no está autenticado
+      return;
+    }
+
+    const newProduct = {
+      category: category,
+      name: name,
+      description: description,
+      price: price,
+      image: image,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8000/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al añadir el producto");
+      }
+
+      setName("");
+      setPrice("");
+      setDescription("");
+      setCategory("");
+      setImage("");
+      setError(null); // Limpiar el estado de error
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -21,12 +76,16 @@ const NewProduct = () => {
               <h5>Publicar un nuevo producto</h5>
             </Row>
             <hr />
+            {error && <p>{error}</p>}{" "}
+            {/* Muestra el mensaje de error si está definido */}
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
                 <Form.Label>Nombre:</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Ingresar el nombre del producto"
+                  value={name}
+                  onChange={changeNameHandler}
                 />
               </FormGroup>
 
@@ -35,6 +94,8 @@ const NewProduct = () => {
                 <Form.Control
                   type="number"
                   placeholder="Ingresar el precio del producto"
+                  value={price}
+                  onChange={changePriceHandler}
                 />
               </FormGroup>
 
@@ -44,11 +105,13 @@ const NewProduct = () => {
                   as="textarea"
                   rows={3}
                   placeholder="Ingrese una breve descripción del producto"
+                  value={description}
+                  onChange={changeDescriptionHandler}
                 />
               </FormGroup>
               <FormGroup className="mb-4">
                 <Form.Label>Quieres Vender...</Form.Label>
-                <Form.Select value={selection} onChange={handleSelectionChange}>
+                <Form.Select value={category} onChange={changeCategoryHandler}>
                   <option value="" disabled>
                     Selecciona una opción...
                   </option>
@@ -63,6 +126,8 @@ const NewProduct = () => {
                 <Form.Control
                   type="text"
                   placeholder="Ingrese la imagen del producto por URL"
+                  value={image}
+                  onChange={changeImageHandler}
                 />
               </FormGroup>
               <hr />
