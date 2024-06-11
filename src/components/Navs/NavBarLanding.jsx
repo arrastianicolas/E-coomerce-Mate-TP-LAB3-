@@ -44,6 +44,9 @@ const NavBarLanding = () => {
   const clickHandlerMenuSeller = () => {
     navigate("/seller");
   };
+  const handleAdminPage = () => {
+    navigate("/sysAdmin");
+  };
 
   return (
     <>
@@ -240,6 +243,23 @@ const NavBarLanding = () => {
             onClick={clickHandlerShop}
           >
             Tienda
+          </button>
+        </div>
+      )}
+      {location.pathname === "/sysAdmin" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          {}
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={handleAdminPage}
+          >
+            CERRAR SESION
           </button>
         </div>
       )}

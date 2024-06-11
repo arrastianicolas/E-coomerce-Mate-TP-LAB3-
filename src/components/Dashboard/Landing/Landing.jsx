@@ -1,8 +1,8 @@
 import NavBarLanding from "../../navs/NavBarLanding";
 import Footer from "../../footer/Footer";
-import AboutWe from "../aboutWe/AboutWe";
-import HandsL from "../hands/HandsL";
-import HandsR from "../hands/HandsR";
+import AboutWe from "../AboutWe/AboutWe";
+import HandsL from "../Hands/HandsL";
+import HandsR from "../Hands/HandsR";
 
 import Carrousel from "./Carrousel";
 
@@ -41,7 +41,6 @@ const Landing = () => {
       <Footer />
 
       <AboutWe />
-
     </>
   );
 };
