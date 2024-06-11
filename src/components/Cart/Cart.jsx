@@ -38,8 +38,19 @@ const Cart = () => {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
-                <td>${item.price.toFixed(2)}</td>
-                <td>${(item.price * item.quantity).toFixed(2)}</td>
+                <td>
+                  $
+                  {typeof item.price === "number"
+                    ? item.price.toFixed(2)
+                    : item.price}
+                </td>
+                <td>
+                  $
+                  {(typeof item.price === "number"
+                    ? item.price * item.quantity
+                    : 0
+                  ).toFixed(2)}
+                </td>
                 <td>
                   <Button
                     variant="danger"

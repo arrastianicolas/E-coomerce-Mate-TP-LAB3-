@@ -1,9 +1,9 @@
-import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
 import { useState, useContext } from "react";
-import { AuthenticationContext } from "../../services/auth/Auth.context"; // Asegúrate de importar el contexto de autenticación
+import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
+import { ApiContext } from "../../services/apiContext/Api.context"; // Asegúrate de importar el contexto de la API
 
 const NewProduct = () => {
-  const { user } = useContext(AuthenticationContext); // Obtén el estado de autenticación del contexto
+  const { setProducts } = useContext(ApiContext); // Obtén la función para actualizar los productos desde el contexto
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -30,11 +30,6 @@ const NewProduct = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (!user) {
-      setError("Debes iniciar sesión para crear un nuevo producto."); // Mostrar error si el usuario no está autenticado
-      return;
-    }
-
     const newProduct = {
       category: category,
       name: name,
@@ -56,6 +51,10 @@ const NewProduct = () => {
         throw new Error("Error al añadir el producto");
       }
 
+      // Actualizar el contexto de productos con el nuevo producto creado
+      setProducts((prevProducts) => [...prevProducts, newProduct]);
+
+      // Limpiar los campos después de la creación exitosa del producto
       setName("");
       setPrice("");
       setDescription("");
@@ -115,10 +114,10 @@ const NewProduct = () => {
                   <option value="" disabled>
                     Selecciona una opción...
                   </option>
-                  <option value="mate">Mate</option>
-                  <option value="termo">Termo</option>
-                  <option value="bombilla">Bombilla</option>
-                  <option value="matera">Matera</option>
+                  <option value="Mates">Mate</option>
+                  <option value="Termos">Termo</option>
+                  <option value="Bombillas">Bombilla</option>
+                  <option value="Materas">Matera</option>
                 </Form.Select>
               </FormGroup>
               <FormGroup className="mb-4">

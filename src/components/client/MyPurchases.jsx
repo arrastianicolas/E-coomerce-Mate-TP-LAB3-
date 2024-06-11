@@ -4,6 +4,7 @@ import NavBarLanding from "../navs/NavBarLanding";
 
 const MyPurchases = () => {
   const { purchaseHistory } = useContext(ApiContext);
+
   return (
     <>
       <NavBarLanding />
@@ -24,9 +25,18 @@ const MyPurchases = () => {
               <tr key={index}>
                 <td>{purchase.name}</td>
                 <td>{purchase.description}</td>
-                <td>${purchase.price.toFixed(2)}</td>
+                <td>
+                  {typeof purchase.price === "number"
+                    ? `$${purchase.price.toFixed(2)}`
+                    : purchase.price}
+                </td>
                 <td>{purchase.quantity}</td>
-                <td>${(purchase.price * purchase.quantity).toFixed(2)}</td>
+                <td>
+                  {typeof purchase.price === "number" &&
+                  typeof purchase.quantity === "number"
+                    ? `$${(purchase.price * purchase.quantity).toFixed(2)}`
+                    : ""}
+                </td>
               </tr>
             ))}
           </tbody>
