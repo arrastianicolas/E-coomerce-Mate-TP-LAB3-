@@ -11,9 +11,9 @@ export const ApiContextProvider = ({ children }) => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
-  //   const [salesHistory, setSalesHistory] = useState([]);
+  const [salesHistory, setSalesHistory] = useState([]);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
-
+  const [productsForSale, setProductsForSale] = useState([]);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
@@ -61,10 +61,12 @@ export const ApiContextProvider = ({ children }) => {
         cart,
         setCart,
         addToCart,
-        // salesHistory,
-        // setSalesHistory,
+        salesHistory,
+        setSalesHistory,
         purchaseHistory,
         setPurchaseHistory,
+        productsForSale,
+        setProductsForSale,
       }}
     >
       {children}
