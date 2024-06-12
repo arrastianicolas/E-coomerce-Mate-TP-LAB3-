@@ -1,15 +1,16 @@
 import { useState, useContext } from "react";
 import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
-import { ApiContext } from "../../services/apiContext/Api.context"; // Asegúrate de importar el contexto de la API
+import { ApiContext } from "../../services/apiContext/Api.context";
 
 const NewProduct = () => {
-  const { setProducts } = useContext(ApiContext); // Obtén la función para actualizar los productos desde el contexto
+  const { setProducts } = useContext(ApiContext);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
-  const [error, setError] = useState(null); // Define el estado de error
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null); // Nuevo estado para el mensaje de éxito
 
   const changeNameHandler = (event) => {
     setName(event.target.value);
@@ -51,16 +52,18 @@ const NewProduct = () => {
         throw new Error("Error al añadir el producto");
       }
 
-      // Actualizar el contexto de productos con el nuevo producto creado
       setProducts((prevProducts) => [...prevProducts, newProduct]);
 
-      // Limpiar los campos después de la creación exitosa del producto
+      // Mostrar mensaje de éxito
+      setSuccessMessage("Producto agregado correctamente");
+
+      // Limpiar campos y errores
       setName("");
       setPrice("");
       setDescription("");
       setCategory("");
       setImage("");
-      setError(null); // Limpiar el estado de error
+      setError(null);
     } catch (error) {
       setError(error.message);
     }
@@ -75,8 +78,9 @@ const NewProduct = () => {
               <h5>Publicar un nuevo producto</h5>
             </Row>
             <hr />
-            {error && <p>{error}</p>}{" "}
-            {/* Muestra el mensaje de error si está definido */}
+            {error && <p>{error}</p>}
+            {successMessage && <p>{successMessage}</p>}{" "}
+            {/* Mostrar mensaje de éxito */}
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
                 <Form.Label>Nombre:</Form.Label>
@@ -87,7 +91,6 @@ const NewProduct = () => {
                   onChange={changeNameHandler}
                 />
               </FormGroup>
-
               <FormGroup className="mb-4">
                 <Form.Label>Precio:</Form.Label>
                 <Form.Control
@@ -97,7 +100,6 @@ const NewProduct = () => {
                   onChange={changePriceHandler}
                 />
               </FormGroup>
-
               <FormGroup className="mb-4">
                 <Form.Label>Descripción:</Form.Label>
                 <Form.Control
