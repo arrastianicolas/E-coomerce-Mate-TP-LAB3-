@@ -64,10 +64,6 @@ function App() {
       path: "*",
       element: <Landing />,
     },
-    {
-      path: "/cart",
-      element: <Cart />,
-    },
   ]);
   return <RouterProvider router={router} />;
 }
