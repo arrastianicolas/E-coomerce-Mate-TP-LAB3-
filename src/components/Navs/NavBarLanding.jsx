@@ -255,7 +255,7 @@ const NavBarLanding = () => {
             INICIO
           </button>
           <button className="btn btn-light buttons-navs" onClick={handleLogOut}>
-            CERRAR SESION
+            Cerrar Sesion
           </button>
         </div>
       )}
