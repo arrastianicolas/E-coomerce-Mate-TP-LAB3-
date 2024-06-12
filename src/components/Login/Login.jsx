@@ -62,7 +62,7 @@ const Login = () => {
       } else if (userData.userType === "seller") {
         navigate("/seller");
       } else if (userData.userType === "sysAdmin") {
-        navigate("/sysAdmin");
+        navigate("/admin");
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);

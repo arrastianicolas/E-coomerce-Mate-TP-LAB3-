@@ -67,7 +67,7 @@ function App() {
     },
     {
       path: "/",
-      element: <Protected allowedRoles={["admin"]} />,
+      element: <Protected allowedRoles={["sysAdmin"]} />,
       children: [
         {
           path: "/admin",
