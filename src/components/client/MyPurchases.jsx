@@ -15,8 +15,8 @@ const MyPurchases = () => {
             <tr>
               <th>Producto</th>
               <th>Descripción</th>
-              <th>Precio</th>
               <th>Cantidad</th>
+              <th>SubTotal</th>
               <th>Total</th>
             </tr>
           </thead>
@@ -25,12 +25,13 @@ const MyPurchases = () => {
               <tr key={index}>
                 <td>{purchase.name}</td>
                 <td>{purchase.description}</td>
+
+                <td>{purchase.quantity}</td>
                 <td>
                   {typeof purchase.price === "number"
                     ? `$${purchase.price.toFixed(2)}`
                     : purchase.price}
                 </td>
-                <td>{purchase.quantity}</td>
                 <td>
                   {typeof purchase.price === "number" &&
                   typeof purchase.quantity === "number"

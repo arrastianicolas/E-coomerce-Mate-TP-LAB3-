@@ -181,7 +181,8 @@ const NavBarLanding = () => {
                 fontSize: "1.5rem",
                 background: "none",
                 border: "none",
-                marginLeft: "20px",
+
+                color: "white",
               }}
               onClick={clickHandlerCart}
             ></button>
