@@ -9,6 +9,7 @@ const NavBarLanding = () => {
 
   const { handleLogout, user } = useContext(AuthenticationContext);
   const { setCart } = useContext(ApiContext);
+
   const clickHandlerRegister = () => {
     navigate("/register");
   };
@@ -20,6 +21,7 @@ const NavBarLanding = () => {
   const clickHandlerMain = () => {
     navigate("/");
   };
+
   const handleLogOut = () => {
     handleLogout();
     navigate("/");
@@ -41,6 +43,7 @@ const NavBarLanding = () => {
   const clickHandlerCart = () => {
     navigate("/cart");
   };
+
   const clickHandlerMenuSeller = () => {
     navigate("/seller");
   };
@@ -240,6 +243,19 @@ const NavBarLanding = () => {
             onClick={clickHandlerShop}
           >
             Tienda
+          </button>
+        </div>
+      )}
+      {location.pathname === "/sysAdmin" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerMain}
+          >
+            INICIO
+          </button>
+          <button className="btn btn-light buttons-navs" onClick={handleLogOut}>
+            Cerrar Sesion
           </button>
         </div>
       )}

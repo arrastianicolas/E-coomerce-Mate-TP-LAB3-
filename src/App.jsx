@@ -9,6 +9,7 @@ import MyPurchases from "./components/client/MyPurchases.jsx";
 import ProductForSale from "./components/seller/productsForSale/ProducstForSale.jsx";
 import SaleHistory from "./components/seller/saleHistory/SaleHistory.jsx";
 import Protected from "./routes/Protected";
+import Admin from "./components/admin/Admin.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -63,6 +64,16 @@ function App() {
     {
       path: "*",
       element: <Landing />,
+    },
+    {
+      path: "/",
+      element: <Protected allowedRoles={["admin"]} />,
+      children: [
+        {
+          path: "/admin",
+          element: <Admin />,
+        },
+      ],
     },
   ]);
   return <RouterProvider router={router} />;
