@@ -13,7 +13,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  const { handleLogin, isAuthenticated } = useContext(AuthenticationContext);
+  const { handleLogin } = useContext(AuthenticationContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -61,6 +61,8 @@ const Login = () => {
         navigate("/client");
       } else if (userData.userType === "seller") {
         navigate("/seller");
+      } else if (userData.userType === "sysAdmin") {
+        navigate("/admin");
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
@@ -108,14 +110,14 @@ const Login = () => {
                     <Button className="btnLogIn" type="submit">
                       Iniciar sesión
                     </Button>
-                    {isAuthenticated && (
+                    {/* {isAuthenticated && (
                       <Button
                         className="btnStore"
                         onClick={() => navigate("/client")}
                       >
                         Tienda
                       </Button>
-                    )}
+                    )} */}
                   </Col>
                 </div>
               </Row>

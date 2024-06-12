@@ -9,7 +9,7 @@ const Client = () => {
   const [filter, setFilter] = useState("");
   const [productsFiltered, setProductsFiltered] = useState([]);
 
-  const { products, setCart } = useContext(ApiContext); 
+  const { products, setCart } = useContext(ApiContext);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -18,6 +18,7 @@ const Client = () => {
   const handleFilter = (category) => {
     setFilter(category);
   };
+
   const addToCart = (product) => {
     setCart((prevCart) => {
       const itemInCart = prevCart.find((item) => item.id === product.id);
@@ -34,8 +35,10 @@ const Client = () => {
 
   useEffect(() => {
     const filteredProducts = products
-      .filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      .filter(
+        (product) =>
+          product.name &&
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
       .filter((product) => !filter || product.category === filter);
 
@@ -57,6 +60,7 @@ const Client = () => {
 
         <div className="product-container">
           <div className="search-bar">
+            <i className="bi bi-search"></i>
             <input
               type="text"
               placeholder="Buscar..."

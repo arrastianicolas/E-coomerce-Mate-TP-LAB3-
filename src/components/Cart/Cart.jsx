@@ -8,14 +8,15 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 const Cart = () => {
   const [purchaseConfirmed, setPurchaseConfirmed] = useState(false);
   const { cart, setCart, setPurchaseHistory } = useContext(ApiContext);
+
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
   const handleConfirmPurchase = () => {
-    setPurchaseConfirmed(!purchaseConfirmed);
     setPurchaseHistory((prevHistory) => [...prevHistory, ...cart]);
     setCart([]);
+    setPurchaseConfirmed(true);
   };
 
   return (
@@ -28,7 +29,7 @@ const Cart = () => {
             <tr>
               <th>Producto</th>
               <th>Descripción</th>
-              <th>Precio</th>
+              <th>SubTotal</th>
               <th>Total</th>
               <th className="actions-column">Opciones</th>
             </tr>
@@ -38,8 +39,19 @@ const Cart = () => {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
-                <td>${item.price.toFixed(2)}</td>
-                <td>${(item.price * item.quantity).toFixed(2)}</td>
+                <td>
+                  $
+                  {typeof item.price === "number"
+                    ? item.price.toFixed(2)
+                    : item.price}
+                </td>
+                <td>
+                  $
+                  {(typeof item.price === "number"
+                    ? item.price * item.quantity
+                    : 0
+                  ).toFixed(2)}
+                </td>
                 <td>
                   <Button
                     variant="danger"
@@ -56,10 +68,11 @@ const Cart = () => {
           variant="success"
           onClick={handleConfirmPurchase}
           className="confirm-button"
+          disabled={cart.length < 1}
         >
           Confirmar Compra
         </Button>
-        {purchaseConfirmed && cart.length > 0 && (
+        {purchaseConfirmed && (
           <div className="confirmation-message">
             <span className="checkmark">La compra ha sido Confirmada ✔️</span>
           </div>
