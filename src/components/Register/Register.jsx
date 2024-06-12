@@ -40,7 +40,7 @@ const Register = () => {
     const selectUsertype = event.target.value;
     setUserType(selectUsertype);
   };
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     if (userRef.current.value.length === 0) {
@@ -84,9 +84,29 @@ const Register = () => {
       user: false,
     }));
 
-    console.log(`Usuario ${user} se ha registrado con email ${email}.`);
+    try {
+      const response = await fetch("http://localhost:8000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: user,
+          email: email,
+          password: password,
+          userType: userType,
+        }),
+      });
 
-    navigate("/seller");
+      if (!response.ok) {
+        throw new Error("Error al registrar usuario");
+      }
+
+      console.log(`Usuario ${user} se ha registrado con email ${email}.`);
+      navigate("/login"); // o hacia donde quieras redirigir después del registro
+    } catch (error) {
+      console.error("Error al registrar usuario:", error.message);
+    }
   };
 
   //-----FORM-----

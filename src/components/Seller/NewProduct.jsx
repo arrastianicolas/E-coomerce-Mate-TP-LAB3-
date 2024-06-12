@@ -1,15 +1,16 @@
-import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
 import { useState, useContext } from "react";
-import { AuthenticationContext } from "../../services/auth/Auth.context"; // Asegúrate de importar el contexto de autenticación
+import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
+import { ApiContext } from "../../services/apiContext/Api.context";
 
 const NewProduct = () => {
-  const { user } = useContext(AuthenticationContext); // Obtén el estado de autenticación del contexto
+  const { setProducts } = useContext(ApiContext);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
-  const [error, setError] = useState(null); // Define el estado de error
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null); // Nuevo estado para el mensaje de éxito
 
   const changeNameHandler = (event) => {
     setName(event.target.value);
@@ -29,11 +30,6 @@ const NewProduct = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    if (!user) {
-      setError("Debes iniciar sesión para crear un nuevo producto."); // Mostrar error si el usuario no está autenticado
-      return;
-    }
 
     const newProduct = {
       category: category,
@@ -56,12 +52,18 @@ const NewProduct = () => {
         throw new Error("Error al añadir el producto");
       }
 
+      setProducts((prevProducts) => [...prevProducts, newProduct]);
+
+      // Mostrar mensaje de éxito
+      setSuccessMessage("Producto agregado correctamente");
+
+      // Limpiar campos y errores
       setName("");
       setPrice("");
       setDescription("");
       setCategory("");
       setImage("");
-      setError(null); // Limpiar el estado de error
+      setError(null);
     } catch (error) {
       setError(error.message);
     }
@@ -76,8 +78,9 @@ const NewProduct = () => {
               <h5>Publicar un nuevo producto</h5>
             </Row>
             <hr />
-            {error && <p>{error}</p>}{" "}
-            {/* Muestra el mensaje de error si está definido */}
+            {error && <p>{error}</p>}
+            {successMessage && <p>{successMessage}</p>}{" "}
+            {/* Mostrar mensaje de éxito */}
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
                 <Form.Label>Nombre:</Form.Label>
@@ -88,7 +91,6 @@ const NewProduct = () => {
                   onChange={changeNameHandler}
                 />
               </FormGroup>
-
               <FormGroup className="mb-4">
                 <Form.Label>Precio:</Form.Label>
                 <Form.Control
@@ -98,7 +100,6 @@ const NewProduct = () => {
                   onChange={changePriceHandler}
                 />
               </FormGroup>
-
               <FormGroup className="mb-4">
                 <Form.Label>Descripción:</Form.Label>
                 <Form.Control
@@ -115,10 +116,10 @@ const NewProduct = () => {
                   <option value="" disabled>
                     Selecciona una opción...
                   </option>
-                  <option value="mate">Mate</option>
-                  <option value="termo">Termo</option>
-                  <option value="bombilla">Bombilla</option>
-                  <option value="matera">Matera</option>
+                  <option value="Mates">Mate</option>
+                  <option value="Termos">Termo</option>
+                  <option value="Bombillas">Bombilla</option>
+                  <option value="Materas">Matera</option>
                 </Form.Select>
               </FormGroup>
               <FormGroup className="mb-4">

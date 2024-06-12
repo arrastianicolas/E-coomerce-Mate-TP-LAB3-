@@ -41,7 +41,6 @@ const Landing = () => {
       <Footer />
 
       <AboutWe />
-
     </>
   );
 };
