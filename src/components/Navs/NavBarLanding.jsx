@@ -47,6 +47,9 @@ const NavBarLanding = () => {
   const clickHandlerMenuSeller = () => {
     navigate("/seller");
   };
+  const clickHandlerMenuAdmin = () => {
+    navigate("/admin");
+  };
 
   return (
     <>
@@ -82,7 +85,7 @@ const NavBarLanding = () => {
           >
             INICIO
           </button>
-          {user.userType === "client" ? (
+          {user.userType === "client" && (
             <div className="nav2">
               <button
                 className="btn btn-light buttons-navs"
@@ -91,11 +94,22 @@ const NavBarLanding = () => {
                 Tienda
               </button>
             </div>
-          ) : (
+          )}
+          {user.userType === "seller" && (
             <div className="nav2">
               <button
                 className="btn btn-light buttons-navs"
                 onClick={clickHandlerMenuSeller}
+              >
+                Menu
+              </button>
+            </div>
+          )}
+          {user.userType === "sysAdmin" && (
+            <div className="nav2">
+              <button
+                className="btn btn-light buttons-navs"
+                onClick={clickHandlerMenuAdmin}
               >
                 Menu
               </button>
@@ -246,7 +260,7 @@ const NavBarLanding = () => {
           </button>
         </div>
       )}
-      {location.pathname === "/sysAdmin" && (
+      {location.pathname === "/admin" && (
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
