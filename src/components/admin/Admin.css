@@ -1,0 +1,55 @@
+body {
+  background-color: var(--main-bg-color);
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  font-family: "Raleway", sans-serif;
+  padding-top: 50px;
+}
+
+.Tittle-Admin {
+  font-family: "Erica One", sans-serif;
+  color: white;
+  font-size: 80px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.Tittle-Admin span {
+  display: block;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+}
+
+.btn {
+  padding: 20px 30px;
+  font-size: 23px;
+  background-color: #ef9d63;
+  color: #444;
+  border: none;
+  border-radius: 10px;
+}
+
+.btn:hover {
+  background-color: #e08d5b;
+}
+
+.btn-primary {
+  background-color: #ef9d63;
+  text-transform: uppercase;
+  font-family: "Erica One", sans-serif;
+}
+
+.btn-secondary {
+  background-color: #ef9d63;
+  text-transform: uppercase;
+  font-family: "Erica One", sans-serif;
+}
