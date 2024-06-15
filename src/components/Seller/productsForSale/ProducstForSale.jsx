@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { ApiContext } from "../../../services/apiContext/Api.context";
 import NavBarLanding from "../../navs/NavBarLanding";
 
 const ProductsForSale = () => {
+  const { productsForSale } = useContext(ApiContext);
+
   return (
     <>
       <NavBarLanding />
@@ -16,20 +20,22 @@ const ProductsForSale = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Mate Imperial Personalizable</td>
-              <td>Miguel</td>
-              <td>$40.000</td>
-              <td>
-                <button type="button" className="btn btn-primary">
-                  Editar
-                </button>
-                <br />
-                <button type="button" className="btn btn-danger">
-                  Eliminar
-                </button>
-              </td>
-            </tr>
+            {productsForSale.map((product, index) => (
+              <tr key={index}>
+                <td>{product.name}</td>
+                <td>{product.description}</td>
+                <td>${Number(product.price).toFixed(2)}</td>
+                <td>
+                  <button type="button" className="btn btn-primary">
+                    Editar
+                  </button>
+                  <br />
+                  <button type="button" className="btn btn-danger">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

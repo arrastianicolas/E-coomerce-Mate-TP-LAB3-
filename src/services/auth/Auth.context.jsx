@@ -13,9 +13,9 @@ export const AuthenticationContextProvider = ({ children }) => {
     setUser(null);
   };
 
-  const handleLogin = (email, userType) => {
-    localStorage.setItem("user", JSON.stringify({ email, userType }));
-    setUser({ email, userType });
+  const handleLogin = (email, userType, id) => {
+    localStorage.setItem("user", JSON.stringify({ email, userType, id }));
+    setUser({ email, userType, id });
   };
 
   return (
