@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import NavBarLanding from "../../navs/NavBarLanding";
-import "./ListUser.css";
 
 const ListUser = () => {
   const [users, setUsers] = useState([]);
@@ -58,7 +57,7 @@ const ListUser = () => {
       <div className="list-user-container">
         <h1>Lista de usuarios</h1>
         <button
-          className="btn btn-success mb-3"
+          className="btnAddUser mb-3"
           onClick={() => console.log("Dar de alta usuario")}
         >
           Dar de alta usuario

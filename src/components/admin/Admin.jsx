@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import NavBarLanding from "../navs/NavBarLanding";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
-import "./Admin.css";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -24,10 +23,10 @@ const Admin = () => {
           <>
             <h1 className="Tittle-Admin">USTED HA INGRESADO COMO ADMIN</h1>
             <div className="button-container">
-              <button onClick={handleUserListClick} className="btn btn-primary">
+              <button onClick={handleUserListClick} className="btnAdmin">
                 Lista de Usuarios
               </button>
-              <button onClick={handleShopClick} className="btn btn-secondary">
+              <button onClick={handleShopClick} className="btnAdmin">
                 Tienda
               </button>
             </div>

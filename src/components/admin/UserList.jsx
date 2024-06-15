@@ -6,7 +6,7 @@ const UsersList = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await fetch("/api/users"); // URL de tu API
+      const response = await fetch("http://localhost:8000/users/${id}"); // URL de tu API
       const data = await response.json();
       setUsers(data);
     };

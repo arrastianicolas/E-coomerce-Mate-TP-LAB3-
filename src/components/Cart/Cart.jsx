@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-
 import Footer from "../footer/Footer";
 import NavBarLanding from "../navs/NavBarLanding";
 import { ApiContext } from "../../services/apiContext/Api.context";
@@ -26,6 +25,7 @@ const Cart = () => {
   const removeFromCart = () => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== bookIdToDelete));
     hideModalHandler();
+  }
     
 
   const handleConfirmPurchase = async () => {

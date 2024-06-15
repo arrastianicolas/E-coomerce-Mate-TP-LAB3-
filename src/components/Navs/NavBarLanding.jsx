@@ -52,10 +52,6 @@ const NavBarLanding = () => {
     navigate("/admin");
   };
 
-  const clickHandlerListUser = () => {
-    navigate("/listUser");
-  };
-
   return (
     <>
       {location.pathname === "/" && !user && (
@@ -248,7 +244,7 @@ const NavBarLanding = () => {
         <div className="navbar-landing">
           <button
             className="btn btn-light buttons-navs"
-            onClick={clickHandlerListUser}
+            onClick={clickHandlerMenuAdmin}
           >
             Menu
           </button>
