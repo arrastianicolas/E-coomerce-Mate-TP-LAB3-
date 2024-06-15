@@ -1,6 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+
 body {
   background-color: var(--main-bg-color);
+  font-family: "Raleway", sans-serif;
 }
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -30,6 +35,7 @@ h5 {
   width: 100%; 
   max-width: 500px;
 }
+
 .content-login Form {
   height: 90%;
   display: flex;
@@ -45,6 +51,7 @@ h5 {
   border-radius: 20px;
   font-family: "Raleway", sans-serif;
   font-weight: bold;
+  width: 170px;
 }
 .btnLogIn:hover {
   background-color: #fff;

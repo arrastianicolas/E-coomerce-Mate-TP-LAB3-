@@ -1,6 +1,6 @@
 import NavBarLanding from "../navs/NavBarLanding";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 
 const Register = () => {
@@ -171,6 +171,12 @@ const Register = () => {
                   <option value="seller">Vendedor</option>
                 </Form.Select>
               </FormGroup>
+              <p style={{ textAlign: "center" }}>
+                ¿Ya tenes una cuenta?{" "}
+                <Link to="/login" style={{ color: "white", textDecoration: "underline" }}>
+                  Inicia sesion
+                </Link>
+              </p>
               <hr />
               <Row>
                 <Col />

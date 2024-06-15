@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 
 import Footer from "../footer/Footer";
 import NavBarLanding from "../navs/NavBarLanding";
@@ -8,12 +8,25 @@ import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const Cart = () => {
   const [purchaseConfirmed, setPurchaseConfirmed] = useState(false);
-  const { cart, setCart, setPurchaseHistory, setOrderHistory } =
-    useContext(ApiContext);
+  const { cart, setCart, setPurchaseHistory, setOrderHistory } =useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
-  const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [bookIdToDelete, setBookIdToDelete] = useState(null);
+
+  const hideModalHandler = () => {
+    setShowDeleteModal(false);
+    setBookIdToDelete(null);
   };
+
+  const showModalHandler = (id) => {
+    setShowDeleteModal(true);
+    setBookIdToDelete(id);
+  };
+
+  const removeFromCart = () => {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== bookIdToDelete));
+    hideModalHandler();
+    
 
   const handleConfirmPurchase = async () => {
     const order = {
@@ -82,7 +95,7 @@ const Cart = () => {
                 <td>
                   <Button
                     variant="danger"
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => showModalHandler(item.id)}
                   >
                     Eliminar
                   </Button>
@@ -106,6 +119,23 @@ const Cart = () => {
         )}
       </div>
       <Footer />
+
+      <Modal show={showDeleteModal} onHide={hideModalHandler}>
+        <Modal.Header closeButton>
+          <Modal.Title>Eliminar producto</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Está seguro que desea eliminar este producto?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={hideModalHandler}>
+            Cerrar
+          </Button>
+          <Button variant="danger" onClick={removeFromCart}>
+            Eliminar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

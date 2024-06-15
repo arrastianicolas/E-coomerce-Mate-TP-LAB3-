@@ -1,5 +1,5 @@
-import { useContext, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useRef, useState } from "react";
+import { useNavigate, Link } from "react-router-dom"; 
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 import NavBarLanding from "../navs/NavBarLanding";
@@ -75,7 +75,7 @@ const Login = () => {
 
   return (
     <>
-      <NavBarLanding></NavBarLanding>
+      <NavBarLanding />
       <div className="login-container">
         <Card className="content-login">
           <Card.Body>
@@ -106,24 +106,23 @@ const Login = () => {
                   placeholder="Ingresar contraseña"
                 />
               </FormGroup>
+
+              <p style={{ textAlign: "center" }}>
+                ¿No tenes una cuenta?{" "}
+                <Link to="/register" style={{ color: "white", textDecoration: "underline" }}>
+                  Regístrate
+                </Link>
+              </p>
               <hr />
+
               <Row>
                 <Col />
-                <div>
-                  <Col style={{ display: "flex", justifyContent: "center" }}>
-                    <Button className="btnLogIn" type="submit">
-                      Iniciar sesión
-                    </Button>
-                    {/* {isAuthenticated && (
-                      <Button
-                        className="btnStore"
-                        onClick={() => navigate("/client")}
-                      >
-                        Tienda
-                      </Button>
-                    )} */}
-                  </Col>
-                </div>
+                <Col style={{ display: "flex", justifyContent: "center" }}>
+                  <Button className="btnLogIn" type="submit">
+                    Iniciar sesión
+                  </Button>
+                </Col>
+                <Col />
               </Row>
             </Form>
           </Card.Body>
