@@ -4,16 +4,43 @@ import { Button } from "react-bootstrap";
 import Footer from "../footer/Footer";
 import NavBarLanding from "../navs/NavBarLanding";
 import { ApiContext } from "../../services/apiContext/Api.context";
+import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const Cart = () => {
   const [purchaseConfirmed, setPurchaseConfirmed] = useState(false);
-  const { cart, setCart, setPurchaseHistory } = useContext(ApiContext);
-
+  const { cart, setCart, setPurchaseHistory, setOrderHistory } =
+    useContext(ApiContext);
+  const { user } = useContext(AuthenticationContext);
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  const handleConfirmPurchase = () => {
+  const handleConfirmPurchase = async () => {
+    const order = {
+      items: cart,
+      date: new Date().toISOString(),
+      buyerId: user.id,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8000/order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order),
+      });
+
+      if (response.ok) {
+        const newOrder = await response.json();
+        setOrderHistory((prevHistory) => [...prevHistory, newOrder]);
+      } else {
+        console.error("Error placing order:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error.message);
+    }
+
     setPurchaseHistory((prevHistory) => [...prevHistory, ...cart]);
     setCart([]);
     setPurchaseConfirmed(true);
