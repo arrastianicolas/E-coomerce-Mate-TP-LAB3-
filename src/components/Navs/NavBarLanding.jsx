@@ -47,8 +47,13 @@ const NavBarLanding = () => {
   const clickHandlerMenuSeller = () => {
     navigate("/seller");
   };
+
   const clickHandlerMenuAdmin = () => {
     navigate("/admin");
+  };
+
+  const clickHandlerListUser = () => {
+    navigate("/listUser");
   };
 
   return (
@@ -181,7 +186,6 @@ const NavBarLanding = () => {
                 fontSize: "1.5rem",
                 background: "none",
                 border: "none",
-
                 color: "white",
               }}
               onClick={clickHandlerCart}
@@ -210,7 +214,6 @@ const NavBarLanding = () => {
             >
               Historial de ventas
             </button>
-
             <button
               className="btn btn-light buttons-navs"
               style={{ marginLeft: "auto" }}
@@ -236,6 +239,16 @@ const NavBarLanding = () => {
           <button
             className="btn btn-light buttons-navs"
             onClick={clickHandlerMenuSeller}
+          >
+            Menu
+          </button>
+        </div>
+      )}
+      {location.pathname === "/listUser" && (
+        <div className="navbar-landing">
+          <button
+            className="btn btn-light buttons-navs"
+            onClick={clickHandlerListUser}
           >
             Menu
           </button>

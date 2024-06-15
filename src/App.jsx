@@ -10,6 +10,7 @@ import ProductForSale from "./components/seller/productsForSale/ProducstForSale.
 import SaleHistory from "./components/seller/saleHistory/SaleHistory.jsx";
 import Protected from "./routes/Protected";
 import Admin from "./components/admin/Admin.jsx";
+import ListUser from "./components/admin/listUser/ListUser.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -72,6 +73,10 @@ function App() {
         {
           path: "/admin",
           element: <Admin />,
+        },
+        {
+          path: "/listUser",
+          element: <ListUser />,
         },
       ],
     },
