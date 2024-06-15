@@ -4,6 +4,8 @@ import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 import NavBarLanding from "../navs/NavBarLanding";
 
+// import { ApiContext } from "../../services/apiContext/Api.context";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { handleLogin } = useContext(AuthenticationContext);
+
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -55,7 +58,8 @@ const Login = () => {
       }
 
       const userData = await response.json();
-      handleLogin(userData.email, userData.userType);
+      handleLogin(userData.email, userData.userType, userData.id);
+      // setCurrentUser(userData);
 
       if (userData.userType === "client") {
         navigate("/client");

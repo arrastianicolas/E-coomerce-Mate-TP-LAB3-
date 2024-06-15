@@ -3,7 +3,7 @@ import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
 import { ApiContext } from "../../services/apiContext/Api.context";
 
 const NewProduct = () => {
-  const { setProducts } = useContext(ApiContext);
+  const { setProducts, setProductsForSale } = useContext(ApiContext);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -53,6 +53,7 @@ const NewProduct = () => {
       }
 
       setProducts((prevProducts) => [...prevProducts, newProduct]);
+      setProductsForSale((prevProducts) => [...prevProducts, newProduct]); // Actualiza productsForSale
 
       // Mostrar mensaje de éxito
       setSuccessMessage("Producto agregado correctamente");

@@ -11,17 +11,21 @@ export const ApiContextProvider = ({ children }) => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
-  //   const [salesHistory, setSalesHistory] = useState([]);
+  const [orderHistory, setOrderHistory] = useState([]);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
+  const [productsForSale, setProductsForSale] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null); // Assuming you have a way to set the current user
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
   // Funciones para manejar la API
   const fetchUsers = async () => {
     const response = await fetch("http://localhost:8000/users");
     const data = await response.json();
     setUsers(data);
+    setCurrentUser(data);
   };
 
   const fetchProducts = async () => {
@@ -29,21 +33,28 @@ export const ApiContextProvider = ({ children }) => {
     const data = await response.json();
     setProducts(data);
   };
+
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
   };
-  //   const fetchSalesHistory = async () => {
-  //     const response = await fetch("/api/salesHistory");
-  //     const data = await response.json();
-  //     setSalesHistory(data);
-  //   };
 
-  //   const fetchPurchaseHistory = async () => {
-  //     const response = await fetch("/api/purchaseHistory");
-  //     setPurchaseHistory(data);
-  //   };
+  // const placeOrder = async (order) => {
+  //   const response = await fetch("http://localhost:8000/order", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(order),
+  //   });
 
-  // UseEffect para cargar los datos al inicio
+  //   if (response.ok) {
+  //     const newOrder = await response.json();
+  //     setOrderHistory((prevHistory) => [...prevHistory, newOrder]);
+  //   } else {
+  //     console.error("Error placing order:", response.statusText);
+  //   }
+  // };
+
   useEffect(() => {
     fetchUsers();
     fetchProducts();
@@ -61,10 +72,15 @@ export const ApiContextProvider = ({ children }) => {
         cart,
         setCart,
         addToCart,
-        // salesHistory,
-        // setSalesHistory,
+        // placeOrder,
+        orderHistory,
+        setOrderHistory,
         purchaseHistory,
         setPurchaseHistory,
+        productsForSale,
+        setProductsForSale,
+        currentUser,
+        setCurrentUser,
       }}
     >
       {children}
