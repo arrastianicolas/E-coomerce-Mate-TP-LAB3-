@@ -1,5 +1,5 @@
-import React, { useContext, useRef, useState } from "react";
-import { useNavigate, Link } from "react-router-dom"; 
+import { useContext, useRef, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 import NavBarLanding from "../navs/NavBarLanding";
@@ -109,7 +109,10 @@ const Login = () => {
 
               <p style={{ textAlign: "center" }}>
                 ¿No tenes una cuenta?{" "}
-                <Link to="/register" style={{ color: "white", textDecoration: "underline" }}>
+                <Link
+                  to="/register"
+                  style={{ color: "white", textDecoration: "underline" }}
+                >
                   Regístrate
                 </Link>
               </p>

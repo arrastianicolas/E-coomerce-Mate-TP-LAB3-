@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import { Button, Card, Col, Form, Row, FormGroup } from "react-bootstrap";
 import { ApiContext } from "../../services/apiContext/Api.context";
+import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const NewProduct = () => {
   const { setProducts, setProductsForSale } = useContext(ApiContext);
+  const { user } = useContext(AuthenticationContext);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -37,6 +39,7 @@ const NewProduct = () => {
       description: description,
       price: price,
       image: image,
+      sellerId: user.id,
     };
 
     try {
