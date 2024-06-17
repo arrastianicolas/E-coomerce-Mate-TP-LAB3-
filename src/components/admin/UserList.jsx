@@ -12,7 +12,7 @@ const UsersList = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, []); 
 
   return (
     <>

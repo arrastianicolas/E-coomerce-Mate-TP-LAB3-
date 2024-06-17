@@ -284,7 +284,8 @@ const NavBarLanding = () => {
         </div>
       )}
     </>
-  );
+  ); 
 };
 
 export default NavBarLanding;
+ 

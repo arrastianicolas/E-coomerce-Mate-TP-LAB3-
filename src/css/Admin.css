@@ -1,8 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
-/*@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-
- body {
->>>>>>> 7351be6560f0d71a20e7fa301b876e2a87d94f71
+body {
+  font-family: "Raleway", sans-serif;
   background-color: var(--main-bg-color);
 }
 
@@ -46,19 +45,3 @@
   font-family: "Raleway", sans-serif;
 }
 
-
-.btn:hover {
-  background-color: #e08d5b;
-}
-
-.btn-primary {
-  background-color: #ef9d63;
-  text-transform: uppercase;
-  font-family: "Erica One", sans-serif;
-}
-
-.btn-secondary {
-  background-color: #ef9d63;
-  text-transform: uppercase;
-  font-family: "Erica One", sans-serif;
-} */

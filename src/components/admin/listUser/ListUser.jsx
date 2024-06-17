@@ -4,6 +4,7 @@ import NavBarLanding from "../../navs/NavBarLanding";
 const ListUser = () => {
   const [users, setUsers] = useState([]);
 
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
