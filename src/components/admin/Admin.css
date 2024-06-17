@@ -1,11 +1,6 @@
-
-/*@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-
- body {
->>>>>>> 7351be6560f0d71a20e7fa301b876e2a87d94f71
+/* body {
   background-color: var(--main-bg-color);
 }
-
 
 .admin-container {
   display: flex;
@@ -34,18 +29,14 @@
   gap: 20px;
 }
 
-.btnAdmin {
-  background-color: #E5A157;
-  color: #3D3D3D;
-  font-weight: bold;
+.btn {
+  padding: 20px 30px;
+  font-size: 23px;
+  background-color: #ef9d63;
+  color: #444;
   border: none;
-  border-radius: 15px;
-  width: 300px;
-  height: 70px;
-  font-size: xx-large;
-  font-family: "Raleway", sans-serif;
+  border-radius: 10px;
 }
-
 
 .btn:hover {
   background-color: #e08d5b;
