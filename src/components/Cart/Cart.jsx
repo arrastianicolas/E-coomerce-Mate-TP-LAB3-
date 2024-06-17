@@ -8,7 +8,8 @@ import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const Cart = () => {
   const [purchaseConfirmed, setPurchaseConfirmed] = useState(false);
-  const { cart, setCart, setPurchaseHistory, setOrderHistory } =useContext(ApiContext);
+  const { cart, setCart, setPurchaseHistory, setOrderHistory } =
+    useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [bookIdToDelete, setBookIdToDelete] = useState(null);
@@ -24,9 +25,11 @@ const Cart = () => {
   };
 
   const removeFromCart = () => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== bookIdToDelete));
+    setCart((prevCart) =>
+      prevCart.filter((item) => item.id !== bookIdToDelete)
+    );
     hideModalHandler();
-    
+  };
 
   const handleConfirmPurchase = async () => {
     const order = {
@@ -124,9 +127,7 @@ const Cart = () => {
         <Modal.Header closeButton>
           <Modal.Title>Eliminar producto</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          ¿Está seguro que desea eliminar este producto?
-        </Modal.Body>
+        <Modal.Body>¿Está seguro que desea eliminar este producto?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={hideModalHandler}>
             Cerrar
