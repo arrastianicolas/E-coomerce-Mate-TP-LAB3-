@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import NavBarLanding from "../navs/NavBarLanding";
+import NavBarLanding from "../Navs/NavBarLanding";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 import "./Admin.css";
 
