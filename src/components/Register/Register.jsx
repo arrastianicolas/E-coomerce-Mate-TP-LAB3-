@@ -1,4 +1,4 @@
-import NavBarLanding from "../navs/NavBarLanding";
+import NavBarLanding from "../Navs/NavBarLanding";
 import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
@@ -173,7 +173,10 @@ const Register = () => {
               </FormGroup>
               <p style={{ textAlign: "center" }}>
                 ¿Ya tenes una cuenta?{" "}
-                <Link to="/login" style={{ color: "white", textDecoration: "underline" }}>
+                <Link
+                  to="/login"
+                  style={{ color: "white", textDecoration: "underline" }}
+                >
                   Inicia sesion
                 </Link>
               </p>

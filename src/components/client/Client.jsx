@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import NavBarLanding from "../navs/NavBarLanding";
-import Footer from "../footer/Footer";
+import NavBarLanding from "../Navs/NavBarLanding";
+import Footer from "../Footer/Footer";
 import { Card } from "react-bootstrap";
 import { ApiContext } from "../../services/apiContext/Api.context";
 
