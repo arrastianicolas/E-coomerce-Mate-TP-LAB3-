@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ApiContext } from "../../services/apiContext/Api.context";
-import NavBarLanding from "../navs/NavBarLanding";
+import NavBarLanding from "../Navs/NavBarLanding";
 
 const MyPurchases = () => {
   const { purchaseHistory } = useContext(ApiContext);
