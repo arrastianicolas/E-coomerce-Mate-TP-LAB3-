@@ -1,4 +1,4 @@
-import NavBarLanding from "../Navs/NavBarLanding";
+import NavBarLanding from "../navs/NavBarLanding";
 import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
@@ -14,6 +14,7 @@ const Register = () => {
     user: false,
     userType: false,
   });
+  const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
 
   const emailRef = useRef(null);
@@ -21,68 +22,40 @@ const Register = () => {
   const userRef = useRef(null);
   const userTypeRef = useRef(null);
 
-  //-----HANDLER-----
-  const changeEmailHandler = (event) => {
-    const inputEmail = event.target.value;
-    setEmail(inputEmail);
-  };
+  // Handlers
+  const changeEmailHandler = (event) => setEmail(event.target.value);
+  const changeUserHandler = (event) => setUser(event.target.value);
+  const changePasswordHandler = (event) => setPassword(event.target.value);
+  const changeUserTypeHandler = (event) => setUserType(event.target.value);
 
-  const changeUserHandler = (event) => {
-    const inputUser = event.target.value;
-    setUser(inputUser);
-  };
-
-  const changePasswordHandler = (event) => {
-    const inputPassword = event.target.value;
-    setPassword(inputPassword);
-  };
-  const changeUserTypeHandler = (event) => {
-    const selectUsertype = event.target.value;
-    setUserType(selectUsertype);
-  };
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    if (userRef.current.value.length === 0) {
+    // Validations
+    if (!user) {
       userRef.current.focus();
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        user: true,
-        email: false,
-        password: false,
-      }));
+      setErrors({ user: true, email: false, password: false, userType: false });
       return;
     }
-
-    if (emailRef.current.value.length === 0) {
+    if (!email) {
       emailRef.current.focus();
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        email: true,
-        password: false,
-        user: false,
-      }));
+      setErrors({ email: true, user: false, password: false, userType: false });
       return;
     }
-
-    if (passwordRef.current.value.length === 0) {
+    if (!password) {
       passwordRef.current.focus();
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        password: true,
-        email: false,
-        user: false,
-      }));
+      setErrors({ password: true, email: false, user: false, userType: false });
+      return;
+    }
+    if (!userType) {
+      userTypeRef.current.focus();
+      setErrors({ userType: true, email: false, user: false, password: false });
       return;
     }
 
-    //-----SET-ERRORS-----
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      email: false,
-      password: false,
-      user: false,
-    }));
+    // Reset errors
+    setErrors({ email: false, password: false, user: false, userType: false });
+    setApiError("");
 
     try {
       const response = await fetch("http://localhost:8000/register", {
@@ -90,26 +63,22 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          user: user,
-          email: email,
-          password: password,
-          userType: userType,
-        }),
+        body: JSON.stringify({ user, email, password, userType }),
       });
 
       if (!response.ok) {
-        throw new Error("Error al registrar usuario");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error al registrar usuario");
       }
 
       console.log(`Usuario ${user} se ha registrado con email ${email}.`);
-      navigate("/login"); // o hacia donde quieras redirigir después del registro
+      navigate("/login");
     } catch (error) {
       console.error("Error al registrar usuario:", error.message);
+      setApiError(error.message);
     }
   };
 
-  //-----FORM-----
   return (
     <>
       <NavBarLanding />
@@ -156,6 +125,7 @@ const Register = () => {
                   placeholder="Ingresar contraseña"
                 />
               </FormGroup>
+              
               <FormGroup className="mb-4">
                 <Form.Label>Quieres Ser...</Form.Label>
                 <Form.Select
@@ -164,13 +134,18 @@ const Register = () => {
                   className={errors.userType ? "border border-danger" : ""}
                   onChange={changeUserTypeHandler}
                 >
-                  <option value="" disabled>
-                    Selecciona una opción...
-                  </option>
+                  <option value="" disabled>Selecciona una opción...</option>
                   <option value="client">Cliente</option>
                   <option value="seller">Vendedor</option>
                 </Form.Select>
               </FormGroup>
+
+              {apiError && (
+                <div className="alert alert-danger" role="alert">
+                  {apiError}
+                </div>
+              )}
+
               <p style={{ textAlign: "center" }}>
                 ¿Ya tenes una cuenta?{" "}
                 <Link
