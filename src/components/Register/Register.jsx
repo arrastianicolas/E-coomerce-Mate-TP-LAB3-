@@ -6,12 +6,12 @@ import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
+  const [username, setUser] = useState("");
   const [userType, setUserType] = useState("");
   const [errors, setErrors] = useState({
     email: false,
     password: false,
-    user: false,
+    username: false,
     userType: false,
     passwordLengthAndWordUppercase: false,
   });
@@ -41,10 +41,10 @@ const Register = () => {
     event.preventDefault();
 
     // Validations
-    if (!user) {
+    if (!username) {
       userRef.current.focus();
       setErrors({
-        user: true,
+        username: true,
         email: false,
         password: false,
         userType: false,
@@ -56,7 +56,7 @@ const Register = () => {
       emailRef.current.focus();
       setErrors({
         email: true,
-        user: false,
+        username: false,
         password: false,
         userType: false,
         passwordLengthAndWordUppercase: false,
@@ -68,7 +68,7 @@ const Register = () => {
       setErrors({
         password: true,
         email: false,
-        user: false,
+        username: false,
         userType: false,
         passwordLengthAndWordUppercase: false,
       });
@@ -79,7 +79,7 @@ const Register = () => {
       setErrors({
         userType: true,
         email: false,
-        user: false,
+        username: false,
         password: false,
         passwordLengthAndWordUppercase: false,
       });
@@ -92,7 +92,7 @@ const Register = () => {
         ...errors,
         passwordLengthAndWordUppercase: true,
         email: false,
-        user: false,
+        username: false,
         userType: false,
       });
       return;
@@ -102,7 +102,7 @@ const Register = () => {
     setErrors({
       email: false,
       password: false,
-      user: false,
+      username: false,
       userType: false,
       passwordLengthAndWordUppercase: false,
     });
@@ -114,7 +114,7 @@ const Register = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ user, email, password, userType }),
+        body: JSON.stringify({ username, email, password, userType }),
       });
 
       if (!response.ok) {
@@ -122,7 +122,7 @@ const Register = () => {
         throw new Error(errorData.message || "Error al registrar usuario");
       }
 
-      console.log(`Usuario ${user} se ha registrado con email ${email}.`);
+      console.log(`Usuario ${username} se ha registrado con email ${email}.`);
       navigate("/login");
     } catch (error) {
       console.error("Error al registrar usuario:", error.message);
@@ -145,7 +145,7 @@ const Register = () => {
                 <Form.Label>Usuario:</Form.Label>
                 <Form.Control
                   ref={userRef}
-                  value={user}
+                  value={username}
                   type="text"
                   className={errors.user ? "border border-danger" : ""}
                   onChange={changeUserHandler}

@@ -1,20 +1,21 @@
 import { useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
-import NavBarLanding from "../../Navs/NavBarLanding";
+import NavBarLanding from "../../navs/NavBarLanding";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 
 const ListUser = () => {
-  const { users, deleteUser } = useContext(ApiContext);
+  const { users, addUser, updateUser, deleteUser } = useContext(ApiContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [userIdToDelete, setUserIdToDelete] = useState(null);
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [userIdToDelete, setUserIdToDelete] = useState(null);
   const [newUser, setNewUser] = useState({
     username: "",
     userType: "",
     email: "",
     password: "",
   });
+
   const [editUser, setEditUser] = useState({
     id: null,
     username: "",
@@ -25,36 +26,11 @@ const ListUser = () => {
 
   const hideModalHandler = () => {
     setShowDeleteModal(false);
-    setUserIdToDelete(null);
   };
 
   const showModalHandler = (id) => {
     setShowDeleteModal(true);
     setUserIdToDelete(id);
-  };
-
-  const handleDeleteUser = async () => {
-    console.log(`Attempting to delete user with id ${userIdToDelete}`);
-    try {
-      await deleteUser(userIdToDelete);
-      console.log(`User with id ${userIdToDelete} deleted successfully`);
-    } catch (error) {
-      console.error(`Failed to delete user with id ${userIdToDelete}`, error);
-    }
-    hideModalHandler();
-  };
-
-  const getRolLabel = (userType) => {
-    switch (userType) {
-      case "admin":
-        return "Administrador";
-      case "seller":
-        return "Vendedor";
-      case "client":
-        return "Cliente";
-      default:
-        return userType;
-    }
   };
 
   const hideAddUserModalHandler = () => {
@@ -74,20 +50,14 @@ const ListUser = () => {
   const handleInputChange = (e, isEdit = false) => {
     const { name, value } = e.target;
     if (isEdit) {
-      setEditUser((prevUser) => ({
-        ...prevUser,
-        [name]: value,
-      }));
+      setEditUser((prevUser) => ({ ...prevUser, [name]: value }));
     } else {
-      setNewUser((prevUser) => ({
-        ...prevUser,
-        [name]: value,
-      }));
+      setNewUser((prevUser) => ({ ...prevUser, [name]: value }));
     }
   };
 
   const handleAddUser = async () => {
-    // Lógica para agregar usuario usando el contexto
+    await addUser(newUser);
     hideAddUserModalHandler();
   };
 
@@ -108,8 +78,13 @@ const ListUser = () => {
   };
 
   const handleEditUser = async () => {
-    // Lógica para editar usuario usando el contexto
+    await updateUser(editUser);
     hideEditUserModalHandler();
+  };
+
+  const handleDeleteUser = async () => {
+    await deleteUser(userIdToDelete);
+    hideModalHandler();
   };
 
   return (
@@ -130,24 +105,24 @@ const ListUser = () => {
                 <th>Usuario</th>
                 <th>Rol</th>
                 <th>Email</th>
-                <th className="actions-column">Opciones</th>
+                <th className="actions-column">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user.id}>
                   <td>{user.username}</td>
-                  <td>{getRolLabel(user.userType)}</td>
+                  <td>{user.userType}</td>
                   <td>{user.email}</td>
-                  <td>
+                  <td className="actions-column">
                     <button
-                      className="btn btn-primary me-2 custom-button"
+                      className="btn btn-primary"
                       onClick={() => showEditUserModalHandler(user)}
                     >
                       Editar
                     </button>
                     <button
-                      className="btn btn-danger custom-button"
+                      className="btn btn-danger"
                       onClick={() => showModalHandler(user.id)}
                     >
                       Eliminar
@@ -160,83 +135,59 @@ const ListUser = () => {
         </div>
       </div>
 
-      {/*confirmación de eliminación */}
-      <Modal show={showDeleteModal} onHide={hideModalHandler}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirmar Eliminación</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>¿Estás seguro que deseas eliminar este usuario?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={hideModalHandler}>
-            Cancelar
-          </Button>
-          <Button variant="danger" onClick={handleDeleteUser}>
-            Eliminar
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      {/* agregar usuario */}
+      {/* Modal para dar de alta usuario */}
       <Modal show={showAddUserModal} onHide={hideAddUserModalHandler}>
         <Modal.Header closeButton>
-          <Modal.Title>Agregar Usuario</Modal.Title>
+          <Modal.Title>Dar de alta usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
-            <div className="mb-3">
-              <label htmlFor="username" className="form-label">
-                Nombre de Usuario
-              </label>
+            <div className="form-group">
+              <label>Nombre de usuario</label>
               <input
                 type="text"
-                className="form-control"
-                id="username"
                 name="username"
                 value={newUser.username}
                 onChange={handleInputChange}
+                className="form-control"
+                required
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="userType" className="form-label">
-                Rol
-              </label>
+            <div className="form-group">
+              <label>Rol</label>
               <select
-                className="form-control"
-                id="userType"
                 name="userType"
                 value={newUser.userType}
                 onChange={handleInputChange}
+                className="form-control"
+                required
               >
-                <option value="">Seleccione un rol</option>
-                <option value="admin">Administrador</option>
-                <option value="seller">Vendedor</option>
+                <option value="">Seleccionar rol</option>
                 <option value="client">Cliente</option>
+                <option value="seller">Vendedor</option>
+                <option value="sysAdmin">SuperAdmin</option>
               </select>
             </div>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email
-              </label>
+            <div className="form-group">
+              <label>Email</label>
               <input
                 type="email"
-                className="form-control"
-                id="email"
                 name="email"
                 value={newUser.email}
                 onChange={handleInputChange}
+                className="form-control"
+                required
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Contraseña
-              </label>
+            <div className="form-group">
+              <label>Contraseña</label>
               <input
                 type="password"
-                className="form-control"
-                id="password"
                 name="password"
                 value={newUser.password}
                 onChange={handleInputChange}
+                className="form-control"
+                required
               />
             </div>
           </form>
@@ -245,73 +196,65 @@ const ListUser = () => {
           <Button variant="secondary" onClick={hideAddUserModalHandler}>
             Cancelar
           </Button>
-          <Button variant="success" onClick={handleAddUser}>
-            Agregar
+          <Button variant="primary" onClick={handleAddUser}>
+            Guardar
           </Button>
         </Modal.Footer>
       </Modal>
 
-      {/* editar usuario */}
+      {/* Modal para editar usuario */}
       <Modal show={showEditUserModal} onHide={hideEditUserModalHandler}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Usuario</Modal.Title>
+          <Modal.Title>Editar usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
-            <div className="mb-3">
-              <label htmlFor="edit-username" className="form-label">
-                Nombre de Usuario
-              </label>
+            <div className="form-group">
+              <label>Nombre de usuario</label>
               <input
                 type="text"
-                className="form-control"
-                id="edit-username"
                 name="username"
                 value={editUser.username}
                 onChange={(e) => handleInputChange(e, true)}
+                className="form-control"
+                required
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="edit-userType" className="form-label">
-                Rol
-              </label>
+            <div className="form-group">
+              <label>Rol</label>
               <select
-                className="form-control"
-                id="edit-userType"
                 name="userType"
                 value={editUser.userType}
                 onChange={(e) => handleInputChange(e, true)}
+                className="form-control"
+                required
               >
-                <option value="">Seleccione un rol</option>
-                <option value="admin">Administrador</option>
+                <option value="">Seleccionar rol</option>
+                <option value="client">cliente</option>
                 <option value="seller">Vendedor</option>
-                <option value="client">Cliente</option>
+                <option value="sysAdmin">SuperAdmin</option>
               </select>
             </div>
-            <div className="mb-3">
-              <label htmlFor="edit-email" className="form-label">
-                Email
-              </label>
+            <div className="form-group">
+              <label>Email</label>
               <input
                 type="email"
-                className="form-control"
-                id="edit-email"
                 name="email"
                 value={editUser.email}
                 onChange={(e) => handleInputChange(e, true)}
+                className="form-control"
+                required
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="edit-password" className="form-label">
-                Contraseña
-              </label>
+            <div className="form-group">
+              <label>Contraseña</label>
               <input
                 type="password"
-                className="form-control"
-                id="edit-password"
                 name="password"
                 value={editUser.password}
                 onChange={(e) => handleInputChange(e, true)}
+                className="form-control"
+                required
               />
             </div>
           </form>
@@ -320,8 +263,26 @@ const ListUser = () => {
           <Button variant="secondary" onClick={hideEditUserModalHandler}>
             Cancelar
           </Button>
-          <Button variant="success" onClick={handleEditUser}>
-            Guardar Cambios
+          <Button variant="primary" onClick={handleEditUser}>
+            Guardar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Modal para confirmar eliminación */}
+      <Modal show={showDeleteModal} onHide={hideModalHandler}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar eliminación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Estás seguro de que deseas eliminar este usuario?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={hideModalHandler}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={handleDeleteUser}>
+            Eliminar
           </Button>
         </Modal.Footer>
       </Modal>
