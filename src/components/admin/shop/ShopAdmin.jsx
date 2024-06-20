@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Button, Modal } from "react-bootstrap";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 import NavBarLanding from "../../navs/NavBarLanding";
 import Footer from "../../footer/Footer";
@@ -15,6 +15,8 @@ const ShopAdmin = () => {
     description: "",
     image: "",
   });
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [productIdToDelete, setProductIdToDelete] = useState(null);
 
   const { products, updateProduct, deleteProduct } = useContext(ApiContext);
 
@@ -35,7 +37,7 @@ const ShopAdmin = () => {
     setEditProduct(product);
     setEditedFields({
       name: product.name,
-      price: parseFloat(product.price), // Asegúrate de convertir price a tipo numérico
+      price: parseFloat(product.price),
       description: product.description,
       image: product.image,
     });
@@ -58,7 +60,7 @@ const ShopAdmin = () => {
     const updatedProduct = {
       ...editProduct,
       name: editedFields.name,
-      price: parseFloat(editedFields.price), // Asegúrate de convertir price a tipo numérico
+      price: parseFloat(editedFields.price),
       description: editedFields.description,
       image: editedFields.image,
     };
@@ -68,8 +70,14 @@ const ShopAdmin = () => {
   };
 
   const handleDeleteProduct = (productId) => {
-    deleteProduct(productId);
-    // Aquí podrías actualizar el estado de los productos filtrados si lo consideras necesario
+    setProductIdToDelete(productId);
+    setShowDeleteModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteProduct(productIdToDelete);
+    setProductIdToDelete(null);
+    setShowDeleteModal(false);
   };
 
   useEffect(() => {
@@ -110,7 +118,14 @@ const ShopAdmin = () => {
           {productsFiltered.length > 0 ? (
             <div className="card-container">
               {productsFiltered.map((product) => (
-                <Card key={product.id} className="product-cardadmin">
+                <Card
+                  key={product.id}
+                  className={`product-cardadmin ${
+                    editProduct && editProduct.id === product.id
+                      ? "editing"
+                      : ""
+                  }`}
+                >
                   <div>
                     <img src={product.image} alt={product.name} />
                     <h4>{product.name}</h4>
@@ -158,7 +173,10 @@ const ShopAdmin = () => {
                         value={editedFields.image}
                         onChange={handleInputChange}
                       />
-                      <button onClick={handleEditSubmit}>
+                      <button
+                        onClick={handleEditSubmit}
+                        className="save-changes-button"
+                      >
                         Guardar Cambios
                       </button>
                     </div>
@@ -175,6 +193,22 @@ const ShopAdmin = () => {
       </div>
 
       <Footer />
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar Eliminación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Estás seguro que deseas eliminar este producto?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Eliminar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

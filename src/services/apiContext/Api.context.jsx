@@ -105,6 +105,24 @@ export const ApiContextProvider = ({ children }) => {
     }
   };
 
+  /* Eliminar el usuario en la API
+  const deleteUser = async (userId) => {
+    try {
+      const response = await fetch(`http://localhost:8000/users/${userId}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        console.log(`User with id ${userId} deleted successfully`);
+        // Si la eliminación fue exitosa, actualizar el estado local
+        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+      } else {
+        console.error("Error al eliminar usuario:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error);
+    }
+  };*/
+
   useEffect(() => {
     fetchUsers();
     fetchProducts();
@@ -128,6 +146,7 @@ export const ApiContextProvider = ({ children }) => {
         setPurchaseHistory,
         deleteProduct,
         updateProduct,
+        //deleteUser,
       }}
     >
       {children}
