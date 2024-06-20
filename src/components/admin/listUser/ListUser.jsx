@@ -14,7 +14,6 @@ const ListUser = () => {
     password: "",
   });
 
-  
   useEffect(() => {
     const fetchUsers = async () => {
       try {

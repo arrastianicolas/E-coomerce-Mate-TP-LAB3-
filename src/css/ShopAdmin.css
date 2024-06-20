@@ -1,0 +1,45 @@
+.product-cardadmin {
+  width: 220px;
+
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-cardadmin img {
+  height: 200px; /* Ajusta la altura de las imágenes para que todas sean iguales */
+  object-fit: cover; /* Asegura que las imágenes se ajusten sin distorsionarse */
+}
+
+.product-cardadmin h4 {
+  margin: 10px 0;
+  font-size: 1.3rem;
+  border-top: 2px solid black;
+}
+
+.product-cardadmin p {
+  color: #198754;
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.product-cardadmin button {
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.product-cardadmin:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

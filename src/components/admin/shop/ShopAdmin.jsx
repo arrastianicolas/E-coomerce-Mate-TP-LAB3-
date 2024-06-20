@@ -54,7 +54,7 @@ const ShopAdmin = () => {
       console.error("Producto no válido para la edición:", editProduct);
       return;
     }
-  
+
     const updatedProduct = {
       ...editProduct,
       name: editedFields.name,
@@ -62,7 +62,7 @@ const ShopAdmin = () => {
       description: editedFields.description,
       image: editedFields.image,
     };
-  
+
     updateProduct(updatedProduct);
     setEditProduct(null);
   };
@@ -110,13 +110,22 @@ const ShopAdmin = () => {
           {productsFiltered.length > 0 ? (
             <div className="card-container">
               {productsFiltered.map((product) => (
-                <Card key={product.id} className="product-card">
+                <Card key={product.id} className="product-cardadmin">
                   <div>
                     <img src={product.image} alt={product.name} />
                     <h4>{product.name}</h4>
                     <p>${product.price}</p>
-                    <button onClick={() => openEditForm(product)}>Editar</button>
-                    <button className="btndelete" onClick={() => handleDeleteProduct(product.id)}>
+                    <button
+                      onClick={() => openEditForm(product)}
+                      className="btn btn-primary"
+                    >
+                      Editar
+                    </button>
+                    <br />
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDeleteProduct(product.id)}
+                    >
                       Eliminar
                     </button>
                   </div>
@@ -149,7 +158,9 @@ const ShopAdmin = () => {
                         value={editedFields.image}
                         onChange={handleInputChange}
                       />
-                      <button onClick={handleEditSubmit}>Guardar Cambios</button>
+                      <button onClick={handleEditSubmit}>
+                        Guardar Cambios
+                      </button>
                     </div>
                   )}
                 </Card>

@@ -102,6 +102,7 @@ const NewProduct = () => {
                   placeholder="Ingresar el precio del producto"
                   value={price}
                   onChange={changePriceHandler}
+                  min={1}
                 />
               </FormGroup>
               <FormGroup className="mb-4">
