@@ -2,9 +2,7 @@ import { useContext, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
-import NavBarLanding from "../Navs/NavBarLanding";
-
-// import { ApiContext } from "../../services/apiContext/Api.context";
+import NavBarLanding from "../navs/NavBarLanding";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,6 +11,7 @@ const Login = () => {
     email: false,
     password: false,
   });
+  const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
 
   const { handleLogin } = useContext(AuthenticationContext);
@@ -44,6 +43,9 @@ const Login = () => {
       return;
     }
 
+    setErrors({ email: false, password: false });
+    setApiError("");
+
     try {
       const response = await fetch("http://localhost:8000/login", {
         method: "POST",
@@ -59,7 +61,6 @@ const Login = () => {
 
       const userData = await response.json();
       handleLogin(userData.email, userData.userType, userData.id);
-      // setCurrentUser(userData);
 
       if (userData.userType === "client") {
         navigate("/client");
@@ -70,6 +71,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error.message);
+      setApiError(error.message);
     }
   };
 
@@ -89,6 +91,7 @@ const Login = () => {
                 <Form.Control
                   ref={emailRef}
                   type="email"
+                  value={email}
                   className={errors.email ? "border border-danger" : ""}
                   onChange={changeEmailHandler}
                   placeholder="Ingresar email"
@@ -106,6 +109,12 @@ const Login = () => {
                   placeholder="Ingresar contraseña"
                 />
               </FormGroup>
+
+              {apiError && (
+                <div className="alert alert-danger" role="alert">
+                  {apiError}
+                </div>
+              )}
 
               <p style={{ textAlign: "center" }}>
                 ¿No tenes una cuenta?{" "}

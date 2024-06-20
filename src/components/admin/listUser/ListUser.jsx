@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
-import NavBarLanding from "../../Navs/NavBarLanding";
-import "./ListUser.css";
+import NavBarLanding from "../../navs/NavBarLanding";
 
 const ListUser = () => {
   const [users, setUsers] = useState([]);
@@ -15,6 +14,7 @@ const ListUser = () => {
     password: "",
   });
 
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {

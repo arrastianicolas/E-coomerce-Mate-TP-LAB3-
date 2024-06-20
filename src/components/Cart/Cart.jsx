@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-
-import Footer from "../Footer/Footer";
-import NavBarLanding from "../Navs/NavBarLanding";
+import Footer from "../footer/Footer";
+import NavBarLanding from "../navs/NavBarLanding";
 import { ApiContext } from "../../services/apiContext/Api.context";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 

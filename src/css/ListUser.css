@@ -1,14 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  font-family: "Raleway", sans-serif;
+}
+
 .list-user-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   color: #fff;
+  font-family: "Raleway", sans-serif;
+}
+
+.list-user-container h1{
+  font-family: 'Erica One';  
 }
 
 .list-user-table-container {
-  width: 80%; /* Ajusta el ancho de la tabla según tu preferencia */
-  max-height: 300px; /* Ajusta la altura máxima según tu preferencia */
+  width: 80%; 
+  max-height: 300px;
 }
 
 .list-user-table {
@@ -34,11 +45,19 @@
 }
 
 .custom-button {
-  background-color: #ef9d63;
-  text-transform: uppercase;
-  font-family: "Erica One", sans-serif;
-  padding: 10px 14px;
-  font-size: 16px;
-  font-family: "Raleway", sans-serif;
   margin-bottom: 8px;
+}
+.btnAddUser{
+  background-color: #4BB096;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  width: 20%;
+  height: 35px;
+  font-size: larger;
+}
+
+.btnAddUser:hover{
+  background-color: #67b19f;
 }
