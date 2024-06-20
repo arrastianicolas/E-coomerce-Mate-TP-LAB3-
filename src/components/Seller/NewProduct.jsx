@@ -4,7 +4,7 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const NewProduct = () => {
-  const { setProducts, setProductsForSale } = useContext(ApiContext);
+  const { setProducts } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -56,7 +56,6 @@ const NewProduct = () => {
       }
 
       setProducts((prevProducts) => [...prevProducts, newProduct]);
-      setProductsForSale((prevProducts) => [...prevProducts, newProduct]); // Actualiza productsForSale
 
       // Mostrar mensaje de éxito
       setSuccessMessage("Producto agregado correctamente");
