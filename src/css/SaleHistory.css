@@ -13,8 +13,8 @@ body {
 }
 
 .salesHistory-container h1 {
-  font-weight: bold;
-  font-family: "Raleway", sans-serif;
+  font-size: 3rem;
+  font-family: "Erica One", sans-serif;
 }
 
 .salesHistory-table {

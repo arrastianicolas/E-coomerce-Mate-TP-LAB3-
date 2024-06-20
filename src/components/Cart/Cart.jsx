@@ -24,10 +24,30 @@ const Cart = () => {
   };
 
   const removeFromCart = () => {
-    setCart((prevCart) =>
-      prevCart.filter((item) => item.id !== ProductDelete)
-    );
+    setCart((prevCart) => prevCart.filter((item) => item.id !== ProductDelete));
     hideModalHandler();
+  };
+
+  const addPurchase = async (purchase) => {
+    const purchaseWithUserId = { ...purchase, userId: user.id };
+
+    try {
+      const response = await fetch("http://localhost:8000/purchase", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(purchaseWithUserId),
+      });
+      if (response.ok) {
+        const newPurchase = await response.json();
+        setPurchaseHistory((prev) => [...prev, newPurchase]);
+      } else {
+        console.error("Error al agregar compra:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al agregar compra:", error);
+    }
   };
 
   const handleConfirmPurchase = async () => {
@@ -49,6 +69,17 @@ const Cart = () => {
       if (response.ok) {
         const newOrder = await response.json();
         setOrderHistory((prevHistory) => [...prevHistory, newOrder]);
+
+        // Agregar cada compra al historial de compras
+        for (const item of cart) {
+          const purchase = {
+            name: item.name,
+            description: item.description,
+            quantity: item.quantity,
+            price: item.price,
+          };
+          await addPurchase(purchase);
+        }
       } else {
         console.error("Error placing order:", response.statusText);
       }
@@ -56,7 +87,6 @@ const Cart = () => {
       console.error("Error al iniciar sesión:", error.message);
     }
 
-    setPurchaseHistory((prevHistory) => [...prevHistory, ...cart]);
     setCart([]);
     setPurchaseConfirmed(true);
   };
