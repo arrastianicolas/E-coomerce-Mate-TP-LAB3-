@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { ApiContext } from "../../../services/apiContext/Api.context";
-import NavBarLanding from "../../Navs/NavBarLanding";
+import NavBarLanding from "../../navs/NavBarLanding";
 import { AuthenticationContext } from "../../../services/auth/Auth.context";
 import { Form } from "react-bootstrap";
 
