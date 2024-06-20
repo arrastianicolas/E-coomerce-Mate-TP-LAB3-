@@ -13,6 +13,7 @@ const Register = () => {
     password: false,
     user: false,
     userType: false,
+    passwordLengthAndWordUppercase: false,
   });
   const [apiError, setApiError] = useState("");
   const navigate = useNavigate();
@@ -28,33 +29,83 @@ const Register = () => {
   const changePasswordHandler = (event) => setPassword(event.target.value);
   const changeUserTypeHandler = (event) => setUserType(event.target.value);
 
+  // Function to clear password-related errors
+  const clearPasswordErrors = () => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      passwordLengthAndWordUppercase: false,
+    }));
+  };
+
   const submitHandler = async (event) => {
     event.preventDefault();
 
     // Validations
     if (!user) {
       userRef.current.focus();
-      setErrors({ user: true, email: false, password: false, userType: false });
+      setErrors({
+        user: true,
+        email: false,
+        password: false,
+        userType: false,
+        passwordLengthAndWordUppercase: false,
+      });
       return;
     }
     if (!email) {
       emailRef.current.focus();
-      setErrors({ email: true, user: false, password: false, userType: false });
+      setErrors({
+        email: true,
+        user: false,
+        password: false,
+        userType: false,
+        passwordLengthAndWordUppercase: false,
+      });
       return;
     }
     if (!password) {
       passwordRef.current.focus();
-      setErrors({ password: true, email: false, user: false, userType: false });
+      setErrors({
+        password: true,
+        email: false,
+        user: false,
+        userType: false,
+        passwordLengthAndWordUppercase: false,
+      });
       return;
     }
     if (!userType) {
       userTypeRef.current.focus();
-      setErrors({ userType: true, email: false, user: false, password: false });
+      setErrors({
+        userType: true,
+        email: false,
+        user: false,
+        password: false,
+        passwordLengthAndWordUppercase: false,
+      });
       return;
     }
 
-    // Reset errors
-    setErrors({ email: false, password: false, user: false, userType: false });
+    // Validate minimum password length (more than 6 characters) and at least one uppercase letter
+    if (password.length <= 6 || !/[A-Z]/.test(password)) {
+      setErrors({
+        ...errors,
+        passwordLengthAndWordUppercase: true,
+        email: false,
+        user: false,
+        userType: false,
+      });
+      return;
+    }
+
+    // Resetear errores
+    setErrors({
+      email: false,
+      password: false,
+      user: false,
+      userType: false,
+      passwordLengthAndWordUppercase: false,
+    });
     setApiError("");
 
     try {
@@ -120,12 +171,25 @@ const Register = () => {
                   ref={passwordRef}
                   type="password"
                   value={password}
-                  className={errors.password ? "border border-danger" : ""}
-                  onChange={changePasswordHandler}
+                  className={
+                    (errors.password ||
+                      errors.passwordLengthAndWordUppercase) &&
+                    "border border-danger"
+                  }
+                  onChange={(event) => {
+                    changePasswordHandler(event);
+                    clearPasswordErrors();
+                  }}
                   placeholder="Ingresar contraseña"
                 />
+                {errors.passwordLengthAndWordUppercase && (
+                  <small className="text-danger">
+                    La contraseña debe tener más de 6 caracteres y al menos una
+                    mayúscula.
+                  </small>
+                )}
               </FormGroup>
-              
+
               <FormGroup className="mb-4">
                 <Form.Label>Quieres Ser...</Form.Label>
                 <Form.Select
@@ -134,7 +198,9 @@ const Register = () => {
                   className={errors.userType ? "border border-danger" : ""}
                   onChange={changeUserTypeHandler}
                 >
-                  <option value="" disabled>Selecciona una opción...</option>
+                  <option value="" disabled>
+                    Selecciona una opción...
+                  </option>
                   <option value="client">Cliente</option>
                   <option value="seller">Vendedor</option>
                 </Form.Select>
@@ -147,12 +213,12 @@ const Register = () => {
               )}
 
               <p style={{ textAlign: "center" }}>
-                ¿Ya tenes una cuenta?{" "}
+                ¿Ya tienes una cuenta?{" "}
                 <Link
                   to="/login"
                   style={{ color: "white", textDecoration: "underline" }}
                 >
-                  Inicia sesion
+                  Inicia sesión
                 </Link>
               </p>
               <hr />
