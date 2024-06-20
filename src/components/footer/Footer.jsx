@@ -1,46 +1,50 @@
+import useTraduction from "../../custom/UseTraduction";
+
 const Footer = () => {
+  const { t } = useTraduction();
+
   return (
     <>
       <footer className="footer">
         <div className="footer-section left">
-          <h5>CONTACTANOS</h5>
+          <h5>{t("contact")}</h5>
           <div>
-            <i className="bi bi-telephone-fill"></i> +54 2474181222
+            <i className="bi bi-telephone-fill"></i> {t("phone")}
           </div>
           <div>
-            <i className="bi bi-envelope"></i> materos@gmail.com
+            <i className="bi bi-envelope"></i> {t("email")}
           </div>
           <div>
-            <i className="bi bi-geo-alt-fill"></i> Zeballos 1341, Rosario
+            <i className="bi bi-geo-alt-fill"></i> {t("address")}
           </div>
         </div>
         <div className="footer-section center">
-          <h5>OFERTAS Y PAGOS</h5>
+          <h5>{t("offersPayments")}</h5>
           <div>
-            <i className="bi bi-truck"></i> ENVIOS GRATIS A TODO EL PAIS
+            <i className="bi bi-truck"></i> {t("freeShipping")}
           </div>
           <div>
-            <i className="bi bi-bag-check"></i> 3 CUOTAS SIN INTERES
+            <i className="bi bi-bag-check"></i> {t("installments")}
           </div>
           <div>
-            <i className="bi bi-award"></i> 6 MESES DE GARANTíA
+            <i className="bi bi-award"></i> {t("warranty")}
           </div>
         </div>
         <div className="footer-section right">
-          <h5>REDES SOCIALES</h5>
+          <h5>{t("socialMedia")}</h5>
           <div>
-            <i className="bi bi-instagram"></i> INSTAGRAM
+            <i className="bi bi-instagram"></i> {t("instagram")}
           </div>
           <div>
-            <i className="bi bi-facebook"></i> FACEBOOK
+            <i className="bi bi-facebook"></i> {t("facebook")}
           </div>
           <div>
-            <i className="bi bi-twitter-x"></i> TWITTER
+            <i className="bi bi-twitter-x"></i> {t("twitter")}
           </div>
         </div>
       </footer>
       <div className="container-end-main">
-        <p>© 2024. Términos y Condiciones.</p>
+        <p>{t("terms")}</p>
       </div>
     </>
   );

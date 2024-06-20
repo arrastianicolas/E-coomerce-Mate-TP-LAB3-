@@ -12,6 +12,7 @@ import Protected from "./routes/Protected";
 import Admin from "./components/admin/Admin.jsx";
 import ListUser from "./components/admin/listUser/ListUser.jsx";
 import ShopAdmin from "./components/admin/shop/ShopAdmin.jsx";
+import { TraductionDictionaryProvider } from "./custom/TraductionDictionary";
 
 function App() {
   const router = createBrowserRouter([
@@ -81,12 +82,17 @@ function App() {
         },
         {
           path: "/shopAdmin",
-          element: <ShopAdmin/>,
-        }
+          element: <ShopAdmin />,
+        },
       ],
     },
   ]);
-  return <RouterProvider router={router} />;
+
+  return (
+    <TraductionDictionaryProvider>
+      <RouterProvider router={router} />
+    </TraductionDictionaryProvider>
+  );
 }
 
 export default App;

@@ -1,19 +1,23 @@
+import React from "react";
 import NavBarLanding from "../../navs/NavBarLanding";
 import Footer from "../../footer/Footer";
 import AboutWe from "../aboutWe/AboutWe";
 import HandsL from "../hands/HandsL";
 import HandsR from "../hands/HandsR";
-
 import Carrousel from "./Carrousel";
-
+import useTraduction from "../../../custom/UseTraduction";
+import LanguageSelector from "../../../custom/LanguageSelector";
 const Landing = () => {
+  const { t } = useTraduction();
+
   return (
     <>
       <NavBarLanding />
-
+      <div className="language-selector-container">
+        <LanguageSelector />
+      </div>
       <div className="d-flex justify-content-between">
         <HandsL />
-
         <div className="principal">
           <button
             className="buttons-about"
@@ -23,23 +27,26 @@ const Landing = () => {
             aria-controls="offcanvasBottom"
           >
             <h1 className="Tittle-Landing">
-              MUNDO <br /> MATERO
+              {t("title")
+                .split(" ")
+                .map((word, index) => (
+                  <React.Fragment key={index}>
+                    {word}
+                    <br />
+                  </React.Fragment>
+                ))}
             </h1>
           </button>
-
           <div className="p-landing">
-            <p>Conseguí los mejores mates, termos, bombillas y materas.</p>
+            <p>{t("description")}</p>
           </div>
         </div>
         <HandsR />
       </div>
-
       <br />
       <br />
       <Carrousel />
-
       <Footer />
-
       <AboutWe />
     </>
   );
