@@ -1,61 +1,8 @@
-// import { useContext } from "react";
-// import { ApiContext } from "../../../services/apiContext/Api.context";
-// import NavBarLanding from "../../navs/NavBarLanding";
-// import { AuthenticationContext } from "../../../services/auth/Auth.context";
-
-// const ProductsForSale = () => {
-//   const { products } = useContext(ApiContext);
-//   const { user } = useContext(AuthenticationContext);
-
-//   // Filtrar productos según el vendedor actual
-//   const filteredProducts = products.filter(
-//     (product) => product.sellerId === user.id
-//   );
-
-//   return (
-//     <>
-//       <NavBarLanding />
-//       <div className="productForSale-container">
-//         <h1>Productos en venta</h1>
-//         <table className="productForSale-table">
-//           <thead>
-//             <tr>
-//               <th>Producto</th>
-//               <th>Descripción</th>
-//               <th>Precio</th>
-//               <th className="actions-column">Opciones</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {filteredProducts.map((product, index) => (
-//               <tr key={index}>
-//                 <td>{product.name}</td>
-//                 <td>{product.description}</td>
-//                 <td>${Number(product.price).toFixed(2)}</td>
-//                 <td>
-//                   <button type="button" className="btn btn-primary">
-//                     Editar
-//                   </button>
-//                   <br />
-//                   <button type="button" className="btn btn-danger">
-//                     Eliminar
-//                   </button>
-//                 </td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default ProductsForSale;
 import { useContext, useState } from "react";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 import NavBarLanding from "../../navs/NavBarLanding";
 import { AuthenticationContext } from "../../../services/auth/Auth.context";
-import { Form } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 
 const ProductsForSale = () => {
   const { products, updateProduct, deleteProduct } = useContext(ApiContext);
@@ -64,6 +11,18 @@ const ProductsForSale = () => {
   const [editedProductName, setEditedProductName] = useState("");
   const [editedProductDescription, setEditedProductDescription] = useState("");
   const [editedProductPrice, setEditedProductPrice] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [productIdToDelete, setProductIdToDelete] = useState(null);
+
+  const hideModalHandler = () => {
+    setShowDeleteModal(false);
+    setProductIdToDelete(null);
+  };
+
+  const showModalHandler = (id) => {
+    setShowDeleteModal(true);
+    setProductIdToDelete(id);
+  };
 
   // Filtrar productos según el vendedor actual
   const filteredProducts = products.filter(
@@ -91,8 +50,9 @@ const ProductsForSale = () => {
     setEditedProductPrice("");
   };
 
-  const handleDeleteProduct = (productId) => {
-    deleteProduct(productId);
+  const handleDeleteProduct = () => {
+    deleteProduct(productIdToDelete);
+    hideModalHandler();
   };
 
   return (
@@ -166,13 +126,12 @@ const ProductsForSale = () => {
                         Editar
                       </button>
                       <br />
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteProduct(product.id)}
-                        className="btn btn-danger"
+                      <Button
+                        variant="danger"
+                        onClick={() => showModalHandler(product.id)}
                       >
                         Eliminar
-                      </button>
+                      </Button>
                     </>
                   )}
                 </td>
@@ -180,6 +139,21 @@ const ProductsForSale = () => {
             ))}
           </tbody>
         </table>
+
+        <Modal show={showDeleteModal} onHide={hideModalHandler}>
+          <Modal.Header closeButton>
+            <Modal.Title>Eliminar producto</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>¿Está seguro que desea eliminar este producto?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={hideModalHandler}>
+              Cerrar
+            </Button>
+            <Button variant="danger" onClick={handleDeleteProduct}>
+              Eliminar
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </>
   );

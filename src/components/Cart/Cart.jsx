@@ -11,21 +11,21 @@ const Cart = () => {
     useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [bookIdToDelete, setBookIdToDelete] = useState(null);
+  const [ProductDelete, setProductDelete] = useState(null);
 
   const hideModalHandler = () => {
     setShowDeleteModal(false);
-    setBookIdToDelete(null);
+    setProductDelete(null);
   };
 
   const showModalHandler = (id) => {
     setShowDeleteModal(true);
-    setBookIdToDelete(id);
+    setProductDelete(id);
   };
 
   const removeFromCart = () => {
     setCart((prevCart) =>
-      prevCart.filter((item) => item.id !== bookIdToDelete)
+      prevCart.filter((item) => item.id !== ProductDelete)
     );
     hideModalHandler();
   };
