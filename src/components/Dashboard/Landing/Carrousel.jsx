@@ -1,6 +1,6 @@
-import mate2 from "../../../assets/mate2.png";
-import termo from "../../../assets/termo.png";
-import termocarc from "../../../assets/termocentrall.png";
+import Mate from "../../../assets/Mate.png";
+import Termo from "../../../assets/Termo.png";
+import Bombilla from "../../../assets/Bombilla.png";
 import useTraduction from "../../../custom/UseTraduction";
 
 const Carrousel = () => {
@@ -39,7 +39,7 @@ const Carrousel = () => {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
-              src={mate2}
+              src={Mate}
               className="d-block w-100"
               alt="Mate 1"
               id="img-mate"
@@ -47,7 +47,7 @@ const Carrousel = () => {
           </div>
           <div className="carousel-item">
             <img
-              src={termo}
+              src={Termo}
               className="d-block w-100"
               alt="Termo"
               id="img-mate"
@@ -55,7 +55,7 @@ const Carrousel = () => {
           </div>
           <div className="carousel-item">
             <img
-              src={termocarc}
+              src={Bombilla}
               className="d-block w-100"
               alt="Mate 2"
               id="img-mate"
