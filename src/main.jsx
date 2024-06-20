@@ -14,7 +14,8 @@ import "./css/ProductsForSale.css";
 import "./css/SaleHistory.css";
 import "./css/Cart.css";
 import "./css/Admin.css";
-import "./css/ListUser.css"
+import "./css/ListUser.css";
+import "./css/ShopAdmin.css"
 import { AuthenticationContextProvider } from "./services/auth/Auth.context.jsx";
 import "./css/MyPurchases.css";
 import { ApiContextProvider } from "./services/apiContext/Api.context.jsx";
