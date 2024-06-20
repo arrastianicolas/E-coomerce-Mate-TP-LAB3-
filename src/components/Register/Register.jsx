@@ -1,4 +1,4 @@
-import NavBarLanding from "../Navs/NavBarLanding";
+import NavBarLanding from "../navs/NavBarLanding";
 import { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
