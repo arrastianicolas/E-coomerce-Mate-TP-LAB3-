@@ -45,6 +45,7 @@ export const ApiContextProvider = ({ children }) => {
       console.error("Error fetching orders:", error);
     }
   };
+
   const fetchPurchase = async () => {
     try {
       const response = await fetch("http://localhost:8000/purchase");
@@ -105,7 +106,52 @@ export const ApiContextProvider = ({ children }) => {
     }
   };
 
-  /* Eliminar el usuario en la API
+  const addUser = async (newUser) => {
+    try {
+      const response = await fetch("http://localhost:8000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
+      if (response.ok) {
+        const createdUser = await response.json();
+        setUsers((prevUsers) => [...prevUsers, createdUser]);
+      } else {
+        console.error("Error al agregar usuario:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al agregar usuario:", error);
+    }
+  };
+
+  const updateUser = async (updatedUser) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/users/${updatedUser.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedUser),
+        }
+      );
+      if (response.ok) {
+        setUsers((prevUsers) =>
+          prevUsers.map((user) =>
+            user.id === updatedUser.id ? updatedUser : user
+          )
+        );
+      } else {
+        console.error("Error al actualizar usuario:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al actualizar usuario:", error);
+    }
+  };
+
   const deleteUser = async (userId) => {
     try {
       const response = await fetch(`http://localhost:8000/users/${userId}`, {
@@ -121,7 +167,7 @@ export const ApiContextProvider = ({ children }) => {
     } catch (error) {
       console.error("Error al eliminar usuario:", error);
     }
-  };*/
+  };
 
   useEffect(() => {
     fetchUsers();
@@ -146,7 +192,9 @@ export const ApiContextProvider = ({ children }) => {
         setPurchaseHistory,
         deleteProduct,
         updateProduct,
-        //deleteUser,
+        deleteUser,
+        addUser,
+        updateUser,
       }}
     >
       {children}

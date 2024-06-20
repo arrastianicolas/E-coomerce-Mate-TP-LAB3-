@@ -1,18 +1,20 @@
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import NavBarLanding from "../../navs/NavBarLanding";
+import { ApiContext } from "../../services/apiContext/Api.context";
 
 const UsersList = () => {
-  const [users, setUsers] = useState([]);
+  const { users } = useContext(ApiContext);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await fetch("http://localhost:8000/users/${id}");
-      const data = await response.json();
-      setUsers(data);
-    };
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     const response = await fetch("http://localhost:8000/users/${id}");
+  //     const data = await response.json();
+  //     setUsers(data);
+  //   };
 
-    fetchUsers();
-  }, []);
+  //   fetchUsers();
+  // }, []);
 
   return (
     <>
