@@ -13,12 +13,12 @@ export const ApiContextProvider = ({ children }) => {
   });
   const [orderHistory, setOrderHistory] = useState([]);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
-  const [productsForSale, setProductsForSale] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  // Funciones para manejar la API
   const fetchUsers = async () => {
     const response = await fetch("http://localhost:8000/users");
     const data = await response.json();
@@ -35,6 +35,7 @@ export const ApiContextProvider = ({ children }) => {
     setCart((prevCart) => [...prevCart, product]);
   };
 
+  // Simulación de llamada a la API
   const fetchOrders = async () => {
     try {
       const response = await fetch("http://localhost:8000/order");
@@ -44,56 +45,63 @@ export const ApiContextProvider = ({ children }) => {
       console.error("Error fetching orders:", error);
     }
   };
-
-  const updateProduct = (updatedProduct) => {
-    fetch(`http://localhost:8000/products/${updatedProduct.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedProduct),
-    })
-      .then((response) => {
-        if (response.ok) {
-          setProducts((prevProducts) =>
-            prevProducts.map((product) =>
-              product.id === updatedProduct.id ? updatedProduct : product
-            )
-          );
-        } else {
-          console.error("Error al actualizar producto:", response.statusText);
-        }
-      })
-      .catch((error) => console.error("Error al actualizar producto:", error));
+  const fetchPurchase = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/purchase");
+      const data = await response.json();
+      setPurchaseHistory(data);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
   };
 
-  const deleteProduct = (productId) => {
-    fetch(`http://localhost:8000/products/${productId}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (response.ok) {
-          setProducts((prevProducts) =>
-            prevProducts.filter((product) => product.id !== productId)
-          );
-        } else {
-          console.error("Error al eliminar producto:", response.statusText);
+  // Actualizar el producto en la API
+  const updateProduct = async (updatedProduct) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/products/${updatedProduct.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedProduct),
         }
-      })
-      .catch((error) => console.error("Error al eliminar producto:", error));
+      );
+      if (response.ok) {
+        // Si la actualización fue exitosa, actualizar el estado local
+        setProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product.id === updatedProduct.id ? updatedProduct : product
+          )
+        );
+      } else {
+        console.error("Error al actualizar producto:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al actualizar producto:", error);
+    }
   };
 
-  const deleteUser = async (userId, token) => {
-    const response = await fetch(`http://localhost:8000/users/${userId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (response.ok) {
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
-    } else {
-      throw new Error("Error al eliminar usuario");
+  // Eliminar el producto en la API
+  const deleteProduct = async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/products/${productId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        // Si la eliminación fue exitosa, actualizar el estado local
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product.id !== productId)
+        );
+      } else {
+        console.error("Error al eliminar producto:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error al eliminar producto:", error);
     }
   };
 
@@ -101,6 +109,7 @@ export const ApiContextProvider = ({ children }) => {
     fetchUsers();
     fetchProducts();
     fetchOrders();
+    fetchPurchase();
   }, []);
 
   return (
@@ -117,11 +126,8 @@ export const ApiContextProvider = ({ children }) => {
         setOrderHistory,
         purchaseHistory,
         setPurchaseHistory,
-        productsForSale,
-        setProductsForSale,
         deleteProduct,
         updateProduct,
-        deleteUser,
       }}
     >
       {children}

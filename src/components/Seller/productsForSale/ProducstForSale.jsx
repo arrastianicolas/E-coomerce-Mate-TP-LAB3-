@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 import NavBarLanding from "../../navs/NavBarLanding";
 import { AuthenticationContext } from "../../../services/auth/Auth.context";
-import { Form, Button, Modal } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const ProductsForSale = () => {
   const { products, updateProduct, deleteProduct } = useContext(ApiContext);
@@ -11,23 +11,13 @@ const ProductsForSale = () => {
   const [editedProductName, setEditedProductName] = useState("");
   const [editedProductDescription, setEditedProductDescription] = useState("");
   const [editedProductPrice, setEditedProductPrice] = useState("");
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [productIdToDelete, setProductIdToDelete] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const hideModalHandler = () => {
-    setShowDeleteModal(false);
-    setProductIdToDelete(null);
-  };
-
-  const showModalHandler = (id) => {
-    setShowDeleteModal(true);
-    setProductIdToDelete(id);
-  };
-
-  // Filtrar productos según el vendedor actual
-  const filteredProducts = products.filter(
-    (product) => product.sellerId === user.id
-  );
+  useEffect(() => {
+    setFilteredProducts(
+      products.filter((product) => product.sellerId === user.id)
+    );
+  }, [products, user.id]);
 
   const handleEditProduct = (product) => {
     setEditingProduct(product);
@@ -36,23 +26,32 @@ const ProductsForSale = () => {
     setEditedProductPrice(product.price);
   };
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
     const updatedProduct = {
       ...editingProduct,
       name: editedProductName,
       description: editedProductDescription,
       price: parseFloat(editedProductPrice),
     };
-    updateProduct(updatedProduct);
+    await updateProduct(updatedProduct);
     setEditingProduct(null);
     setEditedProductName("");
     setEditedProductDescription("");
     setEditedProductPrice("");
+    // Actualizar el estado local después de la edición
+    setFilteredProducts(
+      filteredProducts.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
   };
 
-  const handleDeleteProduct = () => {
-    deleteProduct(productIdToDelete);
-    hideModalHandler();
+  const handleDeleteProduct = async (productId) => {
+    await deleteProduct(productId);
+    // Actualizar el estado local después de la eliminación
+    setFilteredProducts(
+      filteredProducts.filter((product) => product.id !== productId)
+    );
   };
 
   return (
@@ -70,8 +69,8 @@ const ProductsForSale = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredProducts.map((product, index) => (
-              <tr key={index}>
+            {filteredProducts.map((product) => (
+              <tr key={product.id}>
                 <td>
                   {editingProduct === product ? (
                     <Form.Control
@@ -126,12 +125,13 @@ const ProductsForSale = () => {
                         Editar
                       </button>
                       <br />
-                      <Button
-                        variant="danger"
-                        onClick={() => showModalHandler(product.id)}
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteProduct(product.id)}
+                        className="btn btn-danger"
                       >
                         Eliminar
-                      </Button>
+                      </button>
                     </>
                   )}
                 </td>
@@ -139,21 +139,6 @@ const ProductsForSale = () => {
             ))}
           </tbody>
         </table>
-
-        <Modal show={showDeleteModal} onHide={hideModalHandler}>
-          <Modal.Header closeButton>
-            <Modal.Title>Eliminar producto</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>¿Está seguro que desea eliminar este producto?</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={hideModalHandler}>
-              Cerrar
-            </Button>
-            <Button variant="danger" onClick={handleDeleteProduct}>
-              Eliminar
-            </Button>
-          </Modal.Footer>
-        </Modal>
       </div>
     </>
   );
