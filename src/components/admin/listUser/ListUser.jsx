@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
-import NavBarLanding from "../../Navs/NavBarLanding";
+import NavBarLanding from "../../navs/NavBarLanding";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 
 const ListUser = () => {

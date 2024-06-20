@@ -1,9 +1,9 @@
-import HandL from "../../../assets/se.png";
+import LeftHand from "../../../assets/LeftHand.png";
 
 const HandsL = () => {
   return (
     <div className="container-hands">
-      <img src={HandL} alt="" className="left-hand" />
+      <img src={LeftHand} alt="" className="left-hand" />
     </div>
   );
 };
