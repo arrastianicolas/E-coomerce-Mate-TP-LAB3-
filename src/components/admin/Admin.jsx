@@ -17,11 +17,14 @@ const Admin = () => {
 
   return (
     <>
-      <NavBarLanding clickHandlerShopAdmin={clickHandlerShopAdmin} /> {/* Pasar la función como prop al componente NavBarLanding */}
+      <NavBarLanding clickHandlerShopAdmin={clickHandlerShopAdmin} />{" "}
+      {/* Pasar la función como prop al componente NavBarLanding */}
       <div className="admin-container">
         {user && user.userType === "sysAdmin" && (
           <>
-            <h1 className="Tittle-Admin">USTED HA INGRESADO COMO ADMIN</h1>
+            <h1 className="Tittle-Admin">
+              USTED HA INGRESADO COMO SUPER-ADMIN
+            </h1>
             <div className="button-container">
               <button onClick={handleUserListClick} className="btnAdmin">
                 Lista de Usuarios
