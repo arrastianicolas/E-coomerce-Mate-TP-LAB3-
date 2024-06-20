@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
-import NavBarLanding from "../Navs/NavBarLanding";
+import NavBarLanding from "../navs/NavBarLanding";
 
 const Login = () => {
   const [email, setEmail] = useState("");
