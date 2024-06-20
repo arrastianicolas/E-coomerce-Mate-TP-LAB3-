@@ -11,14 +11,13 @@ const Admin = () => {
     navigate("/listUser");
   };
 
-  
-  const handleShopClick = () => {
-    navigate("/shop");
-  };
+  const clickHandlerShopAdmin = () => {
+    navigate("/shopAdmin");
+  }; // Definir la función correctamente aquí
 
   return (
     <>
-      <NavBarLanding />
+      <NavBarLanding clickHandlerShopAdmin={clickHandlerShopAdmin} /> {/* Pasar la función como prop al componente NavBarLanding */}
       <div className="admin-container">
         {user && user.userType === "sysAdmin" && (
           <>
@@ -27,7 +26,7 @@ const Admin = () => {
               <button onClick={handleUserListClick} className="btnAdmin">
                 Lista de Usuarios
               </button>
-              <button onClick={handleShopClick} className="btnAdmin">
+              <button onClick={clickHandlerShopAdmin} className="btnAdmin">
                 Tienda
               </button>
             </div>

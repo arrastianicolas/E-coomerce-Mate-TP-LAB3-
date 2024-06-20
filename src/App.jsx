@@ -11,6 +11,7 @@ import SaleHistory from "./components/seller/saleHistory/SaleHistory.jsx";
 import Protected from "./routes/Protected";
 import Admin from "./components/admin/Admin.jsx";
 import ListUser from "./components/admin/listUser/ListUser.jsx";
+import ShopAdmin from "./components/admin/shop/ShopAdmin.jsx";
 
 function App() {
   const router = createBrowserRouter([
@@ -78,6 +79,10 @@ function App() {
           path: "/listUser",
           element: <ListUser />,
         },
+        {
+          path: "/shopAdmin",
+          element: <ShopAdmin/>,
+        }
       ],
     },
   ]);
