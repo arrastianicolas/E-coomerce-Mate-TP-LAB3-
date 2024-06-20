@@ -1,35 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Button, Modal } from "react-bootstrap";
-import NavBarLanding from "../../navs/NavBarLanding";
+import NavBarLanding from "../../Navs/NavBarLanding";
+import { ApiContext } from "../../../services/apiContext/Api.context";
 
 const ListUser = () => {
-  const [users, setUsers] = useState([]);
+  const { users, deleteUser } = useContext(ApiContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState(null);
   const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [showEditUserModal, setShowEditUserModal] = useState(false);
   const [newUser, setNewUser] = useState({
     username: "",
     userType: "",
     email: "",
     password: "",
   });
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/users");
-        if (!response.ok) {
-          throw new Error("Error al obtener la lista de usuarios");
-        }
-        const data = await response.json();
-        setUsers(data);
-      } catch (error) {
-        console.error("Fetch users error:", error.message);
-      }
-    };
-
-    fetchUsers();
-  }, []);
+  const [editUser, setEditUser] = useState({
+    id: null,
+    username: "",
+    userType: "",
+    email: "",
+    password: "",
+  });
 
   const hideModalHandler = () => {
     setShowDeleteModal(false);
@@ -42,26 +34,13 @@ const ListUser = () => {
   };
 
   const handleDeleteUser = async () => {
+    console.log(`Attempting to delete user with id ${userIdToDelete}`);
     try {
-      const response = await fetch(
-        `http://localhost:8000/users/${userIdToDelete}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Error al eliminar el usuario");
-      }
-
-      setUsers((prevUsers) =>
-        prevUsers.filter((user) => user.id !== userIdToDelete)
-      );
-      console.log(`Usuario con ID ${userIdToDelete} eliminado correctamente`);
+      await deleteUser(userIdToDelete);
+      console.log(`User with id ${userIdToDelete} deleted successfully`);
     } catch (error) {
-      console.error("Eliminar usuario error:", error.message);
+      console.error(`Failed to delete user with id ${userIdToDelete}`, error);
     }
-
     hideModalHandler();
   };
 
@@ -92,36 +71,45 @@ const ListUser = () => {
     setShowAddUserModal(true);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e, isEdit = false) => {
     const { name, value } = e.target;
-    setNewUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
+    if (isEdit) {
+      setEditUser((prevUser) => ({
+        ...prevUser,
+        [name]: value,
+      }));
+    } else {
+      setNewUser((prevUser) => ({
+        ...prevUser,
+        [name]: value,
+      }));
+    }
   };
 
   const handleAddUser = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al agregar el usuario");
-      }
-
-      const createdUser = await response.json();
-      setUsers((prevUsers) => [...prevUsers, createdUser]);
-      console.log("Usuario agregado correctamente");
-    } catch (error) {
-      console.error("Agregar usuario error:", error.message);
-    }
-
+    // Lógica para agregar usuario usando el contexto
     hideAddUserModalHandler();
+  };
+
+  const hideEditUserModalHandler = () => {
+    setShowEditUserModal(false);
+    setEditUser({
+      id: null,
+      username: "",
+      userType: "",
+      email: "",
+      password: "",
+    });
+  };
+
+  const showEditUserModalHandler = (user) => {
+    setEditUser(user);
+    setShowEditUserModal(true);
+  };
+
+  const handleEditUser = async () => {
+    // Lógica para editar usuario usando el contexto
+    hideEditUserModalHandler();
   };
 
   return (
@@ -154,7 +142,7 @@ const ListUser = () => {
                   <td>
                     <button
                       className="btn btn-primary me-2 custom-button"
-                      onClick={() => console.log("Editar")}
+                      onClick={() => showEditUserModalHandler(user)}
                     >
                       Editar
                     </button>
@@ -172,14 +160,15 @@ const ListUser = () => {
         </div>
       </div>
 
+      {/*confirmación de eliminación */}
       <Modal show={showDeleteModal} onHide={hideModalHandler}>
         <Modal.Header closeButton>
-          <Modal.Title>Eliminar usuario</Modal.Title>
+          <Modal.Title>Confirmar Eliminación</Modal.Title>
         </Modal.Header>
-        <Modal.Body>¿Está seguro que desea eliminar este usuario?</Modal.Body>
+        <Modal.Body>¿Estás seguro que deseas eliminar este usuario?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={hideModalHandler}>
-            Cerrar
+            Cancelar
           </Button>
           <Button variant="danger" onClick={handleDeleteUser}>
             Eliminar
@@ -187,15 +176,16 @@ const ListUser = () => {
         </Modal.Footer>
       </Modal>
 
+      {/* agregar usuario */}
       <Modal show={showAddUserModal} onHide={hideAddUserModalHandler}>
         <Modal.Header closeButton>
-          <Modal.Title>Dar de alta usuario</Modal.Title>
+          <Modal.Title>Agregar Usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">
-                Usuario
+                Nombre de Usuario
               </label>
               <input
                 type="text"
@@ -253,10 +243,85 @@ const ListUser = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={hideAddUserModalHandler}>
-            Cerrar
+            Cancelar
           </Button>
-          <Button variant="primary" onClick={handleAddUser}>
-            Guardar
+          <Button variant="success" onClick={handleAddUser}>
+            Agregar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* editar usuario */}
+      <Modal show={showEditUserModal} onHide={hideEditUserModalHandler}>
+        <Modal.Header closeButton>
+          <Modal.Title>Editar Usuario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form>
+            <div className="mb-3">
+              <label htmlFor="edit-username" className="form-label">
+                Nombre de Usuario
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="edit-username"
+                name="username"
+                value={editUser.username}
+                onChange={(e) => handleInputChange(e, true)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="edit-userType" className="form-label">
+                Rol
+              </label>
+              <select
+                className="form-control"
+                id="edit-userType"
+                name="userType"
+                value={editUser.userType}
+                onChange={(e) => handleInputChange(e, true)}
+              >
+                <option value="">Seleccione un rol</option>
+                <option value="admin">Administrador</option>
+                <option value="seller">Vendedor</option>
+                <option value="client">Cliente</option>
+              </select>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="edit-email" className="form-label">
+                Email
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="edit-email"
+                name="email"
+                value={editUser.email}
+                onChange={(e) => handleInputChange(e, true)}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="edit-password" className="form-label">
+                Contraseña
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                id="edit-password"
+                name="password"
+                value={editUser.password}
+                onChange={(e) => handleInputChange(e, true)}
+              />
+            </div>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={hideEditUserModalHandler}>
+            Cancelar
+          </Button>
+          <Button variant="success" onClick={handleEditUser}>
+            Guardar Cambios
           </Button>
         </Modal.Footer>
       </Modal>
