@@ -1,11 +1,14 @@
 import mate2 from "../../../assets/mate2.png";
 import termo from "../../../assets/termo.png";
 import termocarc from "../../../assets/termocentrall.png";
+import useTraduction from "../../../custom/UseTraduction";
 
 const Carrousel = () => {
+  const { t } = useTraduction();
+
   return (
     <>
-      <h2 className="tittle-carrousel">¡NUESTROS PRODUCTOS MAS VENDIDOS!</h2>
+      <h2 className="tittle-carrousel">{t("carouselTitle")}</h2>
       <div
         id="carouselExampleIndicators"
         className="carousel slide"
@@ -69,7 +72,7 @@ const Carrousel = () => {
             className="carousel-control-prev-icon"
             aria-hidden="true"
           ></span>
-          <span className="visually-hidden">Previous</span>
+          <span className="visually-hidden">{t("prev")}</span>
         </button>
         <button
           className="carousel-control-next"
@@ -81,7 +84,7 @@ const Carrousel = () => {
             className="carousel-control-next-icon"
             aria-hidden="true"
           ></span>
-          <span className="visually-hidden">Next</span>
+          <span className="visually-hidden">{t("next")}</span>
         </button>
       </div>
     </>

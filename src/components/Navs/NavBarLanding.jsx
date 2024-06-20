@@ -2,13 +2,14 @@ import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 import { ApiContext } from "../../services/apiContext/Api.context";
+import useTraduction from "../../custom/UseTraduction";
 
 const NavBarLanding = ({ clickHandlerShopAdmin }) => {
   const location = useLocation();
   const { user } = useContext(AuthenticationContext);
   const { handleLogout } = useContext(AuthenticationContext);
   const { setCart } = useContext(ApiContext);
-
+  const { t } = useTraduction();
   const navigate = useNavigate();
 
   const clickHandlerRegister = () => {
@@ -61,20 +62,20 @@ const NavBarLanding = ({ clickHandlerShopAdmin }) => {
             className="btn btn-light buttons-navs"
             onClick={clickHandlerMain}
           >
-            INICIO
+            {t("home")}
           </button>
           <div className="nav2">
             <button
               className="btn btn-light buttons-navs"
               onClick={clickHandlerRegister}
             >
-              Registrarme
+              {t("register")}
             </button>
             <button
               className="btn btn-light buttons-navs"
               onClick={clickHandlerLogin}
             >
-              Iniciar Sesión
+              {t("login")}
             </button>
           </div>
         </div>
