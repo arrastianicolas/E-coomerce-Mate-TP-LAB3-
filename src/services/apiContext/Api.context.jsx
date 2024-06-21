@@ -158,7 +158,6 @@ export const ApiContextProvider = ({ children }) => {
         method: "DELETE",
       });
       if (response.ok) {
-        console.log(`User with id ${userId} deleted successfully`);
         // Si la eliminación fue exitosa, actualizar el estado local
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
       } else {

@@ -1,5 +1,5 @@
 import Mate from "../../../assets/Mate.png";
-import Termo from "../../../assets/Termo.png";
+import Termo from "../../../assets/termo.png";
 import Bombilla from "../../../assets/Bombilla.png";
 import useTraduction from "../../../custom/UseTraduction";
 

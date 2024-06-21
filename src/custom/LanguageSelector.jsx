@@ -1,4 +1,5 @@
 import useTraduction from "./UseTraduction";
+import "./Custom.css"; // Importa el archivo CSS
 
 const LanguageSelector = () => {
   const { setLanguage } = useTraduction();
@@ -8,7 +9,7 @@ const LanguageSelector = () => {
   };
 
   return (
-    <select onChange={handleChangeLanguage}>
+    <select className="language-selector" onChange={handleChangeLanguage}>
       <option value="es">Español</option>
       <option value="en">English</option>
     </select>
