@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Cart from "./components/cart/Cart.jsx";
-import Landing from "./components/dashboard/Landing/Landing.jsx";
+import Landing from "./components/dashboard/landing/Landing.jsx";
 import Register from "./components/register/Register.jsx";
 import Login from "./components/login/Login.jsx";
 import Client from "./components/client/Client.jsx";
