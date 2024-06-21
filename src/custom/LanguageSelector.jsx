@@ -1,5 +1,5 @@
 import useTraduction from "./UseTraduction";
-import "./Custom.css"; // Importa el archivo CSS
+import "./Custom.css"; 
 
 const LanguageSelector = () => {
   const { setLanguage } = useTraduction();
