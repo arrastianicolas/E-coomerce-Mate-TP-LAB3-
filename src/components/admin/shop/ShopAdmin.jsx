@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { Card, Button, Modal } from "react-bootstrap";
 import { ApiContext } from "../../../services/apiContext/Api.context";
-import NavBarLanding from "../../Navs/NavBarLanding";
-import Footer from "../../Footer/Footer";
+import NavBarLanding from "../../navs/NavBarLanding";
+import Footer from "../../footer/Footer";
 
 const ShopAdmin = () => {
   const [searchTerm, setSearchTerm] = useState("");
