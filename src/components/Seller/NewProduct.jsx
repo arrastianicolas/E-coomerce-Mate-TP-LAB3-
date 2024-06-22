@@ -4,6 +4,8 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const NewProduct = () => {
+  
+  // Definimos los estados
   const { setProducts } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [name, setName] = useState("");
@@ -12,8 +14,9 @@ const NewProduct = () => {
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null); 
+  const [successMessage, setSuccessMessage] = useState(null);
 
+  //Cambios de estado
   const changeNameHandler = (event) => {
     setName(event.target.value);
   };
@@ -30,6 +33,7 @@ const NewProduct = () => {
     setImage(event.target.value);
   };
 
+  // Manejamos el envio del formulario
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -55,10 +59,11 @@ const NewProduct = () => {
         throw new Error("Error al añadir el producto");
       }
 
-      setProducts((prevProducts) => [...prevProducts, newProduct]);
+      setProducts((prevProducts) => [...prevProducts, newProduct]); // Añadimos el nuevo producto a la lista de productos
 
       setSuccessMessage("Producto agregado correctamente");
 
+      // Reiniciamos los campos del formulario
       setName("");
       setPrice(0);
       setDescription("");
@@ -73,6 +78,7 @@ const NewProduct = () => {
   return (
     <>
       <div className="register-container">
+        {/* Card para el formulario de registro */}
         <Card className="content-register">
           <Card.Body>
             <Row>
@@ -80,7 +86,8 @@ const NewProduct = () => {
             </Row>
             <hr />
             {error && <p>{error}</p>}
-            {successMessage && <p>{successMessage}</p>}{" "}
+            {successMessage && <p>{successMessage}</p>} 
+            {/* Formulario para añadir un nuevo producto */}
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
                 <Form.Label>Nombre:</Form.Label>

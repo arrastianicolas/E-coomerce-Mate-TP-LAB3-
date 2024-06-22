@@ -4,10 +4,13 @@ import NavBarLanding from "../../navs/NavBarLanding";
 import { AuthenticationContext } from "../../../services/auth/Auth.context";
 
 const SaleHistory = () => {
-  const { orderHistory, users } = useContext(ApiContext);
-  const { user } = useContext(AuthenticationContext);
+
+  // Definimos los estados
+  const { orderHistory, users } = useContext(ApiContext); 
+  const { user } = useContext(AuthenticationContext); 
   const [filteredOrders, setFilteredOrders] = useState([]);
 
+  // Funcion que filtra los pedidos 
   useEffect(() => {
     if (orderHistory && orderHistory.length > 0) {
       const ordersWithSellerItems = orderHistory
@@ -15,13 +18,14 @@ const SaleHistory = () => {
           ...order,
           items: order.items.filter((item) => item.sellerId === user.id),
         }))
-        .filter((order) => order.items.length > 0);
-      setFilteredOrders(ordersWithSellerItems);
+        .filter((order) => order.items.length > 0); 
+      setFilteredOrders(ordersWithSellerItems); 
     }
-  }, [orderHistory, user.id]);
+  }, [orderHistory, user.id]); 
 
+  // Función que obtiene el nombre del comprador por su ID
   const getBuyerName = (buyerId) => {
-    const buyer = users.find((user) => user.id === buyerId);
+    const buyer = users.find((user) => user.id === buyerId); 
     return buyer ? buyer.email : "Desconocido";
   };
 
@@ -33,6 +37,7 @@ const SaleHistory = () => {
         {orderHistory.length === 0 ? (
           <p>No hay pedidos.</p>
         ) : (
+          // Tabla para mostrar el historial de pedidos
           <table className="salesHistory-table">
             <thead>
               <tr>
@@ -50,10 +55,11 @@ const SaleHistory = () => {
                   </td>
                 </tr>
               ) : (
+                // Mapeamos los pedidos para mostrarlos en la tabla
                 filteredOrders.map((order) => (
                   <tr key={order.id}>
-                    <td>{order.id}</td>
-                    <td>{new Date(order.date).toLocaleString()}</td>
+                    <td>{order.id}</td> 
+                    <td>{new Date(order.date).toLocaleString()}</td> 
                     <td>
                       {order.items.map((item) => (
                         <div key={item.id}>
