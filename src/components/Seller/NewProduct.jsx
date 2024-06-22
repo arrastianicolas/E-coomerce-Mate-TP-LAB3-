@@ -7,18 +7,18 @@ const NewProduct = () => {
   const { setProducts } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
   const [error, setError] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null); // Nuevo estado para el mensaje de éxito
+  const [successMessage, setSuccessMessage] = useState(null); 
 
   const changeNameHandler = (event) => {
     setName(event.target.value);
   };
   const changePriceHandler = (event) => {
-    setPrice(event.target.value);
+    setPrice(parseFloat(event.target.value));
   };
   const changeDescriptionHandler = (event) => {
     setDescription(event.target.value);
@@ -57,12 +57,10 @@ const NewProduct = () => {
 
       setProducts((prevProducts) => [...prevProducts, newProduct]);
 
-      // Mostrar mensaje de éxito
       setSuccessMessage("Producto agregado correctamente");
 
-      // Limpiar campos y errores
       setName("");
-      setPrice("");
+      setPrice(0);
       setDescription("");
       setCategory("");
       setImage("");
@@ -83,7 +81,6 @@ const NewProduct = () => {
             <hr />
             {error && <p>{error}</p>}
             {successMessage && <p>{successMessage}</p>}{" "}
-            {/* Mostrar mensaje de éxito */}
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
                 <Form.Label>Nombre:</Form.Label>
