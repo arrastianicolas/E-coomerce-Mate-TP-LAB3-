@@ -5,7 +5,9 @@ import { AuthenticationContext } from "../../../services/auth/Auth.context";
 import { Form } from "react-bootstrap";
 
 const ProductsForSale = () => {
-  const { products, updateProduct, deleteProduct } = useContext(ApiContext);
+
+  // Definimos los estados
+  const { products, updateProduct, deleteProduct } = useContext(ApiContext); 
   const { user } = useContext(AuthenticationContext);
   const [editingProduct, setEditingProduct] = useState(null);
   const [editedProductName, setEditedProductName] = useState("");
@@ -13,32 +15,34 @@ const ProductsForSale = () => {
   const [editedProductPrice, setEditedProductPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  // Funcion para filtrar los productos
   useEffect(() => {
     setFilteredProducts(
       products.filter((product) => product.sellerId === user.id)
     );
-  }, [products, user.id]);
+  }, [products, user.id]); // Ejecutamos este efecto cuando cambian los productos o el id del usuario
 
+  // Funcion que maneja la edición de un producto
   const handleEditProduct = (product) => {
-    setEditingProduct(product);
-    setEditedProductName(product.name);
-    setEditedProductDescription(product.description);
+    setEditingProduct(product); 
+    setEditedProductName(product.name); 
+    setEditedProductDescription(product.description); 
     setEditedProductPrice(product.price);
   };
 
+  // Funcion para manejar el guardado de la edición
   const handleSaveEdit = async () => {
     const updatedProduct = {
       ...editingProduct,
       name: editedProductName,
       description: editedProductDescription,
-      price: parseFloat(editedProductPrice),
+      price: parseFloat(editedProductPrice), 
     };
-    await updateProduct(updatedProduct);
+    await updateProduct(updatedProduct); 
     setEditingProduct(null);
-    setEditedProductName("");
-    setEditedProductDescription("");
-    setEditedProductPrice("");
-    // Actualizar el estado local después de la edición
+    setEditedProductName(""); 
+    setEditedProductDescription(""); 
+    setEditedProductPrice(""); 
     setFilteredProducts(
       filteredProducts.map((product) =>
         product.id === updatedProduct.id ? updatedProduct : product
@@ -46,11 +50,11 @@ const ProductsForSale = () => {
     );
   };
 
+  // Función para manejar la eliminación de un producto
   const handleDeleteProduct = async (productId) => {
-    await deleteProduct(productId);
-    // Actualizar el estado local después de la eliminación
+    await deleteProduct(productId); 
     setFilteredProducts(
-      filteredProducts.filter((product) => product.id !== productId)
+      filteredProducts.filter((product) => product.id !== productId) 
     );
   };
 
@@ -79,7 +83,7 @@ const ProductsForSale = () => {
                       onChange={(e) => setEditedProductName(e.target.value)}
                     />
                   ) : (
-                    product.name
+                    product.name 
                   )}
                 </td>
                 <td>
@@ -92,7 +96,7 @@ const ProductsForSale = () => {
                       }
                     />
                   ) : (
-                    product.description
+                    product.description 
                   )}
                 </td>
                 <td>
@@ -103,7 +107,7 @@ const ProductsForSale = () => {
                       onChange={(e) => setEditedProductPrice(e.target.value)}
                     />
                   ) : (
-                    `$${Number(product.price).toFixed(2)}`
+                    `$${Number(product.price).toFixed(2)}` 
                   )}
                 </td>
                 <td>
