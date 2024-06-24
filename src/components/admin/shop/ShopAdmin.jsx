@@ -3,7 +3,7 @@ import { Card, Button, Modal } from "react-bootstrap";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 import NavBarLanding from "../../navs/NavBarLanding";
 import Footer from "../../footer/Footer";
-import SpinnerShops from "../../spinnerShops/SpinnerShops";
+import SpinnerShops from "../../spinner/SpinnerShops";
 
 const ShopAdmin = () => {
 
