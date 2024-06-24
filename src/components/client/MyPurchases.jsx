@@ -7,7 +7,6 @@ const MyPurchases = () => {
   const { purchaseHistory } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
 
-  // Filtrar el historial de compras por el ID del usuario autenticado
   const userPurchases = purchaseHistory.filter(
     (purchase) => purchase.userId === user.id
   );
