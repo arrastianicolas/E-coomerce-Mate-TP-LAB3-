@@ -108,7 +108,7 @@ export const ApiContextProvider = ({ children }) => {
 
   const addUser = async (newUser) => {
     try {
-      const response = await fetch("http://localhost:8000/users", {
+      const response = await fetch("http://localhost:8000/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -158,6 +158,7 @@ export const ApiContextProvider = ({ children }) => {
         method: "DELETE",
       });
       if (response.ok) {
+        console.log(`User with id ${userId} deleted successfully`);
         // Si la eliminación fue exitosa, actualizar el estado local
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
       } else {

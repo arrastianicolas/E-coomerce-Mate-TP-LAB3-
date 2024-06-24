@@ -6,23 +6,22 @@ import Footer from "../../footer/Footer";
 import SpinnerShops from "../../spinnerShops/SpinnerShops";
 
 const ShopAdmin = () => {
-
   // Definimos los estados del componente
-  const [searchTerm, setSearchTerm] = useState(""); 
-  const [filter, setFilter] = useState(""); 
-  const [productsFiltered, setProductsFiltered] = useState([]); 
-  const [editProduct, setEditProduct] = useState(null); 
-  const [editedFields, setEditedFields] = useState({ 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filter, setFilter] = useState("");
+  const [productsFiltered, setProductsFiltered] = useState([]);
+  const [editProduct, setEditProduct] = useState(null);
+  const [editedFields, setEditedFields] = useState({
     name: "",
     price: 0,
     description: "",
     image: "",
   });
-  const [showDeleteModal, setShowDeleteModal] = useState(false); 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(null);
-  const { products, updateProduct, deleteProduct } = useContext(ApiContext); 
-  const [loading, setLoading] = useState(true); 
-  
+  const { products, updateProduct, deleteProduct } = useContext(ApiContext);
+  const [loading, setLoading] = useState(true);
+
   //Definimos funciones
 
   // Manejar barra de búsqueda
@@ -111,7 +110,7 @@ const ShopAdmin = () => {
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [products]);
@@ -143,90 +142,88 @@ const ShopAdmin = () => {
           {/* Renderizado del spinner */}
           {loading ? (
             <SpinnerShops />
-          ) : (
-            /* Mostramos productos filtrados o mensaje de no encontrado */
-            productsFiltered.length > 0 ? (
-              <div className="card-container">
-                {productsFiltered.map((product) => (
-                  <Card
-                    key={product.id}
-                    className={`product-cardadmin ${
-                      editProduct && editProduct.id === product.id
-                        ? "editing"
-                        : ""
-                    }`}
-                  >
-                    <div>
-                      <img src={product.image} alt={product.name} />
-                      <h4>{product.name}</h4>
-                      <p>${product.price}</p>
+          ) : /* Mostramos productos filtrados o mensaje de no encontrado */
+          productsFiltered.length > 0 ? (
+            <div className="card-container">
+              {productsFiltered.map((product) => (
+                <Card
+                  key={product.id}
+                  className={`product-cardadmin ${
+                    editProduct && editProduct.id === product.id
+                      ? "editing"
+                      : ""
+                  }`}
+                >
+                  <div>
+                    <img src={product.image} alt={product.name} />
+                    <h4>{product.name}</h4>
+                    <p>${product.price}</p>
+                    <button
+                      onClick={() => openEditForm(product)}
+                      className="btn btn-primary"
+                    >
+                      Editar
+                    </button>
+                    <br />
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleDeleteProduct(product.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+
+                  {/* Formulario de edición */}
+                  {editProduct && editProduct.id === product.id && (
+                    <div className="edit-form">
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Nombre"
+                        value={editedFields.name}
+                        onChange={handleInputChange}
+                      />
+                      <input
+                        type="number"
+                        name="price"
+                        placeholder="Precio"
+                        value={editedFields.price}
+                        onChange={handleInputChange}
+                      />
+                      <textarea
+                        name="description"
+                        placeholder="Descripción"
+                        value={editedFields.description}
+                        onChange={handleInputChange}
+                      ></textarea>
+                      <input
+                        type="text"
+                        name="image"
+                        placeholder="URL de imagen"
+                        value={editedFields.image}
+                        onChange={handleInputChange}
+                      />
                       <button
-                        onClick={() => openEditForm(product)}
-                        className="btn btn-primary"
+                        onClick={handleEditSubmit}
+                        className="save-changes-button"
                       >
-                        Editar
-                      </button>
-                      <br />
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => handleDeleteProduct(product.id)}
-                      >
-                        Eliminar
+                        Guardar Cambios
                       </button>
                     </div>
-
-                    {/* Formulario de edición */}
-                    {editProduct && editProduct.id === product.id && (
-                      <div className="edit-form">
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder="Nombre"
-                          value={editedFields.name}
-                          onChange={handleInputChange}
-                        />
-                        <input
-                          type="number"
-                          name="price"
-                          placeholder="Precio"
-                          value={editedFields.price}
-                          onChange={handleInputChange}
-                        />
-                        <textarea
-                          name="description"
-                          placeholder="Descripción"
-                          value={editedFields.description}
-                          onChange={handleInputChange}
-                        ></textarea>
-                        <input
-                          type="text"
-                          name="image"
-                          placeholder="URL de imagen"
-                          value={editedFields.image}
-                          onChange={handleInputChange}
-                        />
-                        <button
-                          onClick={handleEditSubmit}
-                          className="save-changes-button"
-                        >
-                          Guardar Cambios
-                        </button>
-                      </div>
-                    )}
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <h3 className="message-not-product">
-                ¡No se encontraron Productos!
-              </h3>
-            )
+                  )}
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <h3 className="message-not-product">
+              ¡No se encontraron Productos!
+            </h3>
           )}
         </div>
       </div>
 
       <Footer />
-      
+
       {/* Modal de confirmación de eliminación de producto */}
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>

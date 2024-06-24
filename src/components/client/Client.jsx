@@ -6,7 +6,6 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 import SpinnerShops from "../spinnerShops/SpinnerShops";
 
 const Client = () => {
-
   // Definimos los estados del componente
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
@@ -57,10 +56,10 @@ const Client = () => {
 
   // Funcion para manejar el spinner
   useEffect(() => {
-    setLoading(true); 
+    setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [products]);
@@ -92,28 +91,26 @@ const Client = () => {
           {/* Renderizado del spinner */}
           {loading ? (
             <SpinnerShops />
+          ) : /* Mostramos productos filtrados o mensaje de no encontrado */
+          productsFiltered.length > 0 ? (
+            <div className="card-container">
+              {productsFiltered.map((product) => (
+                <Card key={product.id} className="product-card">
+                  <div>
+                    <img src={product.image} alt={product.name} />
+                    <h4>{product.name}</h4>
+                    <p>${product.price}</p>
+                    <button onClick={() => addToCart(product)}>
+                      Agregar al carrito
+                    </button>
+                  </div>
+                </Card>
+              ))}
+            </div>
           ) : (
-            /* Mostramos productos filtrados o mensaje de no encontrado */
-            productsFiltered.length > 0 ? (
-              <div className="card-container">
-                {productsFiltered.map((product) => (
-                  <Card key={product.id} className="product-card">
-                    <div>
-                      <img src={product.image} alt={product.name} />
-                      <h4>{product.name}</h4>
-                      <p>${product.price}</p>
-                      <button onClick={() => addToCart(product)}>
-                        Agregar al carrito
-                      </button>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <h3 className="message-not-product">
-                ¡No se encontraron Productos!
-              </h3>
-            )
+            <h3 className="message-not-product">
+              ¡No se encontraron Productos!
+            </h3>
           )}
         </div>
       </div>

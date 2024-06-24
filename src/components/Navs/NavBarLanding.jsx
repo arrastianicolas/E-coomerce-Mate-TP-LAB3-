@@ -4,7 +4,7 @@ import { AuthenticationContext } from "../../services/auth/Auth.context";
 import { ApiContext } from "../../services/apiContext/Api.context";
 import useTraduction from "../../custom/UseTraduction";
 
-const NavBarLanding = ({ clickHandlerShopAdmin }) => {
+const NavBarLanding = () => {
   const location = useLocation();
   const { user } = useContext(AuthenticationContext);
   const { handleLogout } = useContext(AuthenticationContext);
