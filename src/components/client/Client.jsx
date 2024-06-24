@@ -6,6 +6,7 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 import SpinnerShops from "../spinner/SpinnerShops";
 
 const Client = () => {
+  // Definimos los estados del componente
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
@@ -50,7 +51,7 @@ const Client = () => {
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [products]);
@@ -81,7 +82,8 @@ const Client = () => {
 
           {loading ? (
             <SpinnerShops />
-          ) : productsFiltered.length > 0 ? (
+          ) : /* Mostramos productos filtrados o mensaje de no encontrado */
+          productsFiltered.length > 0 ? (
             <div className="card-container">
               {productsFiltered.map((product) => (
                 <Card key={product.id} className="product-card">

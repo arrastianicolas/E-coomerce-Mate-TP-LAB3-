@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 import NavBarLanding from "../navs/NavBarLanding";
+import { ApiContext } from "../../services/apiContext/Api.context";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { handleLogin } = useContext(AuthenticationContext);
-
+  const { users } = useContext(ApiContext);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -54,12 +55,14 @@ const Login = () => {
         },
         body: JSON.stringify({ email: emailValue, password: passwordValue }),
       });
-
+      console.log(users);
+      console.log(response.ok);
       if (!response.ok) {
         throw new Error("Credenciales incorrectas");
       }
 
       const userData = await response.json();
+      console.log(userData);
       handleLogin(userData.email, userData.userType, userData.id);
 
       if (userData.userType === "client") {

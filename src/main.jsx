@@ -15,17 +15,17 @@ import "./css/SaleHistory.css";
 import "./css/Cart.css";
 import "./css/Admin.css";
 import "./css/ListUser.css";
-import "./css/ShopAdmin.css"
+import "./css/ShopAdmin.css";
 import { AuthenticationContextProvider } from "./services/auth/Auth.context.jsx";
 import "./css/MyPurchases.css";
 import { ApiContextProvider } from "./services/apiContext/Api.context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ApiContextProvider>
-      <AuthenticationContextProvider>
+    <AuthenticationContextProvider>
+      <ApiContextProvider>
         <App />
-      </AuthenticationContextProvider>
-    </ApiContextProvider>
+      </ApiContextProvider>
+    </AuthenticationContextProvider>
   </React.StrictMode>
 );
