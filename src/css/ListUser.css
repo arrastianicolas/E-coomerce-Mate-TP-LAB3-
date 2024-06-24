@@ -61,3 +61,47 @@ body {
 .btnAddUser:hover{
   background-color: #67b19f;
 }
+
+.list-user-container {
+  padding: 20px;
+}
+
+.table.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table.custom-table th, .table.custom-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: left;
+}
+
+.table.custom-table th {
+  color: #fff;
+}
+
+.table.custom-table td {
+  background-color: #037438;
+  color: #fff;
+}
+
+.table.custom-table .actions-column {
+  width: 150px;
+  text-align: center;
+}
+
+.table.custom-table th, .table.custom-table td {
+  padding: 10px;
+  border: 2px solid #fff;
+}
+
+.table.custom-table th {
+  background-color: #4f4f4f;
+  color: white;
+}
+
+.table.custom-table td {
+  background-color: #037438;
+  color: white;
+}

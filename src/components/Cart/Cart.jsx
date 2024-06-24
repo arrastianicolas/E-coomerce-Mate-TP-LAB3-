@@ -89,6 +89,7 @@ const Cart = () => {
 
     setCart([]);
     setPurchaseConfirmed(true);
+
   };
 
   return (
@@ -101,9 +102,9 @@ const Cart = () => {
             <tr>
               <th>Producto</th>
               <th>Descripción</th>
-              <th>SubTotal</th>
+              <th>Cantidad</th>
               <th>Total</th>
-              <th className="actions-column">Opciones</th>
+              <th className="actions-column">Opcion</th>
             </tr>
           </thead>
           <tbody>
@@ -111,12 +112,7 @@ const Cart = () => {
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
-                <td>
-                  $
-                  {typeof item.price === "number"
-                    ? item.price.toFixed(2)
-                    : item.price}
-                </td>
+                <td>{item.quantity}</td>
                 <td>
                   $
                   {(typeof item.price === "number"
