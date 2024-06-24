@@ -61,7 +61,7 @@ const EditUserModal = ({
             <Form.Control
               type="password"
               name="password"
-              value={editUser.password}
+              value={editUser.password} 
               className={
                 formErrors.password || formErrors.passwordLengthAndWordUppercase
                   ? "border border-danger"

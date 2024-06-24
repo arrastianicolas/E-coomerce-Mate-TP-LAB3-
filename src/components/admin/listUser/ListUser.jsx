@@ -95,11 +95,10 @@ const ListUser = () => {
       username: user.username,
       userType: user.userType,
       email: user.email,
-      password: "",
+      password: user.password, 
     });
     setShowEditUserModal(true);
   };
-
   const handleInputChange = (e, isEdit = false) => {
     const { name, value } = e.target;
     if (isEdit) {
