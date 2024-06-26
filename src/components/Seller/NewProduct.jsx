@@ -4,12 +4,11 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const NewProduct = () => {
-  
   // Definimos los estados
   const { setProducts } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
@@ -65,7 +64,7 @@ const NewProduct = () => {
 
       // Reiniciamos los campos del formulario
       setName("");
-      setPrice(0);
+      setPrice("");
       setDescription("");
       setCategory("");
       setImage("");
@@ -86,7 +85,7 @@ const NewProduct = () => {
             </Row>
             <hr />
             {error && <p>{error}</p>}
-            {successMessage && <p>{successMessage}</p>} 
+            {successMessage && <p>{successMessage}</p>}
             {/* Formulario para añadir un nuevo producto */}
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
@@ -144,7 +143,13 @@ const NewProduct = () => {
                 <Col />
                 <div>
                   <Col style={{ display: "flex", justifyContent: "center" }}>
-                    <Button className="btnLogIn" type="submit">
+                    <Button
+                      className="btnLogIn"
+                      type="submit"
+                      disabled={
+                        !name || !price || !description || !category || !image
+                      }
+                    >
                       Publicar
                     </Button>
                   </Col>

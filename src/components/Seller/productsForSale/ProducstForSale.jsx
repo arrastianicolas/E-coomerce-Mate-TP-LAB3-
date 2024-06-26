@@ -2,18 +2,29 @@ import { useContext, useState, useEffect } from "react";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 import NavBarLanding from "../../navs/NavBarLanding";
 import { AuthenticationContext } from "../../../services/auth/Auth.context";
-import { Form } from "react-bootstrap";
+import { Form, Modal, Button } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
 
 const ProductsForSale = () => {
-
   // Definimos los estados
-  const { products, updateProduct, deleteProduct } = useContext(ApiContext); 
+  const { products, updateProduct, deleteProduct } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [editingProduct, setEditingProduct] = useState(null);
   const [editedProductName, setEditedProductName] = useState("");
   const [editedProductDescription, setEditedProductDescription] = useState("");
   const [editedProductPrice, setEditedProductPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false); // Estado para controlar la visibilidad del modal
+  const [productToDelete, setProductToDelete] = useState(null);
+
+  const hideModalHandler = () => {
+    setShowDeleteModal(false);
+    setProductToDelete(null);
+  };
+
+  const showModalHandler = (id) => {
+    setShowDeleteModal(true);
+    setProductToDelete(id);
+  };
 
   // Funcion para filtrar los productos
   useEffect(() => {
@@ -24,9 +35,9 @@ const ProductsForSale = () => {
 
   // Funcion que maneja la edición de un producto
   const handleEditProduct = (product) => {
-    setEditingProduct(product); 
-    setEditedProductName(product.name); 
-    setEditedProductDescription(product.description); 
+    setEditingProduct(product);
+    setEditedProductName(product.name);
+    setEditedProductDescription(product.description);
     setEditedProductPrice(product.price);
   };
 
@@ -36,13 +47,13 @@ const ProductsForSale = () => {
       ...editingProduct,
       name: editedProductName,
       description: editedProductDescription,
-      price: parseFloat(editedProductPrice), 
+      price: parseFloat(editedProductPrice),
     };
-    await updateProduct(updatedProduct); 
+    await updateProduct(updatedProduct);
     setEditingProduct(null);
-    setEditedProductName(""); 
-    setEditedProductDescription(""); 
-    setEditedProductPrice(""); 
+    setEditedProductName("");
+    setEditedProductDescription("");
+    setEditedProductPrice("");
     setFilteredProducts(
       filteredProducts.map((product) =>
         product.id === updatedProduct.id ? updatedProduct : product
@@ -52,10 +63,18 @@ const ProductsForSale = () => {
 
   // Función para manejar la eliminación de un producto
   const handleDeleteProduct = async (productId) => {
-    await deleteProduct(productId); 
+    setShowDeleteModal(true); // Mostrar el modal de confirmación antes de eliminar
+    setProductToDelete(productId);
+  };
+
+  // Función para confirmar la eliminación del producto
+  const confirmDeleteHandler = async () => {
+    await deleteProduct(productToDelete);
     setFilteredProducts(
-      filteredProducts.filter((product) => product.id !== productId) 
+      filteredProducts.filter((product) => product.id !== productToDelete)
     );
+    setShowDeleteModal(false); // Ocultar el modal después de eliminar
+    setProductToDelete(null);
   };
 
   return (
@@ -83,7 +102,7 @@ const ProductsForSale = () => {
                       onChange={(e) => setEditedProductName(e.target.value)}
                     />
                   ) : (
-                    product.name 
+                    product.name
                   )}
                 </td>
                 <td>
@@ -96,7 +115,7 @@ const ProductsForSale = () => {
                       }
                     />
                   ) : (
-                    product.description 
+                    product.description
                   )}
                 </td>
                 <td>
@@ -107,7 +126,7 @@ const ProductsForSale = () => {
                       onChange={(e) => setEditedProductPrice(e.target.value)}
                     />
                   ) : (
-                    `$${Number(product.price).toFixed(2)}` 
+                    `$${Number(product.price).toFixed(2)}`
                   )}
                 </td>
                 <td>
@@ -144,6 +163,24 @@ const ProductsForSale = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Modal de confirmación */}
+      <Modal show={showDeleteModal} onHide={hideModalHandler}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmar Eliminación</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          ¿Estás seguro que deseas eliminar este producto?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={hideModalHandler}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={confirmDeleteHandler}>
+            Eliminar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

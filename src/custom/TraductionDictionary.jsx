@@ -36,7 +36,7 @@ export const TraductionDictionaryProvider = ({ children }) => {
       lugar.`,
     },
     en: {
-      title: "MATE WORLD",
+      title: "MUNDO MATERO",
       description: "Get the best mates, thermoses, straws, and mate holders.",
       carouselTitle: "OUR BEST SELLING PRODUCTS!",
       prev: "Previous",

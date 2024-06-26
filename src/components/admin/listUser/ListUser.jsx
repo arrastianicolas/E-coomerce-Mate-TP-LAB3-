@@ -4,9 +4,11 @@ import EditUserModal from "../Modals/EditUserModal";
 import ConfirmDeleteModal from "../Modals/ConfirmDeleteModal";
 import NavBarLanding from "../../navs/NavBarLanding";
 import { ApiContext } from "../../../services/apiContext/Api.context";
-
+import { AuthenticationContext } from "../../../services/auth/Auth.context";
 const ListUser = () => {
   const { users, addUser, updateUser, deleteUser } = useContext(ApiContext);
+  const { user: currentUser } = useContext(AuthenticationContext);
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
@@ -34,6 +36,7 @@ const ListUser = () => {
     password: false,
     passwordLengthAndWordUppercase: false,
   });
+
   const [formError, setFormError] = useState("");
 
   const hideModalHandler = () => {
@@ -70,6 +73,7 @@ const ListUser = () => {
   };
 
   const showAddUserModalHandler = () => setShowAddUserModal(true);
+
   const hideEditUserModalHandler = () => {
     setShowEditUserModal(false);
     setEditUser({
@@ -99,6 +103,7 @@ const ListUser = () => {
     });
     setShowEditUserModal(true);
   };
+
   const handleInputChange = (e, isEdit = false) => {
     const { name, value } = e.target;
     if (isEdit) {
@@ -144,6 +149,9 @@ const ListUser = () => {
     }
   };
 
+  // Filtrar usuarios para excluir al usuario actual
+  const filteredUsers = users.filter(user => user.id !== currentUser.id);
+
   return (
     <>
       <NavBarLanding />
@@ -166,7 +174,7 @@ const ListUser = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {filteredUsers.map((user) => (
                 <tr key={user.id}>
                   <td>{user.username}</td>
                   <td>{user.userType}</td>
