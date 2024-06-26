@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import Footer from "../footer/Footer";
 import NavBarLanding from "../navs/NavBarLanding";
@@ -7,24 +7,33 @@ import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const Cart = () => {
   const [purchaseConfirmed, setPurchaseConfirmed] = useState(false);
-  const { cart, setCart, setPurchaseHistory, setOrderHistory } =
-    useContext(ApiContext);
+  const { cart, setCart, setPurchaseHistory, setOrderHistory } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [ProductDelete, setProductDelete] = useState(null);
+  const [productToDelete, setProductToDelete] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    // Calcula el precio total al cargar el carrito o cuando cambia el carrito
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.quantity;
+    });
+    setTotalPrice(total);
+  }, [cart]);
 
   const hideModalHandler = () => {
     setShowDeleteModal(false);
-    setProductDelete(null);
+    setProductToDelete(null);
   };
 
   const showModalHandler = (id) => {
     setShowDeleteModal(true);
-    setProductDelete(id);
+    setProductToDelete(id);
   };
 
   const removeFromCart = () => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== ProductDelete));
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productToDelete));
     hideModalHandler();
   };
 
@@ -70,7 +79,6 @@ const Cart = () => {
         const newOrder = await response.json();
         setOrderHistory((prevHistory) => [...prevHistory, newOrder]);
 
-        // Agregar cada compra al historial de compras
         for (const item of cart) {
           const purchase = {
             name: item.name,
@@ -89,7 +97,6 @@ const Cart = () => {
 
     setCart([]);
     setPurchaseConfirmed(true);
-
   };
 
   return (
@@ -103,8 +110,9 @@ const Cart = () => {
               <th>Producto</th>
               <th>Descripción</th>
               <th>Cantidad</th>
-              <th>Total</th>
-              <th className="actions-column">Opcion</th>
+              <th>Precio</th>
+              <th className="actions-column">Opción</th>
+
             </tr>
           </thead>
           <tbody>
@@ -130,6 +138,10 @@ const Cart = () => {
                 </td>
               </tr>
             ))}
+            <tr className="TotalPrice">
+              <td>TOTAL:</td>
+              <td>${totalPrice.toFixed(2)}</td>
+            </tr>
           </tbody>
         </table>
         <Button

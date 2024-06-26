@@ -35,7 +35,7 @@ const SaleHistory = () => {
       <div className="salesHistory-container">
         <h1>Historial de Pedidos</h1>
         {orderHistory.length === 0 ? (
-          <p>No hay pedidos.</p>
+          <h2 style={{color: "#3D3D3D"}}>¡No hay pedidos!</h2>
         ) : (
           // Tabla para mostrar el historial de pedidos
           <table className="salesHistory-table">

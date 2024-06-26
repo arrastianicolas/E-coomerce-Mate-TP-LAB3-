@@ -47,3 +47,8 @@ body {
 .modal-dialog{
   color: black;
 }
+
+.TotalPrice {
+  background-color: #656565;
+  font-weight: bold;
+}
