@@ -3,7 +3,7 @@ import NavBarLanding from "../navs/NavBarLanding";
 import Footer from "../footer/Footer";
 import { Card } from "react-bootstrap";
 import { ApiContext } from "../../services/apiContext/Api.context";
-import SpinnerShops from "../spinner/SpinnerShops";
+import SpinnerShops from "../spinnerShops/SpinnerShops";
 
 const Client = () => {
   // Definimos los estados del componente

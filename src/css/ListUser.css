@@ -13,12 +13,12 @@ body {
   font-family: "Raleway", sans-serif;
 }
 
-.list-user-container h1{
-  font-family: 'Erica One';  
+.list-user-container h1 {
+  font-family: "Erica One";
 }
 
 .list-user-table-container {
-  width: 80%; 
+  width: 80%;
   max-height: 300px;
 }
 
@@ -47,8 +47,8 @@ body {
 .custom-button {
   margin-bottom: 8px;
 }
-.btnAddUser{
-  background-color: #4BB096;
+.btnAddUser {
+  background-color: #4bb096;
   color: black;
   font-weight: bold;
   border: none;
@@ -58,7 +58,7 @@ body {
   font-size: larger;
 }
 
-.btnAddUser:hover{
+.btnAddUser:hover {
   background-color: #67b19f;
 }
 
@@ -71,7 +71,8 @@ body {
   border-collapse: collapse;
 }
 
-.table.custom-table th, .table.custom-table td {
+.table.custom-table th,
+.table.custom-table td {
   border: 1px solid #000;
   padding: 10px;
   text-align: left;
@@ -91,7 +92,8 @@ body {
   text-align: center;
 }
 
-.table.custom-table th, .table.custom-table td {
+.table.custom-table th,
+.table.custom-table td {
   padding: 10px;
   border: 2px solid #fff;
 }
@@ -104,4 +106,8 @@ body {
 .table.custom-table td {
   background-color: #037438;
   color: white;
+}
+
+.btn-primary {
+  margin: 7px;
 }
