@@ -99,7 +99,7 @@ const ListUser = () => {
       username: user.username,
       userType: user.userType,
       email: user.email,
-      password: user.password, 
+      password: user.password,
     });
     setShowEditUserModal(true);
   };
@@ -150,7 +150,7 @@ const ListUser = () => {
   };
 
   // Filtrar usuarios para excluir al usuario actual
-  const filteredUsers = users.filter(user => user.id !== currentUser.id);
+  const filteredUsers = users.filter((user) => user.id !== currentUser.id);
 
   return (
     <>
@@ -186,6 +186,7 @@ const ListUser = () => {
                     >
                       Editar
                     </button>
+
                     <button
                       className="btn btn-danger"
                       onClick={() => showModalHandler(user.id)}
