@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Modal, Form, FormGroup, Button } from "react-bootstrap";
 
 const EditUserModal = ({
@@ -8,7 +9,46 @@ const EditUserModal = ({
   handleInputChange,
   formError,
   editUser,
+  existingUsers,
 }) => {
+  const [apiError, setApiError] = useState("");
+
+  useEffect(() => {
+    setApiError("");
+  }, [showEditUserModal]); // Clear error message when modal shows
+
+  const checkUserExists = async (field, value) => {
+    try {
+      const response = await fetch(`http://localhost:8000/users?${field}=${value}`);
+      const data = await response.json();
+
+      // Exclude current user from check
+      const filteredUsers = data.filter(user => user.id !== editUser.id);
+
+      return filteredUsers.length > 0;
+    } catch (error) {
+      console.error("Error checking user existence:", error);
+      return false;
+    }
+  };
+
+  const handleSave = async () => {
+    const isEmailTaken = await checkUserExists("email", editUser.email);
+    const isUsernameTaken = await checkUserExists("username", editUser.username);
+
+    if (isEmailTaken) {
+      setApiError("El correo electrónico ya está registrado");
+      return;
+    }
+
+    if (isUsernameTaken) {
+      setApiError("El nombre de usuario ya está registrado");
+      return;
+    }
+
+    handleEditUser();
+  };
+
   return (
     <Modal show={showEditUserModal} onHide={hideEditUserModalHandler}>
       <Modal.Header closeButton>
@@ -61,7 +101,7 @@ const EditUserModal = ({
             <Form.Control
               type="password"
               name="password"
-              value={editUser.password} 
+              value={editUser.password}
               className={
                 formErrors.password || formErrors.passwordLengthAndWordUppercase
                   ? "border border-danger"
@@ -78,9 +118,9 @@ const EditUserModal = ({
               </small>
             )}
           </FormGroup>
-          {formError && (
+          {apiError && (
             <div className="alert alert-danger" role="alert">
-              {formError}
+              {apiError}
             </div>
           )}
         </Form>
@@ -89,7 +129,7 @@ const EditUserModal = ({
         <Button variant="secondary" onClick={hideEditUserModalHandler}>
           Cancelar
         </Button>
-        <Button variant="primary" onClick={handleEditUser}>
+        <Button variant="primary" onClick={handleSave}>
           Guardar
         </Button>
       </Modal.Footer>
