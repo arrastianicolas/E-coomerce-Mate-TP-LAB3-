@@ -23,13 +23,13 @@ const Register = () => {
   const userRef = useRef(null);
   const userTypeRef = useRef(null);
 
-  // Handlers
+  // Manejadores de cambios en los campos del formulario
   const changeEmailHandler = (event) => setEmail(event.target.value);
   const changeUserHandler = (event) => setUser(event.target.value);
   const changePasswordHandler = (event) => setPassword(event.target.value);
   const changeUserTypeHandler = (event) => setUserType(event.target.value);
 
-  // Function to clear password-related errors
+  // Función para limpiar errores relacionados con la contraseña
   const clearPasswordErrors = () => {
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -40,7 +40,7 @@ const Register = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    // Validations
+    // Validaciones
     if (!username) {
       userRef.current.focus();
       setErrors({
@@ -86,7 +86,7 @@ const Register = () => {
       return;
     }
 
-    // Validate minimum password length (more than 6 characters) and at least one uppercase letter
+    // Validar longitud mínima de la contraseña (más de 6 caracteres) y al menos una letra mayúscula
     if (password.length <= 6 || !/[A-Z]/.test(password)) {
       setErrors({
         ...errors,
@@ -119,11 +119,19 @@ const Register = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Error al registrar usuario");
+        if (errorData.message === "El correo electronico ya existe") {
+          setErrors({ ...errors, email: true });
+          setApiError("El correo electrónico ya está registrado");
+        } else if (errorData.message === "El nombre de usuario ya existe") {
+          setErrors({ ...errors, username: true });
+          setApiError("El nombre de usuario ya está registrado");
+        } else {
+          throw new Error(errorData.message || "Error al registrar usuario");
+        }
+      } else {
+        console.log(`Usuario ${username} se ha registrado con email ${email}.`);
+        navigate("/login");
       }
-
-      console.log(`Usuario ${username} se ha registrado con email ${email}.`);
-      navigate("/login");
     } catch (error) {
       console.error("Error al registrar usuario:", error.message);
       setApiError(error.message);
@@ -137,7 +145,7 @@ const Register = () => {
         <Card className="content-register">
           <Card.Body>
             <Row>
-              <h5>REGISTRATE</h5>
+              <h5>REGÍSTRATE</h5>
             </Row>
             <hr />
             <Form onSubmit={submitHandler}>
@@ -147,7 +155,7 @@ const Register = () => {
                   ref={userRef}
                   value={username}
                   type="text"
-                  className={errors.user ? "border border-danger" : ""}
+                  className={errors.username ? "border border-danger" : ""}
                   onChange={changeUserHandler}
                   placeholder="Ingresar usuario"
                 />
