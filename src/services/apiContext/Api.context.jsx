@@ -139,9 +139,10 @@ export const ApiContextProvider = ({ children }) => {
         }
       );
       if (response.ok) {
+        const updatedUserFromServer = await response.json();
         setUsers((prevUsers) =>
           prevUsers.map((user) =>
-            user.id === updatedUser.id ? updatedUser : user
+            user.id === updatedUserFromServer.id ? updatedUserFromServer : user
           )
         );
       } else {

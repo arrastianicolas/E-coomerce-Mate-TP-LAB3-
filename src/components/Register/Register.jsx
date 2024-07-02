@@ -1,9 +1,11 @@
 import NavBarLanding from "../navs/NavBarLanding";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
+import { ApiContext } from "../../services/apiContext/Api.context";
 
 const Register = () => {
+  const { setUsers } = useContext(ApiContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUser] = useState("");
@@ -131,6 +133,8 @@ const Register = () => {
       } else {
         console.log(`Usuario ${username} se ha registrado con email ${email}.`);
         navigate("/login");
+        const createdUser = await response.json();
+        setUsers((prevUsers) => [...prevUsers, createdUser]);
       }
     } catch (error) {
       console.error("Error al registrar usuario:", error.message);
