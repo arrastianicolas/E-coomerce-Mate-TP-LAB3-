@@ -6,7 +6,7 @@ import Footer from "../../footer/Footer";
 import SpinnerShops from "../../spinnerShops/SpinnerShops";
 
 const ShopAdmin = () => {
-  // Definimos los estados del componente
+  // Definimos los estados 
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
   const [productsFiltered, setProductsFiltered] = useState([]);

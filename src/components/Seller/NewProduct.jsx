@@ -58,11 +58,10 @@ const NewProduct = () => {
         throw new Error("Error al añadir el producto");
       }
 
-      setProducts((prevProducts) => [...prevProducts, newProduct]); // Añadimos el nuevo producto a la lista de productos
+      setProducts((prevProducts) => [...prevProducts, newProduct]); 
 
       setSuccessMessage("Producto agregado correctamente");
 
-      // Reiniciamos los campos del formulario
       setName("");
       setPrice("");
       setDescription("");
@@ -77,7 +76,6 @@ const NewProduct = () => {
   return (
     <>
       <div className="register-container">
-        {/* Card para el formulario de registro */}
         <Card className="content-register">
           <Card.Body>
             <Row>
@@ -86,7 +84,6 @@ const NewProduct = () => {
             <hr />
             {error && <p>{error}</p>}
             {successMessage && <p>{successMessage}</p>}
-            {/* Formulario para añadir un nuevo producto */}
             <Form onSubmit={submitHandler}>
               <FormGroup className="mb-4">
                 <Form.Label>Nombre:</Form.Label>

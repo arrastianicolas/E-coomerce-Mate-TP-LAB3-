@@ -13,12 +13,11 @@ const Admin = () => {
 
   const clickHandlerShopAdmin = () => {
     navigate("/shopAdmin");
-  }; // Definir la función correctamente aquí
+  }; 
 
   return (
     <>
       <NavBarLanding clickHandlerShopAdmin={clickHandlerShopAdmin} />{" "}
-      {/* Pasar la función como prop al componente NavBarLanding */}
       <div className="admin-container">
         {user && user.userType === "sysAdmin" && (
           <>

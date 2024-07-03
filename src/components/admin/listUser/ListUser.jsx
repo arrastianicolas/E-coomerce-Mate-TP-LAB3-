@@ -149,7 +149,6 @@ const ListUser = () => {
     }
   };
 
-  // Filtrar usuarios para excluir al usuario actual
   const filteredUsers = users.filter((user) => user.id !== currentUser.id);
 
   return (

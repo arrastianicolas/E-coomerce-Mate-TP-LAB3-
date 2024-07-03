@@ -25,13 +25,11 @@ const Register = () => {
   const userRef = useRef(null);
   const userTypeRef = useRef(null);
 
-  // Manejadores de cambios en los campos del formulario
   const changeEmailHandler = (event) => setEmail(event.target.value);
   const changeUserHandler = (event) => setUser(event.target.value);
   const changePasswordHandler = (event) => setPassword(event.target.value);
   const changeUserTypeHandler = (event) => setUserType(event.target.value);
 
-  // Función para limpiar errores relacionados con la contraseña
   const clearPasswordErrors = () => {
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -42,7 +40,6 @@ const Register = () => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    // Validaciones
     if (!username) {
       userRef.current.focus();
       setErrors({
@@ -88,7 +85,6 @@ const Register = () => {
       return;
     }
 
-    // Validar longitud mínima de la contraseña (más de 6 caracteres) y al menos una letra mayúscula
     if (password.length <= 6 || !/[A-Z]/.test(password)) {
       setErrors({
         ...errors,
@@ -100,7 +96,6 @@ const Register = () => {
       return;
     }
 
-    // Resetear errores
     setErrors({
       email: false,
       password: false,

@@ -1,16 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
-/* .container-landing {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-} */
-/* .navbar-landing {
-  border-bottom: 3px solid white;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-} */
 .principal {
   text-align: -webkit-center;
   padding-top: 50px;
@@ -21,7 +10,7 @@
   from {
     transform: translateY(
       -100%
-    ); /* Ajusta según la dirección desde la que quieras que aparezca */
+    ); 
   }
   to {
     transform: translateY(0);
@@ -43,26 +32,16 @@
   font-size: 20px;
 }
 .carousel-item img {
-  max-height: 400px; /* Ajusta esta altura según tus necesidades */
-  object-fit: contain; /* Ajusta el tamaño de la imagen manteniendo su proporción */
+  max-height: 400px; 
+  object-fit: contain; 
 }
-/* #img-mate {
-  max-width: 400px;
-  max-height: 400px;
-} */
-/* .carousel-item.active {
-  display: flex;
-  justify-content: center;
-} */
+
 .tittle-carrousel {
   text-align: center;
   font-family: "Erica One", sans-serif;
   font-size: 50px;
   color: white;
 }
-/* #carouselExampleIndicators img {
-  object-fit: cover;
-  height: 500px; /* Puedes ajustar esta altura según sea necesario */
 
 .cart {
   position: relative;

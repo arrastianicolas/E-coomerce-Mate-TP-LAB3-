@@ -14,7 +14,6 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    // Calcula el precio total al cargar el carrito o cuando cambia el carrito
     let total = 0;
     cart.forEach(item => {
       total += item.price * item.quantity;
