@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Modal, Form, FormGroup, Button } from "react-bootstrap";
 
 const AddUserModal = ({
@@ -9,6 +10,41 @@ const AddUserModal = ({
   formError,
   newUser,
 }) => {
+  const [apiError, setApiError] = useState("");
+
+  useEffect(() => {
+    setApiError("");
+  }, [showAddUserModal]);
+
+  const checkUserExists = async (field, value) => {
+    try {
+      const response = await fetch(`http://localhost:8000/users?${field}=${value}`);
+      const data = await response.json();
+
+      return data.length > 0;
+    } catch (error) {
+      console.error("Error, chequeando existencia del usuario:", error);
+      return false;
+    }
+  };
+
+  const handleSave = async () => {
+    const isUsernameTaken = await checkUserExists("username", newUser.username);
+    const isEmailTaken = await checkUserExists("email", newUser.email);
+
+    if (isUsernameTaken) {
+      setApiError("El nombre de usuario ya está registrado");
+      return;
+    }
+
+    if (isEmailTaken) {
+      setApiError("El correo electrónico ya está registrado");
+      return;
+    }
+
+    handleAddUser();
+  };
+
   return (
     <Modal show={showAddUserModal} onHide={hideAddUserModalHandler}>
       <Modal.Header closeButton>
@@ -78,6 +114,11 @@ const AddUserModal = ({
               </small>
             )}
           </FormGroup>
+          {apiError && (
+            <div className="alert alert-danger" role="alert">
+              {apiError}
+            </div>
+          )}
           {formError && (
             <div className="alert alert-danger" role="alert">
               {formError}
@@ -89,7 +130,7 @@ const AddUserModal = ({
         <Button variant="secondary" onClick={hideAddUserModalHandler}>
           Cancelar
         </Button>
-        <Button variant="primary" onClick={handleAddUser}>
+        <Button variant="primary" onClick={handleSave}>
           Guardar
         </Button>
       </Modal.Footer>

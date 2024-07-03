@@ -7,9 +7,7 @@ const EditUserModal = ({
   handleEditUser,
   formErrors,
   handleInputChange,
-  formError,
   editUser,
-  existingUsers,
 }) => {
   const [apiError, setApiError] = useState("");
 
@@ -26,7 +24,7 @@ const EditUserModal = ({
 
       return filteredUsers.length > 0;
     } catch (error) {
-      console.error("Error checking user existence:", error);
+      console.error("Error, chequeando existencia del usuario:", error);
       return false;
     }
   };
