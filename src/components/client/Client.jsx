@@ -6,7 +6,6 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 import SpinnerShops from "../spinnerShops/SpinnerShops";
 
 const Client = () => {
-  // Definimos los estados del componente
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
@@ -82,7 +81,7 @@ const Client = () => {
 
           {loading ? (
             <SpinnerShops />
-          ) : /* Mostramos productos filtrados o mensaje de no encontrado */
+          ) : 
           productsFiltered.length > 0 ? (
             <div className="card-container">
               {productsFiltered.map((product) => (

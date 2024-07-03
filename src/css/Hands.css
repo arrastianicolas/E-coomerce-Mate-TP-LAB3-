@@ -3,7 +3,7 @@
 }
 
 .left-hand {
-  max-width: 443px; /* Ajusta según el tamaño de tu imagen */
+  max-width: 443px;
   height: auto;
   position: relative;
   animation: slideIn 1s ease-in-out;
@@ -19,7 +19,7 @@
 }
 
 .right-hand {
-  max-width: 443px; /* Ajusta según el tamaño de tu imagen */
+  max-width: 443px; 
   height: auto;
   position: relative;
   animation: slideInRight 1s ease-in-out;

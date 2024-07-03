@@ -2,10 +2,9 @@ import { useContext, useState, useEffect } from "react";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 import NavBarLanding from "../../navs/NavBarLanding";
 import { AuthenticationContext } from "../../../services/auth/Auth.context";
-import { Form, Modal, Button } from "react-bootstrap"; // Asegúrate de importar Modal y Button de react-bootstrap
+import { Form, Modal, Button } from "react-bootstrap"; 
 
 const ProductsForSale = () => {
-  // Definimos los estados
   const { products, updateProduct, deleteProduct } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -13,7 +12,7 @@ const ProductsForSale = () => {
   const [editedProductDescription, setEditedProductDescription] = useState("");
   const [editedProductPrice, setEditedProductPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false); // Estado para controlar la visibilidad del modal
+  const [showDeleteModal, setShowDeleteModal] = useState(false); 
   const [productToDelete, setProductToDelete] = useState(null);
 
   const hideModalHandler = () => {
@@ -26,14 +25,12 @@ const ProductsForSale = () => {
     setProductToDelete(id);
   };
 
-  // Funcion para filtrar los productos
   useEffect(() => {
     setFilteredProducts(
       products.filter((product) => product.sellerId === user.id)
     );
-  }, [products, user.id]); // Ejecutamos este efecto cuando cambian los productos o el id del usuario
+  }, [products, user.id]); 
 
-  // Funcion que maneja la edición de un producto
   const handleEditProduct = (product) => {
     setEditingProduct(product);
     setEditedProductName(product.name);
@@ -41,7 +38,6 @@ const ProductsForSale = () => {
     setEditedProductPrice(product.price);
   };
 
-  // Funcion para manejar el guardado de la edición
   const handleSaveEdit = async () => {
     const updatedProduct = {
       ...editingProduct,
@@ -61,19 +57,17 @@ const ProductsForSale = () => {
     );
   };
 
-  // Función para manejar la eliminación de un producto
   const handleDeleteProduct = async (productId) => {
-    setShowDeleteModal(true); // Mostrar el modal de confirmación antes de eliminar
+    setShowDeleteModal(true); 
     setProductToDelete(productId);
   };
 
-  // Función para confirmar la eliminación del producto
   const confirmDeleteHandler = async () => {
     await deleteProduct(productToDelete);
     setFilteredProducts(
       filteredProducts.filter((product) => product.id !== productToDelete)
     );
-    setShowDeleteModal(false); // Ocultar el modal después de eliminar
+    setShowDeleteModal(false); 
     setProductToDelete(null);
   };
 
@@ -164,7 +158,6 @@ const ProductsForSale = () => {
         </table>
       </div>
 
-      {/* Modal de confirmación */}
       <Modal show={showDeleteModal} onHide={hideModalHandler}>
         <Modal.Header closeButton>
           <Modal.Title>Confirmar Eliminación</Modal.Title>

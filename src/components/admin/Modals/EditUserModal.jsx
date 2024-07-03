@@ -15,14 +15,13 @@ const EditUserModal = ({
 
   useEffect(() => {
     setApiError("");
-  }, [showEditUserModal]); // Clear error message when modal shows
+  }, [showEditUserModal]);
 
   const checkUserExists = async (field, value) => {
     try {
       const response = await fetch(`http://localhost:8000/users?${field}=${value}`);
       const data = await response.json();
 
-      // Exclude current user from check
       const filteredUsers = data.filter(user => user.id !== editUser.id);
 
       return filteredUsers.length > 0;

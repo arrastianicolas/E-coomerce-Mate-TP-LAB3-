@@ -153,5 +153,5 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 76.25vh; /* Asegura que el spinner se centre verticalmente en toda la vista */
+  height: 76.25vh; 
 }
