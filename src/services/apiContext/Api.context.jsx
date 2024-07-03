@@ -5,7 +5,10 @@ export const ApiContext = createContext();
 
 // Proveedor del contexto
 export const ApiContextProvider = ({ children }) => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(() => {
+    const savedUsers = localStorage.getItem("users");
+    return savedUsers ? JSON.parse(savedUsers) : [];
+  });
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
@@ -14,28 +17,41 @@ export const ApiContextProvider = ({ children }) => {
   const [orderHistory, setOrderHistory] = useState([]);
   const [purchaseHistory, setPurchaseHistory] = useState([]);
 
+  // Guardar usuarios en localStorage cada vez que se actualicen
+  useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(users));
+  }, [users]);
+
+  // Guardar carrito en localStorage cada vez que se actualice
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   // Funciones para manejar la API
   const fetchUsers = async () => {
-    const response = await fetch("http://localhost:8000/users");
-    const data = await response.json();
-    setUsers(data);
+    try {
+      const response = await fetch("http://localhost:8000/users");
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
   };
 
   const fetchProducts = async () => {
-    const response = await fetch("http://localhost:8000/products");
-    const data = await response.json();
-    setProducts(data);
+    try {
+      const response = await fetch("http://localhost:8000/products");
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   };
 
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
   };
 
-  // Simulación de llamada a la API
   const fetchOrders = async () => {
     try {
       const response = await fetch("http://localhost:8000/order");
@@ -52,11 +68,10 @@ export const ApiContextProvider = ({ children }) => {
       const data = await response.json();
       setPurchaseHistory(data);
     } catch (error) {
-      console.error("Error fetching orders:", error);
+      console.error("Error fetching purchase:", error);
     }
   };
 
-  // Actualizar el producto en la API
   const updateProduct = async (updatedProduct) => {
     try {
       const response = await fetch(
@@ -70,7 +85,6 @@ export const ApiContextProvider = ({ children }) => {
         }
       );
       if (response.ok) {
-        // Si la actualización fue exitosa, actualizar el estado local
         setProducts((prevProducts) =>
           prevProducts.map((product) =>
             product.id === updatedProduct.id ? updatedProduct : product
@@ -84,7 +98,6 @@ export const ApiContextProvider = ({ children }) => {
     }
   };
 
-  // Eliminar el producto en la API
   const deleteProduct = async (productId) => {
     try {
       const response = await fetch(
@@ -94,7 +107,6 @@ export const ApiContextProvider = ({ children }) => {
         }
       );
       if (response.ok) {
-        // Si la eliminación fue exitosa, actualizar el estado local
         setProducts((prevProducts) =>
           prevProducts.filter((product) => product.id !== productId)
         );
@@ -117,7 +129,11 @@ export const ApiContextProvider = ({ children }) => {
       });
       if (response.ok) {
         const createdUser = await response.json();
-        setUsers((prevUsers) => [...prevUsers, createdUser]);
+        setUsers((prevUsers) => {
+          const updatedUsers = [...prevUsers, createdUser];
+          localStorage.setItem("users", JSON.stringify(updatedUsers)); // Guardar en localStorage inmediatamente
+          return updatedUsers;
+        });
       } else {
         console.error("Error al agregar usuario:", response.statusText);
       }
@@ -139,11 +155,13 @@ export const ApiContextProvider = ({ children }) => {
         }
       );
       if (response.ok) {
-        setUsers((prevUsers) =>
-          prevUsers.map((user) =>
+        setUsers((prevUsers) => {
+          const updatedUsers = prevUsers.map((user) =>
             user.id === updatedUser.id ? updatedUser : user
-          )
-        );
+          );
+          localStorage.setItem("users", JSON.stringify(updatedUsers)); // Guardar en localStorage inmediatamente
+          return updatedUsers;
+        });
       } else {
         console.error("Error al actualizar usuario:", response.statusText);
       }
@@ -158,9 +176,11 @@ export const ApiContextProvider = ({ children }) => {
         method: "DELETE",
       });
       if (response.ok) {
-        console.log(`User with id ${userId} deleted successfully`);
-        // Si la eliminación fue exitosa, actualizar el estado local
-        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+        setUsers((prevUsers) => {
+          const updatedUsers = prevUsers.filter((user) => user.id !== userId);
+          localStorage.setItem("users", JSON.stringify(updatedUsers)); // Guardar en localStorage inmediatamente
+          return updatedUsers;
+        });
       } else {
         console.error("Error al eliminar usuario:", response.statusText);
       }
@@ -170,7 +190,9 @@ export const ApiContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchUsers();
+    if (users.length === 0) {
+      fetchUsers();
+    }
     fetchProducts();
     fetchOrders();
     fetchPurchase();

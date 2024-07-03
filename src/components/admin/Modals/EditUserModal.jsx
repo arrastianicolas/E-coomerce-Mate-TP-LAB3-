@@ -7,23 +7,23 @@ const EditUserModal = ({
   handleEditUser,
   formErrors,
   handleInputChange,
-  formError,
+
   editUser,
-  existingUsers,
 }) => {
   const [apiError, setApiError] = useState("");
 
   useEffect(() => {
     setApiError("");
-  }, [showEditUserModal]); // Clear error message when modal shows
+  }, [showEditUserModal]);
 
   const checkUserExists = async (field, value) => {
     try {
-      const response = await fetch(`http://localhost:8000/users?${field}=${value}`);
+      const response = await fetch(
+        `http://localhost:8000/users?${field}=${value}`
+      );
       const data = await response.json();
 
-      // Exclude current user from check
-      const filteredUsers = data.filter(user => user.id !== editUser.id);
+      const filteredUsers = data.filter((user) => user.id !== editUser.id);
 
       return filteredUsers.length > 0;
     } catch (error) {
@@ -34,7 +34,10 @@ const EditUserModal = ({
 
   const handleSave = async () => {
     const isEmailTaken = await checkUserExists("email", editUser.email);
-    const isUsernameTaken = await checkUserExists("username", editUser.username);
+    const isUsernameTaken = await checkUserExists(
+      "username",
+      editUser.username
+    );
 
     if (isEmailTaken) {
       setApiError("El correo electrónico ya está registrado");
