@@ -1,10 +1,12 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AddUserModal from "../Modals/AddUserModal";
 import EditUserModal from "../Modals/EditUserModal";
 import ConfirmDeleteModal from "../Modals/ConfirmDeleteModal";
+import NotificationModal from "../Modals/NotificationModal"; 
 import NavBarLanding from "../../navs/NavBarLanding";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 import { AuthenticationContext } from "../../../services/auth/Auth.context";
+
 const ListUser = () => {
   const { users, addUser, updateUser, deleteUser } = useContext(ApiContext);
   const { user: currentUser } = useContext(AuthenticationContext);
@@ -12,6 +14,7 @@ const ListUser = () => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showAddUserModal, setShowAddUserModal] = useState(false);
   const [showEditUserModal, setShowEditUserModal] = useState(false);
+  const [showNotificationModal, setShowNotificationModal] = useState(false); 
   const [userIdToDelete, setUserIdToDelete] = useState(null);
 
   const [newUser, setNewUser] = useState({
@@ -28,6 +31,8 @@ const ListUser = () => {
     email: "",
     password: "",
   });
+
+  const [originalUser, setOriginalUser] = useState(null); 
 
   const [formErrors, setFormErrors] = useState({
     username: false,
@@ -55,6 +60,12 @@ const ListUser = () => {
   };
 
   const hideAddUserModalHandler = () => {
+    const isFormChanged =
+      newUser.username !== "" ||
+      newUser.userType !== "" ||
+      newUser.email !== "" ||
+      newUser.password !== "";
+  
     setShowAddUserModal(false);
     setNewUser({
       username: "",
@@ -70,7 +81,12 @@ const ListUser = () => {
       passwordLengthAndWordUppercase: false,
     });
     setFormError("");
+  
+    if (isFormChanged) {
+      setShowNotificationModal(true);
+    }
   };
+  
 
   const showAddUserModalHandler = () => setShowAddUserModal(true);
 
@@ -93,6 +109,10 @@ const ListUser = () => {
     setFormError("");
   };
 
+  const hideNotificationModalHandler = () => {
+    setShowNotificationModal(false);
+  };
+
   const showEditUserModalHandler = (user) => {
     setEditUser({
       id: user.id,
@@ -101,6 +121,7 @@ const ListUser = () => {
       email: user.email,
       password: user.password,
     });
+    setOriginalUser(user);
     setShowEditUserModal(true);
   };
 
@@ -146,8 +167,15 @@ const ListUser = () => {
     if (validateForm(editUser)) {
       await updateUser(editUser);
       hideEditUserModalHandler();
+      setShowNotificationModal(true);
     }
   };
+
+  useEffect(() => {
+    if (!showEditUserModal) {
+      setOriginalUser(null);
+    }
+  }, [showEditUserModal]);
 
   const filteredUsers = users.filter((user) => user.id !== currentUser.id);
 
@@ -224,6 +252,12 @@ const ListUser = () => {
         showDeleteModal={showDeleteModal}
         hideModalHandler={hideModalHandler}
         removeUser={removeUser}
+      />
+
+      <NotificationModal
+        showNotificationModal={showNotificationModal}
+        hideNotificationModalHandler={hideNotificationModalHandler}
+        message={"Se guardo el usuario correctamente."}
       />
     </>
   );

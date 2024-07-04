@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { ApiContext } from "../../../services/apiContext/Api.context";
 import NavBarLanding from "../../navs/NavBarLanding";
 import { AuthenticationContext } from "../../../services/auth/Auth.context";
-import { Form, Modal, Button } from "react-bootstrap"; 
+import { Form, Modal, Button } from "react-bootstrap";
 
 const ProductsForSale = () => {
   const { products, updateProduct, deleteProduct } = useContext(ApiContext);
@@ -12,7 +12,7 @@ const ProductsForSale = () => {
   const [editedProductDescription, setEditedProductDescription] = useState("");
   const [editedProductPrice, setEditedProductPrice] = useState("");
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false); 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
 
   const hideModalHandler = () => {
@@ -29,7 +29,7 @@ const ProductsForSale = () => {
     setFilteredProducts(
       products.filter((product) => product.sellerId === user.id)
     );
-  }, [products, user.id]); 
+  }, [products, user.id]);
 
   const handleEditProduct = (product) => {
     setEditingProduct(product);
@@ -58,7 +58,7 @@ const ProductsForSale = () => {
   };
 
   const handleDeleteProduct = async (productId) => {
-    setShowDeleteModal(true); 
+    setShowDeleteModal(true);
     setProductToDelete(productId);
   };
 
@@ -67,7 +67,7 @@ const ProductsForSale = () => {
     setFilteredProducts(
       filteredProducts.filter((product) => product.id !== productToDelete)
     );
-    setShowDeleteModal(false); 
+    setShowDeleteModal(false);
     setProductToDelete(null);
   };
 
@@ -162,9 +162,7 @@ const ProductsForSale = () => {
         <Modal.Header closeButton>
           <Modal.Title>Confirmar Eliminación</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          ¿Estás seguro que deseas eliminar este producto?
-        </Modal.Body>
+        <Modal.Body>¿Estás seguro que deseas eliminar este producto?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={hideModalHandler}>
             Cancelar

@@ -4,7 +4,6 @@ import { ApiContext } from "../../services/apiContext/Api.context";
 import { AuthenticationContext } from "../../services/auth/Auth.context";
 
 const NewProduct = () => {
-  // Definimos los estados
   const { setProducts } = useContext(ApiContext);
   const { user } = useContext(AuthenticationContext);
   const [name, setName] = useState("");
@@ -15,7 +14,6 @@ const NewProduct = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
-  //Cambios de estado
   const changeNameHandler = (event) => {
     setName(event.target.value);
   };
@@ -32,7 +30,6 @@ const NewProduct = () => {
     setImage(event.target.value);
   };
 
-  // Manejamos el envio del formulario
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -58,7 +55,9 @@ const NewProduct = () => {
         throw new Error("Error al añadir el producto");
       }
 
-      setProducts((prevProducts) => [...prevProducts, newProduct]); 
+      const data = await response.json(); 
+
+      setProducts((prevProducts) => [...prevProducts, data]);
 
       setSuccessMessage("Producto agregado correctamente");
 
