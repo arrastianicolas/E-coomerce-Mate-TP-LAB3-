@@ -28,3 +28,5 @@ Roles de usuario:
 Los clientes pueden explorar productos, añadirlos al carrito y realizar compras.
 Los vendedores se encargan de gestionar sus productos.
 Un administrador supervisa y gestiona la plataforma.
+
+![proyecto1](https://github.com/user-attachments/assets/f039c36d-59c3-49ec-8d41-512841e3a167)
