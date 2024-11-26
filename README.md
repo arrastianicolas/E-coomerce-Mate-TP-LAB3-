@@ -1,8 +1,30 @@
-# React + Vite
+# Mundo Matero
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bienvenido al repositorio del proyecto E-Commerce de Mates, una aplicación web desarrollada como parte de un trabajo colaborativo por un equipo de cuatro personas. Este proyecto simula una tienda en línea dedicada a la venta de mates, bombillas, mochilas materas y termos, utilizando tecnologías modernas y una fake API para manejar los datos.
 
-Currently, two official plugins are available:
+Tecnologías utilizadas
+El proyecto fue desarrollado utilizando las siguientes tecnologías:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React: para la construcción de la interfaz de usuario interactiva y basada en componentes.
+HTML y CSS: para la estructura y diseño visual de la aplicación.
+Fake API: para simular operaciones CRUD y manejar datos dinámicos como productos, usuarios y carritos de compras.
+Funcionalidades principales
+Inicio de sesión y registro:
+
+Los usuarios pueden registrarse e iniciar sesión, seleccionando su rol (cliente o vendedor).
+Gestión de productos:
+
+Los vendedores pueden publicar, actualizar y eliminar productos.
+Los productos publicados son visibles para todos los usuarios.
+Carrito de compras:
+
+Los clientes pueden agregar productos al carrito, editarlos o eliminarlos antes de confirmar la compra.
+Historial de compras y ventas:
+
+Los clientes pueden revisar su historial de compras.
+Los vendedores tienen acceso a un historial de ventas actualizado con cada compra confirmada.
+Roles de usuario:
+
+Los clientes pueden explorar productos, añadirlos al carrito y realizar compras.
+Los vendedores se encargan de gestionar sus productos.
+Un administrador supervisa y gestiona la plataforma.
